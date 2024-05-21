@@ -6,6 +6,7 @@ import Informasi from "./pages/Informasi";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./pages/auth/Login";
+import Admin from "./pages/Admin"
 
 import './App.css'
 
@@ -21,7 +22,11 @@ function App() {
       <Route path="/tentang-kami" element={<TentangKami/>}/>
       <Route path="/produk" element={<Produk/>}/>
       <Route path="/informasi" element={<Informasi/>}/>
-      <Route path="/admin" element={<Login/>}/>
+      
+      <Route path="/admin">
+        <Route path="/admin/login" element={<Login/>}/>
+        <Route path="/admin/dashboard" element={<Admin/>}/>
+      </Route>
       
     </Routes>
     
