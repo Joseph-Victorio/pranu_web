@@ -3,9 +3,10 @@ import SideNav from '../components/admin/SideNav'
 
 const Admin = () => {
   return (
-    <>
-        <SideNav/>
-    </>
+    <div className="flex gap-5">
+      <SideNav/>
+      
+    </div>
   )
 }
 

@@ -41,6 +41,7 @@ const Home = () => {
             <HeaderCardCarousel/>
           </div>
         </section>
+        <a href="whatsapp://send?text=http://localhost:5173/tentang-kami" data-action="share/whatsapp/share">Share ke whatsapp </a>
         <Marquee />
         {/* KENAPA PILIH SINI SECTION */}
         <section className='p-5 sm:p-[75px] font-rhodium'>
