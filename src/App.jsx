@@ -16,7 +16,6 @@ import ProdukList from "./pages/admin/ProdukList";
 import ArtikelList from "./pages/admin/ArtikelList";
 import UlasanList from "./pages/admin/UlasanList";
 
-
 function App() {
  
   return (

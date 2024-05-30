@@ -1,8 +1,11 @@
 import React from 'react'
+import NavBiru from '../components/NavBiru'
 
 const Produk = () => {
   return (
-    <div>Produk</div>
+    <>
+      <NavBiru text={"Produk Kami"}/>
+    </>
   )
 }
 

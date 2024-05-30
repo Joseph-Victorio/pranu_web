@@ -1,8 +1,8 @@
 
-import { NavLink} from 'react-router-dom'
-import { MdOutlinePhoneEnabled } from "react-icons/md";
+
 import Footer from '../components/Footer'
 import Galeri from '../components/Galeri';
+import NavBiru from '../components/NavBiru';
 
 const TentangKami = () => {
 
@@ -10,62 +10,9 @@ const TentangKami = () => {
     <>
       <section className='font-rhodium'>
         {/* HEADER */}
-        <div className='bg-[url("background-desktop.png")] bg-cover text-center'>
-            <nav className='hidden sm:block  font-rhodium text-white '>
-            {/* DESKTOP */}
-            <div className='sm:flex items-center justify-between sm:px-[50px] sm:py-[32px] '>
-                {/* LOGO */}
-                <div>
-                    <img 
-                        src="/pranu_logo.svg" 
-                        alt="logo"
-                        className='w-[72px]' />
-                </div>
-                <div className='flex items-center text-[20px] gap-10 '>
-              <NavLink
-                    to='/'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
-                    Beranda
-              </NavLink>
-              <NavLink
-                    to='/tentang-kami'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
-                    Tentang Kami
-              </NavLink>
-              <NavLink
-                    to='/produk'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
-                    Produk
-              </NavLink>
-              <NavLink
-                    to='/informasi'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
-                    Informasi
-              </NavLink>
-              
-                </div>
-                <div className='text-[20px]'>
-                    <a href="https://wa.me/6281295079288" target='blank' className='flex gap-2 items-center'>
-                        <MdOutlinePhoneEnabled
-                            className='text-white'/>
-                        <p>Konsultasi</p>
-                        
-                    </a>
-                </div>
-            </div>
-            {/* MOBILE */}
-            <div className='sm:hidden flex items-center justify-between'>
-
-            </div>
-            </nav>
-            <p className='text-white text-2xl mt-9'>Tentang Kami</p>
-            <img 
-              src="/logo_tentang.svg" 
-              alt=""
-              className='mx-auto mt-5 pb-32' />
-        </div>
+        <NavBiru text={'Tentang Kami'} />
         {/* VIDEO SECTION */}
-        <section className='flex sm:flex-row flex-col p-5 items-center gap-5'>
+        <section className='flex sm:flex-row flex-col p-5 items-center gap-5 mt-20'>
           <video 
             src="/beach.mp4"
             className='border-4 border-primary rounded-xl p-1 sm:w-[528px]'

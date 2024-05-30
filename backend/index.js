@@ -16,6 +16,8 @@ const db = mysql.createConnection({
 app.get('/produk', (req,res)=>{
     const q = "SELECT * FROM produk";
 
+    
+
     db.query(q,(err, data)=>{
         if(err){
             return res.json(err)
