@@ -113,7 +113,7 @@ const Navbar = () => {
                         <button
                             onClick={handleMenuClick}
                             className='mx-auto'>
-                            <IoMdCloseCircle className='mx-auto' />
+                            <IoMdCloseCircle className='fixed bottom-5' />
                         </button>
                         </div>
                     </div>
