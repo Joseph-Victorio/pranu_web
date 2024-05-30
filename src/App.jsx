@@ -3,8 +3,6 @@ import Home from "./pages/Home";
 import TentangKami from "./pages/TentangKami";
 import Produk from "./pages/Produk";
 import Informasi from "./pages/Informasi";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import Login from "./pages/auth/Login";
 import Admin from "./pages/Admin"
 
