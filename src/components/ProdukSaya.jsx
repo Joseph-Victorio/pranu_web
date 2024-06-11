@@ -22,7 +22,6 @@ const ProdukSaya = () => {
   return (
     
     <>
-        <Navbar/>
         <section className="p-5 sm:p-[75px] font-rhodium ">
         <h2 className="text-[30px] text-primary">Produk Kami</h2>
         {/* TOMBOL */}
@@ -31,7 +30,7 @@ const ProdukSaya = () => {
         </div>
         {/* CARDS */}
         <div className="flex  flex-row gap-5 overflow-x-scroll sm:overflow-x-hidden ">
-            {produks.map(produk=>(
+            {Array.isArray(produks) && produks.map(produk=>(
                 <>
                     {/* CARD */}
                     <div className="w-[289px] h-[420px] rounded-[30px] border-2 border-primary p-2 bg-white mx-auto">
@@ -59,7 +58,6 @@ const ProdukSaya = () => {
             
         </div>
     </section>
-    <Footer/>
     </>
   )
 }

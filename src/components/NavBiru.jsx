@@ -25,7 +25,7 @@ const NavBiru = ({text}) => {
                 <div className='flex items-center text-[20px] gap-10 '>
               <NavLink
                     to='/'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
+                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
                     Beranda
               </NavLink>
               <NavLink
@@ -35,12 +35,12 @@ const NavBiru = ({text}) => {
               </NavLink>
               <NavLink
                     to='/produk'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
+                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
                     Produk
               </NavLink>
               <NavLink
                     to='/informasi'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
+                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
                     Informasi
               </NavLink>
               
@@ -67,7 +67,7 @@ const NavBiru = ({text}) => {
                 className='w-[50px]' />
                 <a href="https://wa.me/6281295079288"> <MdOutlinePhoneEnabled color='white' className='text-[25px]'/></a>
             </nav>
-            <p className='text-white text-2xl mt-9'>{text}</p>
+            <p className='text-white text-2xl mt-9 font-rhodium'>{text}</p>
             <img 
               src="/logo_tentang.svg" 
               alt=""

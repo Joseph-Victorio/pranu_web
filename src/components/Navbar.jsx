@@ -69,7 +69,10 @@ const Navbar = () => {
             <button
                 className=""
                 onClick={handleMenuClick}>
-                <img src="/icons/menu-fries-left.svg" alt="" />
+                <img 
+                    src="/icons/menu-fries-left.svg" 
+                    alt=""
+                    className="w-[30px]" />
 
             </button>
             <img src="/pranu_logo.svg" alt="" />
@@ -77,7 +80,7 @@ const Navbar = () => {
             <div className='text-[20px]'>
                 <a href={`https://wa.me/6281295079288/?text=${templatePesanan} ${templatePesanan2}`} target='blank' className='flex gap-2 items-center'>
                     <MdOutlinePhoneEnabled
-                        className={location.pathname===tentang? 'text-white' : 'text-primary'}/>
+                        className="text-[30px] text-primary"/>
                     
                 </a>
             </div>

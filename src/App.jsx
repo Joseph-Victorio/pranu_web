@@ -10,7 +10,7 @@ import Admin from "./pages/Admin"
 import './App.css'
 import AdminList from "./pages/admin/AdminList";
 import ClientList from "./pages/admin/ClientList";
-import ProdukList from "./pages/admin/ProdukList";
+import ProdukList from "./pages/admin/produk/ProdukList";
 import ArtikelList from "./pages/admin/ArtikelList";
 import UlasanList from "./pages/admin/UlasanList";
 

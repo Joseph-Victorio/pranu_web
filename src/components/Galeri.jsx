@@ -23,11 +23,11 @@ const Galeri = () => {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
+          slidesToScroll: 1,
+          initialSlide: 1
         }
       },
       {

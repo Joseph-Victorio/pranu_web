@@ -1,5 +1,5 @@
 import React from 'react'
-import SideNav from '../../components/admin/SideNav'
+import SideNav from '../../../components/admin/SideNav'
 
 const ProdukList = () => {
   return (
