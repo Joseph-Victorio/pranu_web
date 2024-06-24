@@ -11,7 +11,7 @@ const Footer = () => {
                     <p className="text-[18px] text-white text-center font-bold ">PRANUGUM <br />PRODUCTION</p>
                 </div>
                 <div>
-                    <p className="text-justify items-center text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui provident amet harum saepe. Incidunt, cupiditate?</p>
+                    <p className="text-justify items-center text-white">Pranugum Production adalah sebuah perusahaan yang berdedikasi dalam menyediakan peralatan dan layanan sewa untuk keperluan acara</p>
                 </div>
             </div>
             {/* NAV */}

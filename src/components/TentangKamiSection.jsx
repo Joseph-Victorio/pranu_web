@@ -20,7 +20,7 @@ const TentangKamiSection = () => {
         <p className='text-[30px] text-primary mb-5'>Tentang Kami</p>
         <div className='flex sm:flex-row flex-col gap-5'>
             {/* KIRI */}
-            <div className='border-2 border-primary rounded-[20px] p-1 self-start font-rhodium'>
+            <div className='border-2 border-primary rounded-[20px] p-1 self-start font-rhodium flex-1'>
                 <div className='relative mb-10'>
                 <img 
                     src="/pranuFrame.png" 
@@ -34,13 +34,12 @@ const TentangKamiSection = () => {
                    </Link>
                 </div>
                 <div className="p-5">
-                    <p className='text-justify text-tersier sm:text-[16px] text-[14px]'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus eum modi iste totam earum magni?</p>
-                    <br />
-                    <p className='text-justify text-tersier sm:text-[16px] text-[14px]'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus eum modi iste totam earum magni?</p>
+                    <p className='text-justify text-tersier sm:text-[16px] text-[14px]'>Pranugum Production adalah sebuah perusahaan independen yang berdedikasi dalam menyediakan peralatan dan layanan sewa untuk keperluan acara yang beragam. Didirikan pada bulan Februari tahun 2022, Pranugum Production merupakan hasil dari gagasan kreatif para pemuda yang memiliki antusiasme terhadap industri acara dan bermimpi untuk menciptakan sesuatu yang istimewa dan luar biasa.</p>
+                    <br />  
                 </div>
             </div>
             {/* KANAN */}
-            <div className='border-2 border-primary rounded-[30px] p-4 '>
+            <div className='border-2 border-primary rounded-[30px] p-4 flex-1'>
                 <p className='text-[30px] text-center text-primary'>Pertanyaan Sering Diajukan</p>
                 {/* ACCORDION */}
                 <div >

@@ -1,7 +1,12 @@
-import React from 'react'
+import axios from "axios"
+import toast from "react-hot-toast"
 import NavBiru from '../components/NavBiru'
 
 import { FaRegUser } from "react-icons/fa"
+import { MdOutlinePhoneEnabled } from "react-icons/md"
+import { MdOutlineMessage } from "react-icons/md"
+import { CiMail } from "react-icons/ci"
+import { CiInstagram } from "react-icons/ci"
 
 import { useState } from 'react'
 
@@ -36,20 +41,42 @@ const Informasi = () => {
     setKontak(true)
   }
 
-  const [Nama, setNama] = useState('')
-  const [selectedOption, setSelectedOption] = useState('')
+  // const [Nama, setNama] = useState('')
+  // const [selectedOption, setSelectedOption] = useState('')
+  // const [Telemail, setTelemail] = useState('')
+  // const [PesanForm, setPesanForm] = useState('')
+  // const notify = () => toast.success("Berhasil Mengirim Pesan")
 
-
-  const submitHandle = (e)=>{
-    e.preventDefault()
-    setNama("")
-    console.log(Nama)
+  const [KontakForm, setKontakForm] = useState({
+    nama_penanya: "",
+    jenis_pesan : "Pertanyaan",
+    telemail: "",
+    pesan: "",
+  })
+  console.log(KontakForm)
+  const handleChange = (e)=>{
+    setKontakForm((prev)=>({...prev, [e.target.name]: e.target.value}))
   }
 
-  const handleSelect = (e)=>{
-    setSelectedOption(e.target.value);
+  const submitHandle = async (e) => {
+    e.preventDefault();
+    
+    try {
+      await axios.post("http://localhost:8800/kontak", KontakForm);
+      toast.success("Pesan Berhasil Dikirim");
+      toast('Terima kasih, pesan mu akan kami proses ya, mohon ditunggu', {
+        icon: '🙏',
+        duration:5000,
+      })
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.log(error.response.data);
+      } else {
+        console.log("An error occurred:", error.message);
+      }
+    }
   }
-
+  
 
   return (
     <>
@@ -90,10 +117,10 @@ const Informasi = () => {
         {/* RIGHT SIDE */}
         <div className="p-5">
           <div className="bg-secondary border-2 border-primary xl:w-[900px] xl:h-[97px] rounded-[15px]">
-            {Pesan && <p className="md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 text-primary">Cara Mudah Memesan</p>}
-            {Syarat && <p className="md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 text-primary">Syarat Dan Ketentuan</p>}
-            {Kebijakan && <p className="md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 text-primary">Kebijakan Privasi</p>}
-            {Kontak && <p className="md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 text-primary">Kontak Pranugum Production</p>}
+            {Pesan && <p className=" h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 mt-4 text-primary">Cara Mudah Memesan</p>}
+            {Syarat && <p className="h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 mt-4 text-primary">Syarat Dan Ketentuan</p>}
+            {Kebijakan && <p className="h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 mt-4 text-primary">Kebijakan Privasi</p>}
+            {Kontak && <p className="h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5  mt-4 text-primary">Kontak Pranugum Production</p>}
           </div>
           {/* CARA PESAN */}
           {Pesan && (
@@ -219,50 +246,92 @@ const Informasi = () => {
           {Kontak && (
             <div className=' mt-12'>
               <form 
-                onSubmit={submitHandle}
-                method="post"
-                className='p-10 border-primary border-2 rounded-[15px] bg-white'>
+                className='p-5 border-primary border-2 mt-[-20px] md:mt-[0px] rounded-[15px] bg-white'>
                   {/* NAMA */}
-                  <div className='flex flex-col'>
-                    <div className='flex'>
+                  <div className='flex flex-col gap-4'>
+                    <div className='flex gap-5 flex-col md:flex-row xl:flex-row'>
                       <div>
-                        <div className='flex gap-1 text-primary'>
+                        <div className='flex gap-1 text-primary items-center'>
                           <FaRegUser className='text-primary'/>
                           <p>Nama*</p>
                         </div>
                         <input 
                           type="text"
-                          name='nama'
+                          name='nama_penanya'
                           placeholder='Masukkan Nama Anda'
-                          value={Nama}
-                          onChange={e=>setNama(e.target.value)}
-                          className='xl:w-[397px] xl:h-[62px] bg-background  rounded-[15px] border-primary border-[1px] px-4 focus:outline-primary' />
+                          required
+                          onChange={handleChange}
+                          className='md:w-[397px] h-[40px] md:h-[62px] xl:w-[397px] xl:h-[62px] bg-background  rounded-[15px] border-primary border-[1px] px-4 focus:outline-primary' />
                       </div>
                       <div>
+                      <p className='text-primary'>Jenis Pesan*</p>
                         <select 
                           name="jenis_pesan"
-                          value={selectedOption}
-                          onChange={handleSelect}
-                          >
-                            <option value="" disabled >
+                          onChange={handleChange}
+                          required
+                          className='border-primary focus:outline-primary active:outline-primary bg-background rounded-[15px] h-[40px] w-[260px] md:w-[397px] md:h-[62px] px-4 text-primary'
+                          defaultValue={"Pertanyaan"}
+                        >
+                            <option value="" disabled hidden >
                               Pilih Jenis Pesan
                             </option>
-                            <option value="Pertanyaan">
+                            <option value="Pertanyaan" className='text-primary' default >
                                 Pertanyaan
                             </option>
-                            <option value="Pertanyaan">
+                            <option value="Pengaduan" className='text-primary'>
                                 Pengaduan
                             </option>
                           </select>
                       </div>
                     </div>
+
+                    <div>
+                        <div className='flex gap-1 text-primary items-center'>
+                          <MdOutlinePhoneEnabled className='text-primary'/>
+                          <p>Nomor Telepon/Email*</p>
+                        </div>
+                        <input 
+                          type="text"
+                          name='telemail'
+                          placeholder='Masukkan nomor telepon/email Anda'
+                          required
+                          onChange={handleChange}
+                          className='md:w-[397px] md:h-[62px] xl:w-[397px] xl:h-[62px] bg-background  rounded-[15px] h-[40px] border-primary border-[1px] px-4 focus:outline-primary' />
+                      </div>
+                  </div>
+                  <div className='flex flex-col mt-2'>
+                    <div className='flex gap-1 items-center text-primary'>
+                    <MdOutlineMessage />
+                    <p>Pesan*</p>
+                    </div>
+                    <textarea 
+                      name="pesan"
+                      required
+                      onChange={handleChange}
+                      className='w-full h-[207px] xl:w-[834px] xl:h-[207px] bg-background  rounded-[15px] border-primary border-[1px] px-4 py-2 focus:outline-primary mb-5' >
+
+                      </textarea>
                   </div>
                   <button
-                    type='submit'
+                    onClick={submitHandle}
                     className='bg-primary w-full px-6 py-3 text-white rounded-xl md:mt-5 '>
                     Kirim Pesan
                   </button>
               </form>
+              <div className='mt-5 text-primary'>
+                <div className='flex gap-2 items-center text-[10px] md:text-[20px] xl:text-[20px]'>
+                <CiInstagram />
+                <p>@pranu.pro</p>
+                </div>
+                <div className='flex gap-2 items-center text-[10px] md:text-[20px] xl:text-[20px]'>
+                <MdOutlineMessage />
+                <p>0812-9507-9288</p>
+                </div>
+                <div className='flex gap-2 items-center text-[10px] md:text-[20px] xl:text-[20px]'>
+                <CiMail />
+                <p>productionpranugum@gmail.com</p>
+                </div>
+              </div>
             </div>
           )}
         </div>

@@ -1,5 +1,8 @@
-import { MdOutlinePhoneEnabled } from "react-icons/md";
-import { NavLink, useLocation } from 'react-router-dom'
+import { MdOutlinePhoneEnabled } from "react-icons/md"
+import { IoCartOutline } from "react-icons/io5";
+
+
+import {Link, NavLink, useLocation } from 'react-router-dom'
 
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -53,7 +56,12 @@ const Navbar = () => {
            </NavLink>
            
             </div>
-            <div className='text-[20px]'>
+            <div className='text-[20px] flex gap-2'>
+                <Link
+                    className="text-[30px] text-primary"
+                    to={""}>
+                <IoCartOutline />
+                </Link>
                 <a href={`https://wa.me/6281295079288/?text=${templatePesanan} ${templatePesanan2}`} target='blank' className='flex gap-2 items-center'>
                     <MdOutlinePhoneEnabled
                         className={location.pathname===tentang? 'text-white' : 'text-primary'}/>
@@ -77,7 +85,12 @@ const Navbar = () => {
             </button>
             <img src="/pranu_logo.svg" alt="" />
 
-            <div className='text-[20px]'>
+            <div className='text-[20px] gap-2 flex'>
+                <Link
+                    className="text-[30px] text-primary"
+                    to={""}>
+                <IoCartOutline />
+                </Link>
                 <a href={`https://wa.me/6281295079288/?text=${templatePesanan} ${templatePesanan2}`} target='blank' className='flex gap-2 items-center'>
                     <MdOutlinePhoneEnabled
                         className="text-[30px] text-primary"/>
