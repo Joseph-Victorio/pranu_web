@@ -86,7 +86,7 @@ const ArtikelCard = () => {
                 <img 
                     src="/kampanye.png" 
                     alt=""
-                    className='w-[250px] mx-auto' />
+                    className='w-[250px] mx-auto rounded-xl' />
                    <Link
                     to='/tentang-kami'
                     className='absolute bottom-[-20px] left-[50%] translate-x-[-50%] '

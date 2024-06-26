@@ -81,7 +81,7 @@ const ProdukSaya = () => {
                         {/* IMG */}
                         <div className="sm:w-[237px] w-[237px] mx-auto">
                             <img 
-                                src={'/uploads/produk/'+produk.foto} 
+                                src={'../backend/uploads/produk/'+produk.foto} 
                                 alt=""
                                 className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]" />
                         </div>

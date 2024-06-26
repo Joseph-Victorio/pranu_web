@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import toast from "react-hot-toast"
+import { useParams } from 'react-router-dom';
 
 const EditProduk = () => {
     const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const EditProduk = () => {
         kategori: '',
         foto: 'no-image.jpeg',
       });
+
+      const {id} = useParams()
     
       const handleChange = (e) => {
        setFormData((prev)=>({...prev, [e.target.name]: e.target.value}))
@@ -24,7 +27,7 @@ const EditProduk = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-           await axios.put('http://localhost:8800/produk/:id', formData, {
+           await axios.put('http://localhost:8800/produk/'+id, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

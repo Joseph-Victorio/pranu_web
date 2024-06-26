@@ -41,7 +41,6 @@ const storage = multer.diskStorage({
 
 app.get('/produk',  (req,res)=>{
     const q = "SELECT * FROM produk";
-    
 
     db.query(q,(err, data)=>{
         if(err){
@@ -67,22 +66,48 @@ app.post('/produk', upload.single('foto'), (req, res)=>{
           return
         }
         res.status(200).send('Data added successfully.')
-      })
-    
+    })  
 })
 
 app.put('/produk/:id', upload.single('foto'), (req, res) => {
   const { id } = req.params;
-  
-  const { nama_produk, harga, kategori, foto } = req.body;
-  const query = 'UPDATE produk SET nama_produk = ?, harga = ?, kategori = ?, foto = ? WHERE id = ?';
+  const { nama_produk, harga, kategori } = req.body;
+  const foto = req.file ? req.file.filename : null;
 
-  db.query(query, [nama_produk, harga, kategori, foto, id], (err, result) => {
+  // Retrieve the old photo filename
+  const selectQuery = 'SELECT foto FROM produk WHERE id = ?';
+  db.query(selectQuery, [id], (err, results) => {
     if (err) {
       res.status(500).json(err);
-    } else {
-      res.status(200).json("Product updated successfully");
+      return;
     }
+
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Product not found' });
+      return;
+    }
+
+    const oldFoto = results[0].foto;
+    // Update the product details
+    const updateQuery = 'UPDATE produk SET nama_produk = ?, harga = ?, kategori = ?, foto = ? WHERE id = ?';
+    db.query(updateQuery, [nama_produk, harga, kategori, foto, id], (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+        return;
+      }
+
+      // Delete the old photo if a new photo is uploaded
+      if (oldFoto && req.file) {
+        const oldFilePath = path.join(__dirname, 'uploads', oldFoto);
+        fs.unlink(oldFilePath, (err) => {
+          if (err) {
+            console.error('Error deleting old file:', err);
+          }
+        });
+      }
+
+      res.status(200).json({ message: 'Product updated successfully' });
+    });
   });
 });
 
@@ -129,6 +154,7 @@ app.delete('/produk/:id', (req,res)=>{
   })
 })
 
+// KONTAK
 app.post('/kontak', (req, res) => {
     const { nama_penanya, jenis_pesan, telemail, pesan } = req.body;
   
