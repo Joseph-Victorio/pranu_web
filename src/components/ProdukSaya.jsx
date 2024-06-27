@@ -30,7 +30,7 @@ const ProdukSaya = () => {
     
     <>
         <section className="p-5 sm:p-[75px] font-rhodium ">
-        <h2 className="text-[30px] text-primary mt-5">Produk Kami</h2>
+        <h2 className="text-[30px] text-primary ">Produk Kami</h2>
         {/* TOMBOL */}
         <div className="flex justify-between mb-10 flex-col-reverse md:flex-col-reverse xl:flex-col-reverse gap-5 ">
             {/* BUTTONS */}

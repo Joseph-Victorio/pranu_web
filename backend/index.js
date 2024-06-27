@@ -10,7 +10,7 @@ const app = express()
 
 app.use(cors())
 
-app.use(express.json());
+app.use(express.json())
 
 
 const db = mysql.createConnection({
@@ -20,12 +20,12 @@ const db = mysql.createConnection({
     database: "pranugum_web"
 })
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const uploadsDirProduk = path.join(__dirname, 'uploads', 'produk');
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const uploadsDirProduk = path.join(__dirname, 'uploads', 'produk')
 
 if (!fs.existsSync(uploadsDirProduk)) {
-    fs.mkdirSync(uploadsDirProduk, { recursive: true });
+    fs.mkdirSync(uploadsDirProduk, { recursive: true })
 }
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -36,11 +36,11 @@ const storage = multer.diskStorage({
       cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
     }
   })
-  const upload = multer({ storage: storage });
+  const upload = multer({ storage: storage })
 
-
+// ------------------------------------------PRODUK------------------------------------
 app.get('/produk',  (req,res)=>{
-    const q = "SELECT * FROM produk";
+    const q = "SELECT * FROM produk"
 
     db.query(q,(err, data)=>{
         if(err){
@@ -51,52 +51,69 @@ app.get('/produk',  (req,res)=>{
     })
 })
 
+// fetch produk per id
+app.get('/produk/:id', (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM produk WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Produk tidak ditemukan' });
+    }
+    const { foto, ...produkData } = results[0];
+    const fotoURL = foto ? `http://localhost:8800/uploads/produk/${foto}` : null;
+    res.json({ ...produkData, foto: fotoURL }); 
+  });
+})
+
+// UPLOAD PRODUK
 app.post('/produk', upload.single('foto'), (req, res)=>{
     const query = "INSERT INTO produk (`nama_produk`, `harga`, `kategori`, `foto`) VALUES (?,?,?,?)"
 
-    const { nama_produk, harga, kategori } = req.body;
+    const { nama_produk, harga, kategori } = req.body
 
-    const foto = req.file ? req.file.filename : null;
+    const foto = req.file ? req.file.filename : null
    
 
     db.execute(query, [nama_produk, harga, kategori, foto], (err, result) => {
         if (err) {
-          console.error('Error inserting data:', err)
-          res.status(500).send('An error occurred while processing your request.')
+          console.error('Error mengisi data', err)
+          res.status(500).send('Terjadi error saat memproses request anda')
           return
         }
-        res.status(200).send('Data added successfully.')
+        res.status(200).send('Sukses menambahkan data.')
     })  
 })
-
+//BUAT UPDATE PRODUK
 app.put('/produk/:id', upload.single('foto'), (req, res) => {
   const { id } = req.params;
   const { nama_produk, harga, kategori } = req.body;
   const foto = req.file ? req.file.filename : null;
 
-  // Retrieve the old photo filename
+  // Get the old photo
   const selectQuery = 'SELECT foto FROM produk WHERE id = ?';
   db.query(selectQuery, [id], (err, results) => {
     if (err) {
-      res.status(500).json(err);
-      return;
+      return res.status(500).json({ error: 'Database query error', details: err });
     }
 
     if (results.length === 0) {
-      res.status(404).json({ message: 'Product not found' });
-      return;
+      return res.status(404).json({ message: 'Produk tidak ditemukan' });
     }
 
     const oldFoto = results[0].foto;
-    // Update the product details
+
+    // pilih foto lama atau foto baru buat di pake
+    const newFoto = foto || oldFoto;
+
     const updateQuery = 'UPDATE produk SET nama_produk = ?, harga = ?, kategori = ?, foto = ? WHERE id = ?';
-    db.query(updateQuery, [nama_produk, harga, kategori, foto, id], (err, result) => {
+    db.query(updateQuery, [nama_produk, harga, kategori, newFoto, id], (err, result) => {
       if (err) {
-        res.status(500).json(err);
-        return;
+        return res.status(500).json({ error: 'Database update error', details: err });
       }
 
-      // Delete the old photo if a new photo is uploaded
+      // hapus file lama kalau upload file baru
       if (oldFoto && req.file) {
         const oldFilePath = path.join(__dirname, 'uploads', oldFoto);
         fs.unlink(oldFilePath, (err) => {
@@ -106,70 +123,217 @@ app.put('/produk/:id', upload.single('foto'), (req, res) => {
         });
       }
 
-      res.status(200).json({ message: 'Product updated successfully' });
+      res.status(200).json({ message: 'Produk sukses diupdate' });
     });
   });
 });
 
-app.use('/uploads/produk', express.static(path.join(__dirname, 'uploads', 'produk')));
-
-// BUAT UPDATE PRODUK
-
+app.use('/uploads/produk', express.static(path.join(__dirname, 'uploads', 'produk')))
 
 // BUAT HAPUS PRODUK
 app.delete('/produk/:id', (req,res)=>{
   const {id} = req.params
-  const getFilenameQuery = 'SELECT foto FROM produk WHERE id = ?';
+  const getFilenameQuery = 'SELECT foto FROM produk WHERE id = ?'
   db.query(getFilenameQuery, [id], (err, result) => {
     if (err) {
-      return res.status(500).json({ error: 'Failed to delete product.' });
+      return res.status(500).json({ error: 'Failed to delete product.' })
     }
 
     // Assuming result[0].foto contains the filename
-    const filename = result[0].foto;
+    const filename = result[0].foto
 
     // Delete from database
-    const deleteQuery = 'DELETE FROM produk WHERE id = ?';
+    const deleteQuery = 'DELETE FROM produk WHERE id = ?'
     db.query(deleteQuery, [id], (err, result) => {
       if (err) {
-        return res.status(500).json({ error: 'Failed to delete product.' });
+        return res.status(500).json({ error: 'Failed to delete product.' })
       }
 
       // Delete the file from filesystem
       if (filename) {
-        const filePath = path.join(uploadsDirProduk, filename);
+        const filePath = path.join(uploadsDirProduk, filename)
         fs.unlink(filePath, (err) => {
           if (err) {
-            console.error('Error deleting file:', err);
-            return res.status(500).json({ error: 'Failed to delete file.' });
+            console.error('Error deleting file:', err)
+            return res.status(500).json({ error: 'Failed to delete file.' })
           }
           // Respond with success message or handle as needed
           return res.status(200).json({ message: 'Product and file deleted successfully.' })
         })
       } else {
         // Respond with success message if no file to delete
-        return res.status(200).json({ message: 'Product deleted successfully.' });
+        return res.status(200).json({ message: 'Product deleted successfully.' })
       }
     })
   })
 })
 
+// ----------------------------ARTIKEL----------------------------------------------------
+const uploadsDirArtikel = path.join(__dirname, 'uploads', 'artikel')
+
+if (!fs.existsSync(uploadsDirArtikel)) {
+    fs.mkdirSync(uploadsDirArtikel, { recursive: true })
+}
+const storageArtikel = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadsDirArtikel) //nama directorynya
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+    }
+  })
+  const uploadArtikel = multer({ storage: storageArtikel })
+
+// UPLOAD Artikel
+app.post('/artikel', uploadArtikel.single('foto'), (req, res)=>{
+  const query = "INSERT INTO artikel (`judul`, `penulis`, `isi`, `foto`) VALUES (?,?,?,?)"
+
+  const { judul, penulis, isi } = req.body
+
+  const foto = req.file ? req.file.filename : null
+
+  db.execute(query, [judul, penulis, isi, foto], (err, result) => {
+      if (err) {
+        console.error('Error mengisi data', err)
+        res.status(500).send('Terjadi error saat memproses request anda')
+        return
+      }
+      res.status(200).send('Sukses menambahkan data.')
+  })  
+})
+
+// BUAT FETCH ARTIKEL
+app.get('/artikel',  (req,res)=>{
+  const q = "SELECT * FROM artikel"
+
+  db.query(q,(err, data)=>{
+      if(err){
+          return res.json(err)
+      }else{
+          return res.json(data)
+      }
+  })
+})
+// fetch artikel per id
+app.get('/artikel/:id', (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM artikel WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Artikel tidak ditemukan' });
+    }
+    const { foto, ...artikelData } = results[0];
+    const fotoURL = foto ? `http://localhost:8800/uploads/artikel/${foto}` : null;
+    res.json({ ...artikelData, foto: fotoURL }); 
+  });
+})
+
+// UPDATE ARTIKEL
+app.put('/artikel/:id', uploadArtikel.single('foto'), (req, res) => {
+  const { id } = req.params;
+  const { judul, penulis, isi } = req.body;
+  const foto = req.file ? req.file.filename : null;
+
+  // Get the old photo
+  const selectQuery = 'SELECT foto FROM artikel WHERE id = ?';
+  db.query(selectQuery, [id], (err, results) => {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Artikel tidak ditemukan' });
+      return;
+    }
+
+    const oldFoto = results[0].foto;
+
+    // Determine the photo to be used
+    const newFoto = foto || oldFoto;
+
+    const updateQuery = 'UPDATE artikel SET judul = ?, penulis = ?, isi = ?, foto = ? WHERE id = ?';
+    db.query(updateQuery, [judul, penulis, isi, newFoto, id], (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+        return;
+      }
+
+      // Delete the old file if a new file is uploaded
+      if (oldFoto && req.file) {
+        const oldFilePath = path.join(__dirname, 'uploads', 'artikel', oldFoto);
+        fs.unlink(oldFilePath, (err) => {
+          if (err) {
+            console.error('Error menghapus file lama:', err);
+          }
+        });
+      }
+
+      res.status(200).json({ message: 'Artikel sukses di update' });
+    });
+  });
+});
+
+
+// HAPUS ARTIKEL
+app.delete('/artikel/:id', (req,res)=>{
+  const {id} = req.params
+  const getFilenameQuery = 'SELECT foto FROM artikel WHERE id = ?'
+  db.query(getFilenameQuery, [id], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to delete artikel.' })
+    }
+
+    // Assuming result[0].foto contains the filename
+    const filename = result[0].foto
+
+    // Delete from database
+    const deleteQuery = 'DELETE FROM artikel WHERE id = ?'
+    db.query(deleteQuery, [id], (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: 'Failed to delete artikel.' })
+      }
+
+      // Delete the file from filesystem
+      if (filename) {
+        const filePath = path.join('uploads','artikel', filename)
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error('Error deleting file:', err)
+            return res.status(500).json({ error: 'Failed to delete file.' })
+          }
+          // Respond with success message or handle as needed
+          return res.status(200).json({ message: 'Product and file deleted successfully.' })
+        })
+      } else {
+        // Respond with success message if no file to delete
+        return res.status(200).json({ message: 'Product deleted successfully.' })
+      }
+    })
+  })
+})
+
+app.use('/uploads/artikel', express.static(path.join(__dirname, 'uploads', 'artikel')))
+
 // KONTAK
 app.post('/kontak', (req, res) => {
-    const { nama_penanya, jenis_pesan, telemail, pesan } = req.body;
+    const { nama_penanya, jenis_pesan, telemail, pesan } = req.body
   
     const query = 'INSERT INTO kontak (nama, jenis_pesan, telemail, pesan) VALUES (?, ?, ?, ?)'
     db.execute(query, [nama_penanya, jenis_pesan, telemail, pesan], (err, result) => {
       if (err) {
-        console.error('Error inserting data:', err)
-        res.status(500).send('An error occurred while processing your request.')
+        console.error('Error mengisi data', err)
+        res.status(500).send('Terjadi error saat memproses request anda')
         return
       }
-      res.status(200).send('Data added successfully.')
+      res.status(200).send('Sukses menambahkan data.')
     })
   })
 
 app.listen(8800, ()=>{
-    console.log('Connected to backend!!');
+    console.log('Connected to backend!!')
 })
 

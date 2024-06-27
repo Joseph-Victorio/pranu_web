@@ -11,7 +11,7 @@ import { BsTrash } from "react-icons/bs";
 const ProdukList = () => {
   const [produks, setProduk] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage] = useState(5); // Adjust the number of items per page as needed
+  const [itemsPerPage] = useState(5); //atur paginationnya
 
   useEffect(() => {
     const fetchAllProduk = async () => {
@@ -49,7 +49,7 @@ const ProdukList = () => {
       <SideNav />
       {/* KANAN */}
       <div className='font-rhodium text-primary xl:p-5 mt-2 w-full md:ml-[250px]'>
-        <p className='text-3xl p-5'>Daftar Produk</p>
+        <p className='text-3xl p-5'>List Produk</p>
         <hr className='border-primary border-b-2 ' />
         <Link
           to={'/admin/add-produk'}
@@ -60,8 +60,8 @@ const ProdukList = () => {
         </Link>
 
         {/* TABLE LIST */}
-        <div className='overflow-x-scroll w-[350px] md:w-[750px] md:overflow-hidden p-3'>
-          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[450px]md:w-[750px] mx-auto'>
+        <div className='overflow-x-scroll w-[350px] md:w-[800px] md:overflow-hidden p-3'>
+          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[700px] md:w-[750px] mx-auto'>
             <thead>
               <tr className=' bg-secondary rounded-md ring-2 ring-primary'>
                 <th className=' bg-secondary rounded-l-md p-2 w-[100px] md:text-[20px]'>foto</th>
