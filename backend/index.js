@@ -318,6 +318,25 @@ app.delete('/artikel/:id', (req,res)=>{
 
 app.use('/uploads/artikel', express.static(path.join(__dirname, 'uploads', 'artikel')))
 
+// ----------------------------ULASAN---------------------------------------
+
+const uploadsDirUlasan = path.join(__dirname, 'uploads', 'produk')
+
+if (!fs.existsSync(uploadsDirUlasan)) {
+    fs.mkdirSync(uploadsDirUlasan, { recursive: true })
+}
+const storageUlasan = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadsDirUlasan) //nama directorynya
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+    }
+  })
+  const uploadUlasan = multer({ storage: storageUlasan })
+
+  // ----------------------------------------KONTAK---------------------------------
 // KONTAK
 app.post('/kontak', (req, res) => {
     const { nama_penanya, jenis_pesan, telemail, pesan } = req.body

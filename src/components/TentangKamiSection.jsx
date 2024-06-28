@@ -18,7 +18,7 @@ const TentangKamiSection = () => {
   return (
     <section className='font-rhodium p-5 sm:p-[75px]'>
         <p className='text-[30px] text-primary mb-5'>Tentang Kami</p>
-        <div className='flex sm:flex-row flex-col gap-5'>
+        <div className='flex sm:flex-row md:flex-col lg:flex-row flex-col gap-5'>
             {/* KIRI */}
             <div className='border-2 border-primary rounded-[20px] p-1 self-start font-rhodium flex-1'>
                 <div className='relative mb-10'>

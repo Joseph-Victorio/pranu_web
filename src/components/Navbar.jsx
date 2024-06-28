@@ -25,7 +25,7 @@ const Navbar = () => {
     <>
         <nav className={location.pathname===tentang? 'hidden sm:block  font-rhodium text-white ': 'hidden sm:block bg-background font-rhodium text-primary '}>
         {/* DESKTOP */}
-        <div className='sm:flex items-center justify-between sm:px-[50px] sm:py-[32px] '>
+        <div className='sm:flex md:hidden lg:flex items-center justify-between sm:px-[50px] sm:py-[32px] '>
             {/* LOGO */}
             <div>
                 <img 
@@ -73,7 +73,7 @@ const Navbar = () => {
        
         </nav>
          {/* MOBILE */}
-         <div className='p-5 sm:hidden flex items-center justify-between'>
+         <div className='p-5 sm:hidden md:flex lg:hidden flex items-center justify-between'>
             <button
                 className=""
                 onClick={handleMenuClick}>

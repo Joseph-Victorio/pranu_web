@@ -13,7 +13,6 @@ const ApaKataMereka = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    centerMode: true,
     centerPadding: "60px",
     responsive: [
       {
@@ -26,7 +25,7 @@ const ApaKataMereka = () => {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -47,7 +46,7 @@ const ApaKataMereka = () => {
   };
   return (
     <section className='font-rhodium p-5 sm:p-[75px]'>
-        <h2 className='text-primary text-[24px] sm:text-[40px] text-center'>
+        <h2 className='text-primary text-[24px] sm:text-[40px] text-center mb-5'>
             Apa Kata Mereka?
         </h2>
     
@@ -64,7 +63,7 @@ const ApaKataMereka = () => {
                 {/* NAMA */}
                 <p className="sm:text-[30px] text-primary">Syifa Zahwa</p>
             </div>
-            <p className="text-justify text-[12px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque totam aliquid qui maiores consectetur odit architecto veritatis ipsa numquam.</p>
+            <p className="text-justify text-[12px] mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque totam aliquid qui maiores consectetur odit architecto veritatis ipsa numquam.</p>
           </div>
         </div>
         {/* cards */}
@@ -79,7 +78,7 @@ const ApaKataMereka = () => {
                 {/* NAMA */}
                 <p className="sm:text-[30px] text-primary">Syifa Zahwa</p>
             </div>
-            <p className="text-justify text-[12px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque totam aliquid qui maiores consectetur odit architecto veritatis ipsa numquam.</p>
+            <p className="text-justify text-[12px] mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque totam aliquid qui maiores consectetur odit architecto veritatis ipsa numquam.</p>
           </div>
         </div>
         {/* cards */}
@@ -94,7 +93,7 @@ const ApaKataMereka = () => {
                 {/* NAMA */}
                 <p className="sm:text-[30px] text-primary">Syifa Zahwa</p>
             </div>
-            <p className="text-justify text-[12px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque totam aliquid qui maiores consectetur odit architecto veritatis ipsa numquam.</p>
+            <p className="text-justify text-[12px] mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque totam aliquid qui maiores consectetur odit architecto veritatis ipsa numquam.</p>
           </div>
         </div>
         

@@ -14,7 +14,6 @@ const ArtikelCard = () => {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 3,
-        centerMode: true,
         centerPadding: "60px",
         responsive: [
           {
@@ -27,7 +26,7 @@ const ArtikelCard = () => {
             }
           },
           {
-            breakpoint: 600,
+            breakpoint: 768,
             settings: {
               slidesToShow: 2,
               slidesToScroll: 2,
@@ -47,8 +46,8 @@ const ArtikelCard = () => {
       
       };
   return (
-    <section className='font-rhodium p-5 sm:p-[75px]'>
-        <h2 className='text-primary text-[24px] sm:text-[40px] text-center'>
+    <section className='font-rhodium p-5 sm:px-[75px] mb-10'>
+        <h2 className='text-primary text-[24px] sm:text-[40px] text-center mb-5'>
             Artikel
         </h2>
     

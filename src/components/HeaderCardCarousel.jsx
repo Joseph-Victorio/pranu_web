@@ -30,9 +30,9 @@ const HeaderCardCarousel = () => {
                     variants={imgBoxVariants}
                     initial="hidden"
                     animate="visible"
-                    className='max-w-[330px] h-[420px] border-2 border-primary rounded-[16px] p-4'>
+                    className='max-w-[330px] md:w-[300px] lg:w-[330px] h-[420px] border-2 border-primary rounded-[16px] p-4'>
                 {/* IMG */}
-                <div className='w-[300px] mx-auto'>
+                <div className='w-[300px] md:w-[270px] lg:w-[300px] mx-auto'>
                   <img src="/soundsSystem.png" alt="" />
                 </div>
                 {/* CONTENT */}
