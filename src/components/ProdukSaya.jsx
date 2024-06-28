@@ -14,7 +14,7 @@ const ProdukSaya = () => {
     useEffect(()=>{
         const fetchAllProduk = async ()=>{
             try {
-                const res  = await axios.get("http://localhost:8800/produk")
+                const res  = await axios.get("http://localhost:8800/produk-home")
                 setProduk(res.data)
             } catch (error) {
                 console.log(error)
@@ -77,7 +77,7 @@ const ProdukSaya = () => {
             {Array.isArray(produks) && produks.map(produk=>(
                 <>
                     {/* CARD */}
-                    <div className="w-[152px] h-[220px] md:w-[289px] md:h-[420px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto " >
+                    <div className="w-[152px] h-[220px] md:w-[289px] md:h-[420px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto " key={produk.id}>
                         {/* IMG */}
                         <div className="sm:w-[237px] w-[237px] mx-auto">
                             <img 
@@ -87,7 +87,7 @@ const ProdukSaya = () => {
                         </div>
                         
                         {/* CONTENT */}
-                        <div className=" w-[237px] mx-auto" key={produk.id}>
+                        <div className=" w-[237px] mx-auto" >
                             {/* CATEGORY */}
                             <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">{produk.kategori}</p>
                             {/* NAMA */}

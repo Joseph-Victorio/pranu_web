@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { query } from 'express'
 import mysql from 'mysql2'
 import cors from 'cors'
 import multer from 'multer'
@@ -165,6 +165,19 @@ app.delete('/produk/:id', (req,res)=>{
         return res.status(200).json({ message: 'Product deleted successfully.' })
       }
     })
+  })
+})
+
+// PRODUK DI HOMEPAGE
+app.get('/produk-home', (req,res)=>{
+  const q = "SELECT * FROM produk LIMIT 6"
+
+  db.query(q,(err, data)=>{
+    if(err){
+      return res.json(err)
+    }else{
+      return res.json(data)
+    }
   })
 })
 
