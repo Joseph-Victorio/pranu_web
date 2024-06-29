@@ -1,5 +1,5 @@
 import express, { query } from 'express'
-import mysql from 'mysql2'
+import  db from './db.js'
 import cors from 'cors'
 import multer from 'multer'
 import fs from 'fs'
@@ -12,13 +12,6 @@ app.use(cors())
 
 app.use(express.json())
 
-
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "pranugum_web"
-})
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

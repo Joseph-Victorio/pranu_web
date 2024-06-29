@@ -11,7 +11,7 @@ const AddProduk = () => {
     kategori: '',
     foto: 'no-image.jpeg',
   });
-  const {id} = useParams()
+  
 
   const handleChange = (e) => {
    setFormData((prev)=>({...prev, [e.target.name]: e.target.value}))
@@ -27,7 +27,7 @@ const AddProduk = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-       await axios.post('http://localhost:8800/produk/'+id, formData, {
+       await axios.post('http://localhost:8800/produk/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
