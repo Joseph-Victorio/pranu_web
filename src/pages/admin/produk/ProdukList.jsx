@@ -1,48 +1,48 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import ReactPaginate from 'react-paginate'
 
-import SideNav from '../../../components/admin/SideNav';
+import SideNav from '../../../components/admin/SideNav'
 
-import { FaPencil } from "react-icons/fa6";
-import { BsTrash } from "react-icons/bs";
+import { FaPencil } from "react-icons/fa6"
+import { BsTrash } from "react-icons/bs"
 
 const ProdukList = () => {
-  const [produks, setProduk] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage] = useState(5); //atur paginationnya
+  const [produks, setProduk] = useState([])
+  const [currentPage, setCurrentPage] = useState(0)
+  const [itemsPerPage] = useState(5) //atur paginationnya
 
   useEffect(() => {
     const fetchAllProduk = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/produk");
-        setProduk(res.data);
+        const res = await axios.get("http://localhost:8800/produk")
+        setProduk(res.data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    };
-    fetchAllProduk();
-  }, []);
+    }
+    fetchAllProduk()
+  }, [])
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:8800/produk/'+id);
+      await axios.delete('http://localhost:8800/produk/'+id)
       window.location.reload()
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   // Logic for displaying current products
-  const indexOfLastProduct = (currentPage + 1) * itemsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
-  const currentProducts = produks.slice(indexOfFirstProduct, indexOfLastProduct);
+  const indexOfLastProduct = (currentPage + 1) * itemsPerPage
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage
+  const currentProducts = produks.slice(indexOfFirstProduct, indexOfLastProduct)
 
   // Logic for handling page click
   const handlePageClick = (event) => {
-    setCurrentPage(event.selected);
-  };
+    setCurrentPage(event.selected)
+  }
 
   return (
     <div className='flex gap-5 mt-20 sm:mt-0'>
@@ -110,7 +110,7 @@ const ProdukList = () => {
             />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProdukList;
+export default ProdukList

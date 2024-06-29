@@ -9,9 +9,8 @@ const Galeri = () => {
     className: "center",
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "55px",
+    slidesToScroll: 3,
+    centerPadding: "60px",
     responsive: [
       {
         breakpoint: 1024,
@@ -26,8 +25,8 @@ const Galeri = () => {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 1
+          slidesToScroll: 2,
+          initialSlide: 2
         }
       },
       {
@@ -41,14 +40,14 @@ const Galeri = () => {
       }
     ]
   
-  };
+  }
   return (
     <section className="sm:p-8 p-5">
       <p className="text-primary text-3xl mb-7">Galeri</p>
       <Slider {...settings}>
         {/* CARD */}
         <div className="p-1">
-          <div className="border-2 border-primary rounded-xl p-2 sm:w-[350px] ">
+          <div className="border-2 border-primary rounded-xl p-2 md:w-[300px] xl:w-[350px] ">
             <img 
               src="/galeri/image 5.png" 
               alt=""
@@ -57,7 +56,7 @@ const Galeri = () => {
         </div>
         {/* CARD */}
         <div className="p-1">
-          <div className="border-2 border-primary rounded-xl p-2 sm:w-[350px] ">
+          <div className="border-2 border-primary rounded-xl p-2 md:w-[300px] xl:w-[350px] ">
             <img 
               src="/galeri/image 6.png" 
               alt=""
@@ -66,7 +65,7 @@ const Galeri = () => {
         </div>
         {/* CARD */}
         <div className="p-1">
-          <div className="border-2 border-primary rounded-xl p-2 sm:w-[350px] ">
+          <div className="border-2 border-primary rounded-xl p-2 md:w-[300px] xl:w-[350px] ">
             <img 
               src="/galeri/image 7.png" 
               alt=""

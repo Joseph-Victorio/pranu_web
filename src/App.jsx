@@ -19,6 +19,7 @@ import AddProduk from "./pages/admin/produk/AddProduk";
 import EditProduk from "./pages/admin/produk/EditProduk";
 import AddArtikel from "./pages/admin/artikel/AddArtikel";
 import EditArtikel from "./pages/admin/artikel/EditArtikel";
+import ArtikelSingle from "./pages/ArtikelSingle";
 
 function App() {
  
@@ -33,6 +34,9 @@ function App() {
       <Route path="/tentang-kami" element={<TentangKami/>}/>
       <Route path="/produk" element={<Produk/>}/>
       <Route path="/informasi" element={<Informasi/>}/>
+
+       {/* Single Artikel */}
+       <Route path="/artikel/:id" element={<ArtikelSingle/>}/>
       
       <Route path="/admin">
         <Route path="/admin/login" element={<Login/>}/>
@@ -47,6 +51,7 @@ function App() {
         <Route path="/admin/artikel-list" element={<ArtikelList/>}/>
         <Route path="/admin/add-artikel" element={<AddArtikel/>}/>
         <Route path="/admin/edit-artikel/:id" element={<EditArtikel/>}/>
+       
          {/* Rute Ulasan */}
         <Route path="/admin/ulasan-list" element={<UlasanList/>}/>
       </Route>
