@@ -285,7 +285,6 @@ app.put('/artikel/:id', uploadArtikel.single('foto'), (req, res) => {
   });
 });
 
-
 // HAPUS ARTIKEL
 app.delete('/artikel/:id', (req,res)=>{
   const {id} = req.params
@@ -328,7 +327,7 @@ app.use('/uploads/artikel', express.static(path.join(__dirname, 'uploads', 'arti
 
 // ----------------------------ULASAN---------------------------------------
 
-const uploadsDirUlasan = path.join(__dirname, 'uploads', 'produk')
+const uploadsDirUlasan = path.join(__dirname, 'uploads', 'ulasan')
 
 if (!fs.existsSync(uploadsDirUlasan)) {
     fs.mkdirSync(uploadsDirUlasan, { recursive: true })
@@ -343,6 +342,140 @@ const storageUlasan = multer.diskStorage({
     }
   })
   const uploadUlasan = multer({ storage: storageUlasan })
+
+  // UPLOAD Ulasan
+app.post('/ulasan', uploadUlasan.single('foto'), (req, res)=>{
+  const query = "INSERT INTO ulasan (`nama`, `ulasan`, `foto`) VALUES (?,?,?)"
+
+  const { nama, ulasan} = req.body
+
+  const foto = req.file ? req.file.filename : null
+
+  db.execute(query, [nama, ulasan, foto], (err, result) => {
+      if (err) {
+        console.error('Error mengisi data', err)
+        res.status(500).send('Terjadi error saat memproses request anda')
+        return
+      }
+      res.status(200).send('Sukses menambahkan data.')
+  })  
+})
+
+// BUAT FETCH ULASAN
+app.get('/ulasan',  (req,res)=>{
+  const q = "SELECT * FROM ulasan"
+
+  db.query(q,(err, data)=>{
+      if(err){
+          return res.json(err)
+      }else{
+          return res.json(data)
+      }
+  })
+})
+
+// FETCH ULASAN PER ID
+app.get('/ulasan/:id', (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM ulasan WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Ulasan tidak ditemukan' });
+    }
+    const { foto, ...ulasanData } = results[0];
+    const fotoURL = foto ? `http://localhost:8800/uploads/ulasan/${foto}` : null;
+    res.json({ ...ulasanData, foto: fotoURL }); 
+  });
+})
+
+
+// UPDATE ARTIKEL
+app.put('/ulasan/:id', uploadUlasan.single('foto'), (req, res) => {
+  const { id } = req.params;
+  const { nama, ulasan } = req.body;
+  const foto = req.file ? req.file.filename : null;
+
+  // Get the old photo
+  const selectQuery = 'SELECT foto FROM artikel WHERE id = ?';
+  db.query(selectQuery, [id], (err, results) => {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Artikel tidak ditemukan' });
+      return;
+    }
+
+    const oldFoto = results[0].foto;
+
+    // Determine the photo to be used
+    const newFoto = foto || oldFoto;
+
+    const updateQuery = 'UPDATE artikel SET judul = ?, penulis = ?, isi = ?, foto = ? WHERE id = ?';
+    db.query(updateQuery, [nama, ulasan, newFoto, id], (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+        return;
+      }
+
+      // Delete the old file if a new file is uploaded
+      if (oldFoto && req.file) {
+        const oldFilePath = path.join(__dirname, 'uploads', 'ulasan', oldFoto);
+        fs.unlink(oldFilePath, (err) => {
+          if (err) {
+            console.error('Error menghapus file lama:', err);
+          }
+        });
+      }
+
+      res.status(200).json({ message: 'Ulasan sukses di update' });
+    });
+  });
+});
+
+// HAPUS ARTIKEL
+app.delete('/ulasan/:id', (req,res)=>{
+  const {id} = req.params
+  const getFilenameQuery = 'SELECT foto FROM ulasan WHERE id = ?'
+  db.query(getFilenameQuery, [id], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: 'Gagal menghapus Ulasan.' })
+    }
+
+    // Assuming result[0].foto contains the filename
+    const filename = result[0].foto
+
+    // Delete from database
+    const deleteQuery = 'DELETE FROM ulasan WHERE id = ?'
+    db.query(deleteQuery, [id], (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: 'Gagal Menghapus ulasan' })
+      }
+
+      // Delete the file from filesystem
+      if (filename) {
+        const filePath = path.join('uploads','ulasan', filename)
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error('Error deleting file:', err)
+            return res.status(500).json({ error: 'Failed to delete file.' })
+          }
+          // Respond with success message or handle as needed
+          return res.status(200).json({ message: 'Ulasan Berhasil dihapus' })
+        })
+      } else {
+        // Respond with success message if no file to delete
+        return res.status(200).json({ message: 'Ulasan Berhasil dihapus.' })
+      }
+    })
+  })
+})
+
+app.use('/uploads/ulasan', express.static(path.join(__dirname, 'uploads', 'ulasan')))
 
   // ----------------------------------------KONTAK---------------------------------
 // KONTAK

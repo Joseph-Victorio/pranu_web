@@ -14,12 +14,14 @@ import AdminList from "./pages/admin/AdminList";
 import ClientList from "./pages/admin/ClientList";
 import ProdukList from "./pages/admin/produk/ProdukList";
 import ArtikelList from "./pages/admin/artikel/ArtikelList";
-import UlasanList from "./pages/admin/UlasanList";
+import UlasanList from "./pages/admin/ulasan/UlasanList";
 import AddProduk from "./pages/admin/produk/AddProduk";
 import EditProduk from "./pages/admin/produk/EditProduk";
 import AddArtikel from "./pages/admin/artikel/AddArtikel";
 import EditArtikel from "./pages/admin/artikel/EditArtikel";
 import ArtikelSingle from "./pages/ArtikelSingle";
+import AddUlasan from "./pages/admin/ulasan/AddUlasan";
+import EditUlasan from "./pages/admin/ulasan/EditUlasan";
 
 function App() {
  
@@ -54,6 +56,8 @@ function App() {
        
          {/* Rute Ulasan */}
         <Route path="/admin/ulasan-list" element={<UlasanList/>}/>
+        <Route path="/admin/add-ulasan" element={<AddUlasan/>}  />
+        <Route path="/admin/edit-ulasan/:id" element={<EditUlasan/>}/>
       </Route>
       
     </Routes>
