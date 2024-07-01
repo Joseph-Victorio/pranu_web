@@ -2,6 +2,7 @@
 
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 
 
 import { LiaSearchSolid } from "react-icons/lia";
@@ -35,12 +36,7 @@ const ProdukSaya = () => {
         <div className="flex justify-between mb-10 flex-col-reverse md:flex-col-reverse xl:flex-col-reverse gap-5 ">
             {/* BUTTONS */}
             <div className="flex gap-1 md:gap-3  overflow-y-hidden  flex-1 mb-2 mt-2">
-                {/* SEMUA */}
-                <button
-                    className="bg-primary text-white rounded-[40px] px-6 py-2 text-[10px] md:text-[15px] flex-1"
-                    onClick={semuaBtn}>
-                    Semua
-                </button>
+               
                 <button
                     className="bg-primary text-white rounded-[40px] px-6 py-2 text-[10px] md:text-[15px] flex-1"
                     onClick={semuaBtn}>
@@ -72,6 +68,10 @@ const ProdukSaya = () => {
                 <LiaSearchSolid className="text-secondary absolute top-1 right-2"/>
             </div>
         </div>
+        {/* lihatsemua */}
+        <Link to={'/produk'}>
+            <p className="text-tersier mb-5 text-right">Lihat semua &#62;</p>
+        </Link>
         {/* CARDS */}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xl:gap-10 ">
             {Array.isArray(produks) && produks.map(produk=>(

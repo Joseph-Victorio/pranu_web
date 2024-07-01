@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import toast from "react-hot-toast";
-import Quill from 'quill';
-import "quill/dist/quill.snow.css";
+import toast from 'react-hot-toast';
 
 const AddArtikel = () => {
   const [formData, setFormData] = useState({
@@ -11,22 +9,6 @@ const AddArtikel = () => {
     isi: '',
     foto: 'no-image.jpeg',
   });
-
-  const quillRef = useRef(null); // Reference to the Quill editor container
-
-  useEffect(() => {
-    const quill = new Quill(quillRef.current, {
-      theme: 'snow',
-    });
-
-    quill.on('text-change', () => {
-      setFormData(prev => ({ ...prev, isi: quill.root.innerHTML }));
-    });
-
-    return () => {
-      quill.off('text-change');
-    };
-  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -49,9 +31,11 @@ const AddArtikel = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
+
       toast.success('Artikel Berhasil Ditambahkan', {
         duration: 4000,
       });
+
       setFormData({
         judul: '',
         penulis: '',
@@ -68,19 +52,22 @@ const AddArtikel = () => {
     <div className='p-5 font-rhodium'>
       <h1 className='text-primary text-4xl mb-4'>Upload Artikel</h1>
       <hr className='border-secondary' />
-      <a 
-        href="/admin/artikel-list"
-        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-5 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out'>
+      <a
+        href='/admin/artikel-list'
+        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-5 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out'
+      >
         <p>&#8592;</p> <p>Kembali</p>
       </a>
       <form onSubmit={handleSubmit} className='md:w-[500px] md:mx-auto md:text-[24px]'>
         <div>
-          <div className="flex flex-col gap-1 mb-2">
-            <label htmlFor="judul" className='text-primary font-semibold'>Judul:</label>
+          <div className='flex flex-col gap-1 mb-2'>
+            <label htmlFor='judul' className='text-primary font-semibold'>
+              Judul:
+            </label>
             <input
-              type="text"
-              id="judul"
-              name="judul"
+              type='text'
+              id='judul'
+              name='judul'
               value={formData.judul}
               onChange={handleChange}
               required
@@ -88,12 +75,14 @@ const AddArtikel = () => {
               className='outline-primary rounded-md px-2 border-primary'
             />
           </div>
-          <div className="flex flex-col gap-1 mb-2">
-            <label htmlFor="penulis" className='text-primary font-semibold'>Penulis:</label>
+          <div className='flex flex-col gap-1 mb-2'>
+            <label htmlFor='penulis' className='text-primary font-semibold'>
+              Penulis:
+            </label>
             <input
-              type="text"
-              id="penulis"
-              name="penulis"
+              type='text'
+              id='penulis'
+              name='penulis'
               value={formData.penulis}
               placeholder='Penulis'
               onChange={handleChange}
@@ -102,22 +91,33 @@ const AddArtikel = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-1 mb-2">
-          <label htmlFor="isi" className='text-primary font-semibold'>Isi:</label>
-          <div id="editor" ref={quillRef} className='border-primary rounded-md h-[300px] p-2' />
+        <div className='flex flex-col gap-1 mb-2'>
+          <label htmlFor='isi' className='text-primary font-semibold'>
+            Isi:
+          </label>
+          <textarea
+            id='isi'
+            name='isi'
+            value={formData.isi}
+            onChange={handleChange}
+            placeholder='Isi'
+            className='border-primary border-2 rounded-md h-[300px] p-2'
+          />
         </div>
-        <div className="flex flex-col gap-1 mb-2">
-          <label htmlFor="foto" className='text-primary font-semibold'>Foto:</label>
+        <div className='flex flex-col gap-1 mb-2'>
+          <label htmlFor='foto' className='text-primary font-semibold'>
+            Foto:
+          </label>
           <input
-            type="file"
-            id="foto"
-            name="foto"
+            type='file'
+            id='foto'
+            name='foto'
             onChange={handleFileChange}
-            accept="image/*"
+            accept='image/*'
           />
         </div>
         <button
-          type="submit"
+          type='submit'
           className='px-6 py-2 bg-primary text-secondary rounded-md mt-4'>
           Tambah Artikel
         </button>

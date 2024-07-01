@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
+import toast from "react-hot-toast"
 
 import SideNav from '../../../components/admin/SideNav'
 
@@ -27,8 +28,12 @@ const ArtikelList = () => {
 
   const handleDelete = async (id) => {
     try {
+      toast.success("Berhasil Menghapus Artikel!")
       await axios.delete('http://localhost:8800/artikel/'+id);
-      window.location.reload()
+      setTimeout(()=>{
+        window.location.reload()
+      },500)
+    
     } catch (error) {
       console.log(error);
     }
@@ -60,8 +65,8 @@ const ArtikelList = () => {
         </Link>
 
         {/* TABLE LIST */}
-        <div className='overflow-x-scroll w-[350px] md:w-[800px] md:overflow-hidden p-3'>
-          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[750px] md:w-[750px] mx-auto'>
+        <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[800px] lg:overflow-x-scroll p-3'>
+          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[750px] md:w-[750px] mx-auto '>
             <thead>
               <tr className=' bg-secondary rounded-md ring-2 ring-primary'>
                 <th className=' bg-secondary rounded-l-md p-2 w-[100px] md:text-[14px]'>foto</th>
@@ -77,7 +82,7 @@ const ArtikelList = () => {
                   <td className='p-2'><img src={artikel.foto=== 0 ?'/logo_login.png':'../backend/uploads/artikel/' + artikel.foto } alt="" className='w-[150px]'/></td>
                   <td className='p-2 text-sm w-[150px]'><p>{artikel.judul}</p></td>
                   <td className='p-2'><p>{artikel.penulis}</p></td>
-                  <td className='line-clamp-2 md:line-clamp-1 mt-5 px-2'><p>{artikel.isi}</p></td>
+                  <td className='line-clamp-2 md:line-clamp-1 mt-5 px-2'><p dangerouslySetInnerHTML={{ __html: artikel.isi }}/></td>
                   <td className=' p-2'>
                     <div
                       className='flex gap-2 '>
