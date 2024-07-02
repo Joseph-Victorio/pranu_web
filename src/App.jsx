@@ -22,6 +22,8 @@ import EditArtikel from "./pages/admin/artikel/EditArtikel";
 import ArtikelSingle from "./pages/ArtikelSingle";
 import AddUlasan from "./pages/admin/ulasan/AddUlasan";
 import EditUlasan from "./pages/admin/ulasan/EditUlasan";
+import ProdukDetail from "./pages/ProdukDetail";
+import KeranjangBelanja from "./pages/KeranjangBelanja";
 
 function App() {
  
@@ -36,9 +38,12 @@ function App() {
       <Route path="/tentang-kami" element={<TentangKami/>}/>
       <Route path="/produk" element={<Produk/>}/>
       <Route path="/informasi" element={<Informasi/>}/>
+      <Route path="/keranjang" element={<KeranjangBelanja/>}/>
 
        {/* Single Artikel */}
        <Route path="/artikel/:id" element={<ArtikelSingle/>}/>
+       {/* PRODUCT DETAIL */}
+       <Route path="/produk/:id" element={<ProdukDetail/>}/>
       
       <Route path="/admin">
         <Route path="/admin/login" element={<Login/>}/>
@@ -59,6 +64,7 @@ function App() {
         <Route path="/admin/add-ulasan" element={<AddUlasan/>}  />
         <Route path="/admin/edit-ulasan/:id" element={<EditUlasan/>}/>
       </Route>
+
       
     </Routes>
     

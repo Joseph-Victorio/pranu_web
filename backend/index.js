@@ -61,7 +61,18 @@ app.get('/produk/:id', (req, res) => {
     res.json({ ...produkData, foto: fotoURL }); 
   });
 })
+// fetch produk kategori lighting
+app.get('/produk-lighting',  (req,res)=>{
+  const q = "SELECT * FROM produk WHERE kategori = 'lighting'"
 
+  db.query(q,(err, data)=>{
+      if(err){
+          return res.json(err)
+      }else{
+          return res.json(data)
+      }
+  })
+})
 // UPLOAD PRODUK
 app.post('/produk', upload.single('foto'), (req, res)=>{
     const query = "INSERT INTO produk (`nama_produk`, `harga`, `kategori`, `foto`) VALUES (?,?,?,?)"

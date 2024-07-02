@@ -2,6 +2,9 @@ import { NavLink} from 'react-router-dom'
 import { MdOutlinePhoneEnabled } from "react-icons/md";
 import { useState } from 'react';
 import { IoMdCloseCircle } from "react-icons/io";
+import Cart from './Cart';
+
+import { Link } from 'react-router-dom';
 
 
 const NavBiru = ({text}) => {
@@ -11,7 +14,7 @@ const NavBiru = ({text}) => {
     }
   return (
     <>
-        <div className={'bg-[url("background-desktop.png")] bg-cover text-center'}>
+        <div className={'bg-[url("/background-desktop.png")] bg-cover text-center'}>
             <nav className='hidden sm:block  font-rhodium text-white '>
             {/* DESKTOP */}
             <div className='sm:flex items-center justify-between sm:px-[50px] sm:py-[32px] '>
@@ -45,14 +48,22 @@ const NavBiru = ({text}) => {
               </NavLink>
               
                 </div>
-                <div className='text-[20px]'>
-                    <a href="https://wa.me/6281295079288" target='blank' className='flex gap-2 items-center'>
-                        <MdOutlinePhoneEnabled
-                            className='text-white'/>
-                        <p>Konsultasi</p>
-                        
-                    </a>
-                </div>
+               <div className="flex gap-2">
+                
+                    <Cart
+                        warna={'text-white'}
+                        bgAngka={'bg-secondary'}
+                        warnaAngka={'text-primary'}/>
+                
+                    <div className='text-[20px]'>
+                        <a href="https://wa.me/6281295079288" target='blank' className='flex gap-2 items-center'>
+                            <MdOutlinePhoneEnabled
+                                className='text-white'/>
+                            <p>Konsultasi</p>
+                            
+                        </a>
+                    </div>
+               </div>
             </div>
             </nav>
             {/* MOBILE  */}
@@ -62,10 +73,19 @@ const NavBiru = ({text}) => {
                 <img src="/icons/menu-left-white.svg" alt="" />
               </button>
               <img 
-                src="/pranu_logo.svg" 
-                alt=""
-                className='w-[50px]' />
-                <a href="https://wa.me/6281295079288"> <MdOutlinePhoneEnabled color='white' className='text-[25px]'/></a>
+                    src="/pranu_logo.svg" 
+                    alt=""
+                    className='w-[50px]' />
+              <div className="flex gap-2">
+                <Link to="/produk">
+                    <Cart
+                        warna={'text-white'}
+                        bgAngka={'bg-secondary'}
+                        warnaAngka={'text-primary'}/>
+                </Link>
+                
+                    <a href="https://wa.me/6281295079288"> <MdOutlinePhoneEnabled color='white' className='text-[25px]'/></a>
+              </div>
             </nav>
             <p className='text-white text-2xl mt-9 font-rhodium'>{text}</p>
             <img 

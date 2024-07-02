@@ -1,6 +1,8 @@
 import React from 'react'
 import NavBiru from '../components/NavBiru'
 
+import { useState, useEffect } from 'react'
+
 const Produk = () => {
   return (
     <>

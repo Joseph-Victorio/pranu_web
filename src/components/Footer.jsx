@@ -6,12 +6,12 @@ const Footer = () => {
         <div className="flex flex-col p-5 sm:p-[75px] sm:flex-row justify-between font-rhodium gap-[40px]">
             {/* LOGO */}
             <div className="mx-auto sm:mx-0 flex flex-1 flex-col gap-2 items-center">
-                <div className="flex items-center ">
+                <div className="flex items-center md:flex-col lg:flex-row xl:flex-row ">
                     <img src="/pranu_logo.svg" alt="logo" className="w-[137px]"/>
                     <p className="text-[18px] text-white text-center font-bold ">PRANUGUM <br />PRODUCTION</p>
                 </div>
                 <div>
-                    <p className="text-justify items-center text-white">Pranugum Production adalah sebuah perusahaan yang berdedikasi dalam menyediakan peralatan dan layanan sewa untuk keperluan acara</p>
+                    <p className="text-justify items-center text-white lg:w-[200px]">Pranugum Production adalah sebuah perusahaan yang berdedikasi dalam menyediakan peralatan dan layanan sewa untuk keperluan acara</p>
                 </div>
             </div>
             {/* NAV */}

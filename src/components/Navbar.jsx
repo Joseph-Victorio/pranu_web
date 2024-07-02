@@ -1,5 +1,5 @@
 import { MdOutlinePhoneEnabled } from "react-icons/md"
-import { IoCartOutline } from "react-icons/io5";
+
 
 
 import {Link, NavLink, useLocation } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 
 
 import { useState } from "react";
+import Cart from "./Cart";
 
 const Navbar = () => {
     let location = useLocation()
@@ -57,11 +58,10 @@ const Navbar = () => {
            
             </div>
             <div className='text-[20px] flex gap-2'>
-                <Link
-                    className="text-[30px] text-primary"
-                    to={""}>
-                <IoCartOutline />
-                </Link>
+                <Cart
+                    warna={'text-primary'}
+                    bgAngka={'bg-primary'}
+                    warnaAngka={'text-secondary'}/>
                 <a href={`https://wa.me/6281295079288/?text=${templatePesanan} ${templatePesanan2}`} target='blank' className='flex gap-2 items-center'>
                     <MdOutlinePhoneEnabled
                         className={location.pathname===tentang? 'text-white' : 'text-primary'}/>
@@ -86,11 +86,11 @@ const Navbar = () => {
             <img src="/pranu_logo.svg" alt="" />
 
             <div className='text-[20px] gap-2 flex'>
-                <Link
-                    className="text-[30px] text-primary"
-                    to={""}>
-                <IoCartOutline />
-                </Link>
+               <Cart
+                    warna={'text-primary'}
+                    bgAngka={'bg-primary'}
+                    warnaAngka={'text-secondary'}
+                    />
                 <a href={`https://wa.me/6281295079288/?text=${templatePesanan} ${templatePesanan2}`} target='blank' className='flex gap-2 items-center'>
                     <MdOutlinePhoneEnabled
                         className="text-[30px] text-primary"/>
