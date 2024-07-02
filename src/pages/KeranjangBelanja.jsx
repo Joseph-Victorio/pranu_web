@@ -1,42 +1,42 @@
-import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { useState, useEffect } from "react"
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 
 const KeranjangBelanja = () => {
-  const [barang, setBarang] = useState([]);
+  const [barang, setBarang] = useState([])
 
   useEffect(() => {
     const fetchItems = () => {
-      const storageItems = [];
+      const storageItems = []
       for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        const value = localStorage.getItem(key);
+        const key = localStorage.key(i)
+        const value = localStorage.getItem(key)
         try {
-          storageItems.push({ key, value: JSON.parse(value) });
+          storageItems.push({ key, value: JSON.parse(value) })
         } catch (error) {
           // Handle JSON.parse errors if the value is not a valid JSON string
-          console.error("Parsing error on", key, value);
-          storageItems.push({ key, value });
+          console.error("Parsing error on", key, value)
+          storageItems.push({ key, value })
         }
       }
-      setBarang(storageItems);
-    };
+      setBarang(storageItems)
+    }
     
-    fetchItems();
-  }, []);
+    fetchItems()
+  }, [])
 
   const formatCurrencyIDR = (number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
       currency: 'IDR',
       minimumFractionDigits: 0,
-    }).format(number);
-  };
+    }).format(number)
+  }
 
   const handleDelete = (key) => {
-    localStorage.removeItem(key);
-    setBarang((prevBarang) => prevBarang.filter((item) => item.key !== key));
-  };
+    localStorage.removeItem(key)
+    setBarang((prevBarang) => prevBarang.filter((item) => item.key !== key))
+  }
 
   return (
     <div>
@@ -69,7 +69,7 @@ const KeranjangBelanja = () => {
       </div>
       <Footer />
     </div>
-  );
+  )
 }
 
-export default KeranjangBelanja;
+export default KeranjangBelanja
