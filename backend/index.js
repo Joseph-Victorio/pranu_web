@@ -448,7 +448,7 @@ app.put('/ulasan/:id', uploadUlasan.single('foto'), (req, res) => {
   });
 });
 
-// HAPUS ARTIKEL
+// HAPUS ULASAN
 app.delete('/ulasan/:id', (req,res)=>{
   const {id} = req.params
   const getFilenameQuery = 'SELECT foto FROM ulasan WHERE id = ?'
@@ -518,6 +518,100 @@ app.post('/kontak', (req, res) => {
     })
   })
 
+// ------------------------------------------GALERI------------------------------
+const uploadsDirGaleri = path.join(__dirname, 'uploads', 'galeri')
+
+if (!fs.existsSync(uploadsDirGaleri)) {
+    fs.mkdirSync(uploadsDirGaleri, { recursive: true })
+}
+const storageGaleri = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadsDirGaleri) //nama directorynya
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+    }
+  })
+  const uploadGaleri = multer({ storage: storageGaleri })
+
+  // UPLOAD Ulasan
+app.post('/galeri', uploadGaleri.single('foto'), (req, res)=>{
+  const query = "INSERT INTO galeri (`nama`, `foto`, `tanggal`) VALUES (?,?,?)"
+
+  const {nama} = req.body
+  const tgl = new Date
+  const tahun = tgl.getFullYear()
+  const hari = tgl.getDate()
+  const bulan = tgl.getMonth()
+
+  const tanggalan = Date.now()
+  const today = new Date(tanggalan)
+  today.toDateString()
+  const tanggal = today
+
+  const foto = req.file ? req.file.filename : null
+
+  db.execute(query, [nama, foto, tanggal], (err, result) => {
+      if (err) {
+        console.error('Error mengisi data', err)
+        res.status(500).send('Terjadi error saat memproses request anda')
+        return
+      }
+      res.status(200).send('Sukses menambahkan data.')
+  })  
+})
+
+// BUAT FETCH galeri
+app.get('/galeri',  (req,res)=>{
+  const q = "SELECT * FROM galeri"
+
+  db.query(q,(err, data)=>{
+      if(err){
+          return res.json(err)
+      }else{
+          return res.json(data)
+      }
+  })
+})
+
+// HAPUS galeri
+app.delete('/galeri/:id', (req,res)=>{
+  const {id} = req.params
+  const getFilenameQuery = 'SELECT foto FROM galeri WHERE id = ?'
+  db.query(getFilenameQuery, [id], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: 'Gagal menghapus Galeri.' })
+    }
+
+    // Assuming result[0].foto contains the filename
+    const filename = result[0].foto
+
+    // Delete from database
+    const deleteQuery = 'DELETE FROM galeri WHERE id = ?'
+    db.query(deleteQuery, [id], (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: 'Gagal Menghapus ulasan' })
+      }
+
+      // Delete the file from filesystem
+      if (filename) {
+        const filePath = path.join('uploads','galeri', filename)
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error('Error deleting file:', err)
+            return res.status(500).json({ error: 'Failed to delete file.' })
+          }
+          // Respond with success message or handle as needed
+          return res.status(200).json({ message: 'Galeri Berhasil dihapus' })
+        })
+      } else {
+        // Respond with success message if no file to delete
+        return res.status(200).json({ message: 'Galeri Berhasil dihapus.' })
+      }
+    })
+  })
+})
 app.listen(8800, ()=>{
     console.log('Connected to backend!!')
 })

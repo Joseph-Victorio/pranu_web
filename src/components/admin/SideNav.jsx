@@ -8,6 +8,7 @@ import { MdOutlineMessage } from "react-icons/md";
 import { RxExit } from "react-icons/rx";
 import { RiMenu2Fill } from "react-icons/ri";
 import { IoMdCloseCircle } from "react-icons/io";
+import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 
 
 import { useState } from "react";
@@ -108,6 +109,16 @@ const SideNav = () => {
                     <p className="text-xl">Ulasan</p>
                     </div>
                 </NavLink>
+                {/* ULASAN */}
+                <NavLink
+                    to="/admin/galeri-list"
+                    className={({isActive})=>(isActive ? "text-primary bg-secondary p-3 rounded-[10px]":"p-3 text-secondary")}>
+                    <div className="flex gap-2 items-start ">
+                    <MdOutlinePhotoSizeSelectActual 
+                        className="text-2xl font-extrabold"/>
+                    <p className="text-xl">Galeri</p>
+                    </div>
+                </NavLink>
 
             </div>
 
@@ -142,7 +153,7 @@ const SideNav = () => {
         {/* NAV MOBILE CONTENT */}
         {toggle && (
             <div className="p-5 gap-5 bg-primary text-[32px] fixed top-0 left-0 z-50 w-screen h-screen transition text-white">
-                <div className="flex flex-col mx-auto w-full">
+                <div className="flex flex-col mx-auto w-full mt-32">
                 <NavLink
                     to="/admin/dashboard"
                     className={({isActive})=>(isActive ? "text-primary bg-secondary p-3 rounded-[10px]":"p-3 text-secondary")}>
@@ -212,6 +223,16 @@ const SideNav = () => {
                     <MdOutlineMessage 
                         className="text-3xl font-extrabold"/>
                     <p className="text-3xl">Ulasan</p>
+                    </div>
+                </NavLink>
+                {/* ULASAN */}
+                <NavLink
+                    to="/admin/galeri-list"
+                    className={({isActive})=>(isActive ? "text-primary bg-secondary p-3 rounded-[10px]":"p-3 text-secondary")}>
+                    <div className="flex gap-2 items-center ">
+                    <MdOutlinePhotoSizeSelectActual 
+                        className="text-3xl font-extrabold"/>
+                    <p className="text-3xl">Galeri</p>
                     </div>
                 </NavLink>
                 </div>

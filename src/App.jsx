@@ -24,6 +24,8 @@ import AddUlasan from "./pages/admin/ulasan/AddUlasan";
 import EditUlasan from "./pages/admin/ulasan/EditUlasan";
 import ProdukDetail from "./pages/ProdukDetail";
 import KeranjangBelanja from "./pages/KeranjangBelanja";
+import GaleriList from "./pages/admin/galeri/GaleriList";
+import AddGaleri from "./pages/admin/galeri/AddGaleri";
 
 function App() {
  
@@ -63,6 +65,10 @@ function App() {
         <Route path="/admin/ulasan-list" element={<UlasanList/>}/>
         <Route path="/admin/add-ulasan" element={<AddUlasan/>}  />
         <Route path="/admin/edit-ulasan/:id" element={<EditUlasan/>}/>
+
+        {/* Rute galeri */}
+        <Route  path="/admin/galeri-list" element={<GaleriList/>}/>
+        <Route  path="/admin/add-galeri" element={<AddGaleri/>}/>
       </Route>
 
       
