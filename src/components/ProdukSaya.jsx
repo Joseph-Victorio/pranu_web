@@ -95,13 +95,13 @@ const ProdukSaya = () => {
                             <p className="text-[10px] md:text-[18px] text-primary mt-1">{produk.nama_produk}</p>
                             {/* HARGA SEWA */}
                             <p className="text-secondary text-[10px] md:text-[18px] mt-1">Rp {produk.harga}<span className="text-tersier">/hari</span></p>
-                           <Link to={`/produk/${produk.id}`}>
+                           <a href={`/produk/${produk.id}`}>
                            <button
                              className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-8 md:text-[14px] "
                               >
                                 Tambahkan
                             </button>
-                           </Link>
+                           </a>
                         </div>
                     </div>
                 </>

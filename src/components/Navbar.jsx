@@ -62,7 +62,7 @@ const Navbar = () => {
                     warna={'text-primary'}
                     bgAngka={'bg-primary'}
                     warnaAngka={'text-secondary'}/>
-                <a href={`https://wa.me/6281295079288/?text=${templatePesanan} ${templatePesanan2}`} target='blank' className='flex gap-2 items-center'>
+                <a href={`https://wa.me/6281295079288/`} target='blank' className='flex gap-2 items-center'>
                     <MdOutlinePhoneEnabled
                         className={location.pathname===tentang? 'text-white' : 'text-primary'}/>
                     <p>Konsultasi</p>
@@ -91,7 +91,7 @@ const Navbar = () => {
                     bgAngka={'bg-primary'}
                     warnaAngka={'text-secondary'}
                     />
-                <a href={`https://wa.me/6281295079288/?text=${templatePesanan} ${templatePesanan2}`} target='blank' className='flex gap-2 items-center'>
+                <a href={`https://wa.me/6281295079288`} target='blank' className='flex gap-2 items-center'>
                     <MdOutlinePhoneEnabled
                         className="text-[30px] text-primary"/>
                     
@@ -102,7 +102,7 @@ const Navbar = () => {
             &&
             <div className='p-5 gap-5 bg-background text-[32px] fixed top-0 left-0 z-50 w-screen h-screen transition text-primary'>
                 
-                <div className='flex flex-col justify-between'>
+                <div className='flex flex-col justify-between relative top-[25vh] text-center'>
                     <div className='flex flex-col gap-5'>
                         <NavLink
                             to='/'

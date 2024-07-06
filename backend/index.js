@@ -503,6 +503,20 @@ app.post('/kontak', (req, res) => {
       res.status(200).send('Sukses menambahkan data.')
     })
   })
+// ----------------------------------PENYEWA----------------------------------------------------------
+  app.post('/penyewa', (req,res)=>{
+    const {nama, telepon, sewa, balik, alamat, pesanan} = req.body
+    const query = 'INSERT INTO penyewa (nama, telepon, sewa, balik, alamat, pesanan) VALUES (?,?,?,?,?,?)'
+    db.execute(query, [nama, telepon, sewa, balik, alamat, pesanan], (err, result)=>{
+      if(err){
+        console.log(err)
+        res.status(500).send('Terjadi error saat memproses request anda')
+        return
+      }else{
+        res.status(200).send("Sukses menambahkan data!")
+      }
+    })
+  })
 
 app.listen(8800, ()=>{
     console.log('Connected to backend!!')

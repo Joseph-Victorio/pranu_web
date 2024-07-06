@@ -161,31 +161,32 @@ const ProdukDetail = () => {
             )}
           </div>
           {/* tombol tambah */}
-          <form className="flex gap-5 items-center mt-5" onSubmit={(e) => { e.preventDefault(); onClickToCart(); }}>
+          <div className="flex gap-5 items-center mt-5" >
             <div className="flex items-center border-primary border-2 rounded-3xl w-[120px] md:w-[170px] justify-between">
-              <p
+              <button
                 onClick={kurang}
                 className="text-primary cursor-pointer md:text-4xl text-3xl"
               >
                 <IoIosRemoveCircle />
-              </p>
+              </button>
               <div className="user-select-none">
                 <p className="md:text-4xl text-3xl user-select-none">{jumlah}</p>
               </div>
-              <p
+              <button
                 onClick={tambah}
                 className="text-primary cursor-pointer md:text-4xl text-3xl"
               >
                 <IoMdAddCircle />
-              </p>
+              </button>
             </div>
             <button
               className="text-white bg-primary rounded-[40px] px-6 py-2 text-[24px]"
               type="submit"
+              onClick={(e) => { e.preventDefault(); onClickToCart(); }}
             >
               Tambahkan
             </button>
-          </form>
+          </div>
         </div>
       </div>
       {/* BAWAH */}
