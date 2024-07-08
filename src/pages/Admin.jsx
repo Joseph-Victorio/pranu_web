@@ -1,19 +1,20 @@
-import SideNav from '../components/admin/SideNav'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import ReactPaginate from 'react-paginate'
-import toast from "react-hot-toast"
+import SideNav from '../components/admin/SideNav';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
+import toast from "react-hot-toast";
+import * as XLSX from 'xlsx'; // Importing xlsx library
 
 const Admin = () => {
-  const [penyewa, setPenyewa] = useState([])
+  const [penyewa, setPenyewa] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5); // Atur paginationnya
-  
+
   // Logic for displaying current products
   const indexOfLastProduct = (currentPage + 1) * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
   const currentPenyewa = penyewa.slice(indexOfFirstProduct, indexOfLastProduct);
-  
+
   // Logic for handling page click
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
@@ -22,15 +23,23 @@ const Admin = () => {
   useEffect(() => {
     const fetchAllPenyewa = async () => {
       try {
-        const res = await axios.get('http://localhost:8800/penyewa')
-        setPenyewa(res.data)
+        const res = await axios.get('http://localhost:8800/penyewa');
+        setPenyewa(res.data);
       } catch (error) {
-        console.log(error)
-        toast.error("Terjadi error saat memproses tampilan penyewa")
+        console.log(error);
+        toast.error("Terjadi error saat memproses tampilan penyewa");
       }
-    }
-    fetchAllPenyewa()
-  }, [])
+    };
+    fetchAllPenyewa();
+  }, []);
+
+  // Function to export data to Excel
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(penyewa);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Penyewa");
+    XLSX.writeFile(workbook, "penyewa.xlsx");
+  };
 
   return (
     <div className="flex gap-5">
@@ -38,6 +47,12 @@ const Admin = () => {
       <div className="font-rhodium text-primary xl:p-5 mt-2 w-full md:ml-[250px]">
         <p className="text-3xl p-5 mt-20 md:mt-5">Dashboard</p>
         <hr className="border-primary border-b-2" />
+        {/* Export Button */}
+        <button 
+          onClick={exportToExcel} 
+          className="bg-secondary text-primary p-2 rounded-md mt-4">
+          Export to Excel
+        </button>
         {/* TABLE LIST */}
         <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[800px] lg:overflow-x-scroll p-3'>
           <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[900px] md:w-[750px] mx-auto '>
@@ -83,4 +98,4 @@ const Admin = () => {
   );
 }
 
-export default Admin
+export default Admin;

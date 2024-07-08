@@ -511,7 +511,7 @@ app.post('/kontak', (req, res) => {
     const tanggalan = Date.now()
     const today = new Date(tanggalan)
     today.toDateString()
-    const tanggal = today
+    const tanggal = today.toLocaleDateString("id-ID")
 
     db.execute(query, [nama, telepon, sewa, balik, alamat, pesanan, tanggal], (err, result)=>{
       if(err){

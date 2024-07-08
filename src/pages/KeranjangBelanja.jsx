@@ -128,10 +128,15 @@ const KeranjangBelanja = () => {
   const pesanHandelClick = async (e) => {
     e.preventDefault();
     try {
+      setForm({
+        sewa : form.sewa = new Date(form.sewa).toLocaleDateString('id-ID'),
+        balik: form.balik = new Date(form.balik).toLocaleDateString('id-ID')
+      })
       const updatedForm = {
         ...form,
         pesanan: keranjangKu.join(', '),
       };
+      
 
       await axios.post('http://localhost:8800/penyewa', updatedForm);
       setForm({
@@ -256,7 +261,7 @@ const KeranjangBelanja = () => {
                 required
                 onChange={onChangeHandle}
                 value={form.telepon}
-                maxLength={13}
+                maxLength={14}
               />
             </div>
           </div>
