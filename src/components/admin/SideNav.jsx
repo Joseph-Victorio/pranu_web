@@ -47,38 +47,7 @@ const SideNav = () => {
                     <p className="text-xl">Dashboard</p>
                     </div>
                 </NavLink>
-                {/* KELOLA DATA */}
-                <div className="p-3 text-secondary flex justify-between items-center">
-                    <div className="flex gap-2 items-start cursor-default ">
-                        <FaRegUser  
-                            className="text-2xl font-extrabold"/>
-                        <p className="text-xl">Kelola Data</p>
-                    </div>
-                    <button
-                        onClick={handleMenuClick}>
-                            {MenuClick==true
-                                ?
-                            (<p className="text-2xl">-</p>)
-                                :
-                            <p className="text-2xl">+</p>}
-                    </button>
-                
-                </div>
-                {/* DROPDOWN KELOLA DATA */}
-                <div className={MenuClick== true? "flex flex-col gap-1":"hidden" }>
-                        <NavLink
-                            to='/admin/admin-list'
-                            className={({isActive})=>(isActive ? "text-primary bg-secondary p-1 ml-10 rounded-[10px] ":"ml-10 p-1 text-secondary")}>
-
-                            <p className="text-md p-1 ">Admin</p>
-                        </NavLink>
-                        <NavLink
-                            to='/admin/client-list'
-                            className={({isActive})=>(isActive ? "text-primary bg-secondary p-1 ml-10 rounded-[10px] ":"ml-10 p-1 text-secondary")}>
-
-                            <p className="text-md p-1">Penyewa</p>
-                        </NavLink>
-                    </div>
+               
                 {/* PRODUK */}
                 <NavLink
                     to="/admin/produk-list"
@@ -133,22 +102,32 @@ const SideNav = () => {
             </div>
         </nav>
         {/* MOBILE */}
-        <nav className="p-2 bg-primary px-5 mx-auto sm:hidden flex items-center justify-between fixed top-0 left-0 right-0">
-            <button
-                className=""
-                onClick={toggleClick}>
-                <RiMenu2Fill className="text-white text-xl" />
-            </button>
-            <img 
-                src="/Logo_1.svg" 
-                alt="Logo"
-                className='mx-auto w-[60px]' />
-            <Link 
+        <nav className="p-2 bg-primary w-full  sm:hidden flex justify-between items-center fixed top-0 left-0 right-0">
+            <div>
+                <button
+                    className=""
+                    onClick={toggleClick}
+                    aria-label="Toggle Menu"
+                >
+                    <RiMenu2Fill className="text-white text-xl" />
+                </button>
+            </div>
+            <div className="flex-1 flex justify-center">
+                <img 
+                    src="/Logo_1.svg" 
+                    alt="Logo"
+                    className='w-[60px]' 
+                />
+            </div>
+            <div>
+                <Link 
                     to="/admin/login"
-                    className="flex gap-1 items-center text-primary  px-5 py-3 border-primary border-r-2">
-                    <RxExit className="text-white text-xl"/>
-                    Keluar
-            </Link>
+                    className="flex gap-1 items-center text-primary px-5 py-3 border-primary border-r-2"
+                >
+                    <RxExit className="text-white text-xl" />
+                    <span className="text-white">Keluar</span>
+                </Link>
+            </div>
         </nav>
         {/* NAV MOBILE CONTENT */}
         {toggle && (
@@ -163,38 +142,6 @@ const SideNav = () => {
                     <p className="text-3xl">Dashboard</p>
                     </div>
                 </NavLink>
-                <div className="p-3 text-secondary flex justify-between items-center">
-                    <div className="flex gap-2 items-center cursor-default ">
-                        <FaRegUser  
-                            className="text-3xl font-extrabold"/>
-                        <p className="text-3xl">Kelola Data</p>
-                    </div>
-                    <button
-                        onClick={handleMenuClick}>
-                            {MenuClick==true
-                                ?
-                            (<p className="text-3xl">-</p>)
-                                :
-                            <p className="text-3xl">+</p>}
-                    </button>
-                
-                </div>
-                {/* DROPDOWN KELOLA DATA */}
-                <div className={MenuClick== true? "flex flex-col gap-1":"hidden" }>
-                        <NavLink
-                            to='/admin/admin-list'
-                            className={({isActive})=>(isActive ? "text-primary bg-secondary p-1 ml-10 rounded-[10px] ":"ml-10 p-1 text-secondary")}>
-
-                            <p className="text-2xl p-1 ">Admin</p>
-                        </NavLink>
-                        <NavLink
-                            to='/admin/client-list'
-                            className={({isActive})=>(isActive ? "text-primary bg-secondary p-1 ml-10 rounded-[10px] ":"ml-10 p-1 text-secondary")}>
-
-                            <p className="text-2xl p-1">Penyewa</p>
-                        </NavLink>
-                        
-                    </div>
                      {/* PRODUK */}
                 <NavLink
                     to="/admin/produk-list"

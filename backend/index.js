@@ -506,8 +506,14 @@ app.post('/kontak', (req, res) => {
 // ----------------------------------PENYEWA----------------------------------------------------------
   app.post('/penyewa', (req,res)=>{
     const {nama, telepon, sewa, balik, alamat, pesanan} = req.body
-    const query = 'INSERT INTO penyewa (nama, telepon, sewa, balik, alamat, pesanan) VALUES (?,?,?,?,?,?)'
-    db.execute(query, [nama, telepon, sewa, balik, alamat, pesanan], (err, result)=>{
+    const query = 'INSERT INTO penyewa (nama, telepon, sewa, balik, alamat, pesanan, tgl_pesanan) VALUES (?,?,?,?,?,?,?)'
+
+    const tanggalan = Date.now()
+    const today = new Date(tanggalan)
+    today.toDateString()
+    const tanggal = today
+
+    db.execute(query, [nama, telepon, sewa, balik, alamat, pesanan, tanggal], (err, result)=>{
       if(err){
         console.log(err)
         res.status(500).send('Terjadi error saat memproses request anda')
@@ -516,6 +522,18 @@ app.post('/kontak', (req, res) => {
         res.status(200).send("Sukses menambahkan data!")
       }
     })
+  })
+  app.get('/penyewa', (req,res)=>{
+    const query = 'SELECT * FROM penyewa'
+
+    db.execute(query, (err, data)=>{
+      if(err){
+        return res.json(err)
+      }else{
+        return res.json(data)
+      }
+    })
+
   })
 
 // ------------------------------------------GALERI------------------------------
@@ -612,6 +630,8 @@ app.delete('/galeri/:id', (req,res)=>{
     })
   })
 })
+app.use('/uploads/galeri', express.static(path.join(__dirname, 'uploads', 'galeri')))
+
 app.listen(8800, ()=>{
     console.log('Connected to backend!!')
 })

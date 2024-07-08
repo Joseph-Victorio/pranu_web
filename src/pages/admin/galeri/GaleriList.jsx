@@ -6,7 +6,7 @@ import toast from "react-hot-toast"
 
 import SideNav from '../../../components/admin/SideNav'
 
-import { FaPencil } from "react-icons/fa6"
+
 import { BsTrash } from "react-icons/bs"
 
 const GaleriList = () => {

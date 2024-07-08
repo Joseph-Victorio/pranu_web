@@ -10,8 +10,7 @@ import Admin from "./pages/Admin"
 
 
 import './App.css'
-import AdminList from "./pages/admin/AdminList";
-import ClientList from "./pages/admin/ClientList";
+
 import ProdukList from "./pages/admin/produk/ProdukList";
 import ArtikelList from "./pages/admin/artikel/ArtikelList";
 import UlasanList from "./pages/admin/ulasan/UlasanList";
@@ -50,8 +49,7 @@ function App() {
       <Route path="/admin">
         <Route path="/admin/login" element={<Login/>}/>
         <Route path="/admin/dashboard" element={<Admin/>}/>
-        <Route path="/admin/admin-list" element={<AdminList/>}/>
-        <Route path="/admin/client-list" element={<ClientList/>}/>
+
       {/* rute produk */}
         <Route path="/admin/produk-list" element={<ProdukList/>}/>
         <Route path="/admin/add-produk" element={<AddProduk/>}/>
