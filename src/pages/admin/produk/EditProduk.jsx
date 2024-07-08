@@ -136,7 +136,7 @@ const EditProduk = () => {
             <img
               src={currentFoto}
               alt='Current'
-              className='w-full h-auto'
+              className='w-[100px]'
             />
           </div>
         )}
