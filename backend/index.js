@@ -75,14 +75,14 @@ app.get('/produk-lighting',  (req,res)=>{
 })
 // UPLOAD PRODUK
 app.post('/produk', upload.single('foto'), (req, res)=>{
-    const query = "INSERT INTO produk (`nama_produk`, `harga`, `kategori`, `foto`) VALUES (?,?,?,?)"
+    const query = "INSERT INTO produk (`nama_produk`, `harga`, `kategori`, `deskripsi`, `ketentuan`, `foto`) VALUES (?,?,?,?,?,?)"
 
-    const { nama_produk, harga, kategori } = req.body
+    const { nama_produk, harga, kategori, deskripsi, ketentuan } = req.body
 
     const foto = req.file ? req.file.filename : null
    
 
-    db.execute(query, [nama_produk, harga, kategori, foto], (err, result) => {
+    db.execute(query, [nama_produk, harga, kategori,deskripsi, ketentuan, foto], (err, result) => {
         if (err) {
           console.error('Error mengisi data', err)
           res.status(500).send('Terjadi error saat memproses request anda')
@@ -94,7 +94,7 @@ app.post('/produk', upload.single('foto'), (req, res)=>{
 //BUAT UPDATE PRODUK
 app.put('/produk/:id', upload.single('foto'), (req, res) => {
   const { id } = req.params;
-  const { nama_produk, harga, kategori } = req.body;
+  const { nama_produk, harga, kategori, deskripsi, ketentuan } = req.body;
   const foto = req.file ? req.file.filename : null;
 
   // Get the old photo
@@ -114,7 +114,7 @@ app.put('/produk/:id', upload.single('foto'), (req, res) => {
     const newFoto = foto || oldFoto;
 
     const updateQuery = 'UPDATE produk SET nama_produk = ?, harga = ?, kategori = ?, foto = ? WHERE id = ?';
-    db.query(updateQuery, [nama_produk, harga, kategori, newFoto, id], (err, result) => {
+    db.query(updateQuery, [nama_produk, harga, kategori, newFoto, deskripsi, ketentuan, id], (err, result) => {
       if (err) {
         return res.status(500).json({ error: 'Database update error', details: err });
       }
@@ -176,7 +176,7 @@ app.delete('/produk/:id', (req,res)=>{
 
 // PRODUK DI HOMEPAGE
 app.get('/produk-home', (req,res)=>{
-  const q = "SELECT * FROM produk LIMIT 6"
+  const q = "SELECT * FROM produk LIMIT 8"
 
   db.query(q,(err, data)=>{
     if(err){

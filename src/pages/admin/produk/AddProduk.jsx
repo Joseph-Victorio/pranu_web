@@ -9,6 +9,8 @@ const AddProduk = () => {
     nama_produk: '',
     harga: '',
     kategori: '',
+    deskripsi: '',
+    ketentuan: '',
     foto: 'no-image.jpeg',
   });
   
@@ -39,6 +41,8 @@ const AddProduk = () => {
         nama_produk: '',
         harga: '',
         kategori: '',
+        deskripsi: '',
+        ketentuan: '',
         foto: '',
       })
     } catch (error) {
@@ -101,6 +105,32 @@ const AddProduk = () => {
               className='outline-primary rounded-md px-2 border-primary'
             />
           </div>
+        </div>
+        <div className="flex flex-col gap-1 mb-2">
+          <label htmlFor="kategori" className='text-primary font-semibold'>Deskripsi:</label>
+          <textarea
+            type="text"
+            id="deskripsi"
+            name="deskripsi"
+            value={formData.deskripsi}
+            placeholder='Deskripsi'
+            onChange={handleChange}
+            required
+            className='outline-primary rounded-md px-2 border-primary'
+          />
+        </div>
+        <div className="flex flex-col gap-1 mb-2">
+          <label htmlFor="ketentuan" className='text-primary font-semibold'>Ketentuan:</label>
+          <textarea
+            type="text"
+            id="ketentuan"
+            name="ketentuan"
+            value={formData.ketentuan}
+            placeholder='Ketentuan'
+            onChange={handleChange}
+            required
+            className='outline-primary rounded-md px-2 border-primary'
+          />
         </div>
         <div>
          <div className="flex flex-col gap-1 mb-2">

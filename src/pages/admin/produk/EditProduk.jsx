@@ -10,6 +10,8 @@ const EditProduk = () => {
     nama_produk: '',
     harga: '',
     kategori: '',
+    deskripsi: '',
+    ketentuan: '',
     foto: 'no-image.jpeg',
   })
 
@@ -17,11 +19,13 @@ const EditProduk = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:8800/produk/${id}`)
-        const { nama_produk, harga, kategori, foto } = response.data
+        const { nama_produk, harga, kategori, foto, deskripsi, ketentuan } = response.data
         setFormData({
           nama_produk: nama_produk || '',
           harga: harga || '',
           kategori: kategori || '',
+          deskripsi: deskripsi || '',
+          ketentuan: ketentuan || '',
           foto: foto || ''
         })
         setCurrentFoto(foto)
@@ -53,6 +57,8 @@ const EditProduk = () => {
       data.append('nama_produk', formData.nama_produk)
       data.append('harga', formData.harga)
       data.append('kategori', formData.kategori)
+      data.append('deskripsi', formData.deskripsi)
+      data.append('ketentuan', formData.ketentuan)
       if (formData.foto instanceof File) {
         data.append('foto', formData.foto)
       }
@@ -116,6 +122,32 @@ const EditProduk = () => {
             name="kategori"
             value={formData.kategori}
             placeholder='Kategori'
+            onChange={handleChange}
+            required
+            className='outline-primary rounded-md px-2 border-primary'
+          />
+        </div>
+        <div className="flex flex-col gap-1 mb-2">
+          <label htmlFor="kategori" className='text-primary font-semibold'>Deskripsi:</label>
+          <textarea
+            type="text"
+            id="deskripsi"
+            name="deskripsi"
+            value={formData.deskripsi}
+            placeholder='Deskripsi'
+            onChange={handleChange}
+            required
+            className='outline-primary rounded-md px-2 border-primary'
+          />
+        </div>
+        <div className="flex flex-col gap-1 mb-2">
+          <label htmlFor="ketentuan" className='text-primary font-semibold'>Ketentuan:</label>
+          <textarea
+            type="text"
+            id="ketentuan"
+            name="ketentuan"
+            value={formData.ketentuan}
+            placeholder='Ketentuan'
             onChange={handleChange}
             required
             className='outline-primary rounded-md px-2 border-primary'
