@@ -26,12 +26,12 @@ const TentangKamiSection = () => {
                     src="/pranuFrame.png" 
                     alt=""
                     className='w-full' />
-                   <Link
-                    to='/tentang-kami'
+                   <a
+                    href='/tentang-kami'
                     className='absolute bottom-[-20px] left-[50%] translate-x-[-50%] '
                     >
                         <DiagonalBtn/>
-                   </Link>
+                   </a>
                 </div>
                 <div className="p-5">
                     <p className='text-justify text-tersier sm:text-[16px] text-[14px]'>Pranugum Production adalah sebuah perusahaan independen yang berdedikasi dalam menyediakan peralatan dan layanan sewa untuk keperluan acara yang beragam. Didirikan pada bulan Februari tahun 2022, Pranugum Production merupakan hasil dari gagasan kreatif para pemuda yang memiliki antusiasme terhadap industri acara dan bermimpi untuk menciptakan sesuatu yang istimewa dan luar biasa.</p>

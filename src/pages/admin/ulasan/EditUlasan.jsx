@@ -142,7 +142,7 @@ const EditUlasan = () => {
         <button
           type='submit'
           className='px-6 py-2 bg-primary text-secondary rounded-md mt-4'>
-          Update Ulasan
+          Edit Ulasan
         </button>
       </form>
     </div>

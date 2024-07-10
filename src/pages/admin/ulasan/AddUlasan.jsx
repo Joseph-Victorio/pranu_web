@@ -103,7 +103,7 @@ const AddUlasan = () => {
         <button
           type='submit'
           className='px-6 py-2 bg-primary text-secondary rounded-md mt-4'>
-          Tambah Ulasan
+          Simpan Ulasan
         </button>
       </form>
     </div>

@@ -89,7 +89,7 @@ const AddGaleri = () => {
         <button
           type='submit'
           className='px-6 py-2 bg-primary text-secondary rounded-md mt-4'>
-          Tambah Foto
+          Simpan Foto
         </button>
       </form>
     </div>

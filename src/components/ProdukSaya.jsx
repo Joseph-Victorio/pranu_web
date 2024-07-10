@@ -33,42 +33,7 @@ const ProdukSaya = () => {
     <>
         <section className="p-5 sm:p-[75px] font-rhodium ">
         <h2 className="text-[30px] text-primary ">Produk Kami</h2>
-        {/* TOMBOL */}
-        <div className="flex justify-between mb-10 flex-col-reverse md:flex-col-reverse xl:flex-col-reverse gap-5 ">
-            {/* BUTTONS */}
-            <div className="flex gap-1 md:gap-3  overflow-y-hidden  flex-1 mb-2 mt-2">
-               
-                <button
-                    className="bg-primary text-white rounded-[40px] px-6 py-2 text-[10px] md:text-[15px] flex-1"
-                    onClick={semuaBtn}>
-                    Backdrop
-                </button>
-                <button
-                    className="bg-primary text-white rounded-[40px] px-6 py-2 text-[10px] md:text-[15px] flex-1"
-                    onClick={semuaBtn}>
-                    Genset
-                </button>
-                <button
-                    className="bg-primary text-white rounded-[40px] px-6 py-2 text-[10px] md:text-[15px] text-center "
-                    onClick={semuaBtn}>
-                   <p className="break-keep flex w-[143px] text-center justify-center">LED Screen</p>
-                </button>
-                <button
-                    className="bg-primary text-white rounded-[40px] px-6 py-2 text-[10px] md:text-[15px] flex-1"
-                    onClick={semuaBtn}>
-                    lainnya
-                </button>
-            </div>
-            <div className="relative  ">
-                <input 
-                    type="text"
-                    name="search"
-                    placeholder="Cari..."
-                    className="border-b-2 bg-background text-primary focus:outline-none border-primary pr-6 w-full md:w-full md:mt-2 xl:float-right" />
-                
-                <LiaSearchSolid className="text-secondary absolute top-1 right-2"/>
-            </div>
-        </div>
+       
         {/* lihatsemua */}
         <Link to={'/produk'}>
             <p className="text-tersier mb-5 text-right">Lihat semua &#62;</p>
@@ -78,7 +43,7 @@ const ProdukSaya = () => {
             {Array.isArray(produks) && produks.map(produk=>(
                 <>
                     {/* CARD */}
-                    <div className="w-[152px] h-[220px] md:w-[289px] md:h-[420px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto " key={produk.id}>
+                    <div className="w-[152px] h-[220px] md:w-[289px] md:h-[400px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto " key={produk.id}>
                         {/* IMG */}
                         <div className="sm:w-[237px] w-[237px] mx-auto">
                             <img 
@@ -97,7 +62,7 @@ const ProdukSaya = () => {
                             <p className="text-secondary text-[10px] md:text-[18px] mt-1">Rp {produk.harga}<span className="text-tersier">/hari</span></p>
                            <a href={`/produk/${produk.id}`}>
                            <button
-                             className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-8 md:text-[14px] "
+                             className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-2 md:text-[14px] "
                               >
                                 Tambahkan
                             </button>

@@ -6,73 +6,205 @@ import { useState, useEffect } from 'react'
 const Produk = () => {
   return (
     <>
-      <NavBiru text={"Produk Kami"}/>
-      <section className='flex flex-col'>
-        {/* FILTER */}
-        <div className='p-5 border-r-1 border-tersier'>         
-        {/* SEARCH BAR */}
-
-        {/* FILTER BOX */}
-        <div className='hidden sm:block shadow-md shadow-black sm:w-[288px] sm:h-[562px] font-rhodium p-5 rounded-md mt-10'>
-          <p className='text-primary font-bold text-center'>Filter Produk</p>
-          <br />
-          <p className='text-primary font-bold'>
-            Kategori
-          </p>
-          <form 
-            action=""
-            className='flex flex-col gap-3'>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" name='backdrop' id='backdrop' className='border-primary' />
-              <p className='text-tersier'>Backdrop</p>
+      <NavBiru text={"Produk Kami"} />
+      <p className='text-primary text-2xl xl:text-4xl px-5 xl:px-10 mt-5 font-rhodium'>Kategori</p>
+      <div className='px-4 xl:px-10 mt-5 py-5 font-rhodium'> 
+        <section className="grid  grid-cols-2 md:grid-cols-4 gap-2 ">
+         
+          {/* PAKET */}
+          {/* CARD */}
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+            {/* IMG */}
+            <div className="w-[120px] md:w-[220px]  mx-auto">
+              <img src="/kategori/sound.png" alt="" />
             </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" name='genset' id='genset' className='border-primary'/>
-              <p className='text-tersier'>Genset</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" name='ledScreen' id='ledScreen' className='border-primary'/>
-              <p className='text-tersier'>LED Screen</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" name='lighting' id='lighting' className='border-primary'/>
-              <p className='text-tersier'>Lighting</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" name='sound' id='sound' className='border-primary'/>
-              <p className='text-tersier'>Sound System</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" name='stage' id='stage' className='border-primary'/>
-              <p className='text-tersier'>Stage</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" name='perlengkapanAcara' id='perlengkapanAcara' />
-              <p className='text-tersier'>Perlengkapan Acara</p>
-            </div>
-            <p className='text-primary font-bold'>Harga</p>
-            <div className="flex gap-5" >
-
-              <div className='relative'>
-              <input type="number" className='w-[100px] focus:outline-primary pl-7'/>
-              <div className='bg-primary text-white w-7 p-1 text-[10px] absolute rounded-sm left-0 top-[1px]'>
-                Rp.
-                </div>
+            {/* CONTENT */}
+            <div className="flex justify-between items-center">
+              <div className="mt-5">
+                {/* NAMA */}
+                <p className="text-[12px] xl:text-[24px] text-primary">Paket Produk</p>
+                {/* JUMLAH PRODUK */}
+                <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
-              <div className='relative'>
-              <input type="text" className='w-[100px] focus:outline-primary'/>
-              <div className='bg-primary text-white w-7 p-1 text-[10px] absolute rounded-sm left-0 top-[1px]'>
-                Rp.
-                </div>
-              </div>
+              <a
+                href="/produk/id"
+                className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
+              >
+                <img
+                  src="/icons/diagonal arrow.svg"
+                  alt="arrow-go-to"
+                  className="w-[10px] md:w-[20px]"
+                />
+              </a>
             </div>
-          </form>
-
-        </div>
-        </div>
-      </section>
+          </div>
+          {/* SOUND SYSTEM */}
+          {/* CARD */}
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+            {/* IMG */}
+            <div className="w-[120px] md:w-[220px] mx-auto">
+              <img src="/kategori/sound.png" alt="" />
+            </div>
+            {/* CONTENT */}
+            <div className="flex justify-between items-center">
+              <div className="mt-5">
+                {/* NAMA */}
+                <p className="text-[12px] text-primary md:text-[24px]">Sound System</p>
+                {/* JUMLAH PRODUK */}
+                <p className="text-tersier text-[10px]">150+ Produk</p>
+              </div>
+              <a
+                href="/produk/id"
+                className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
+              >
+                <img
+                  src="/icons/diagonal arrow.svg"
+                  alt="arrow-go-to"
+                  className="w-[10px] md:w-[20px]"
+                />
+              </a>
+            </div>
+          </div>
+          {/* STAGE */}
+          {/* CARD */}
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+            {/* IMG */}
+            <div className="w-[120px] md:w-[220px]  mx-auto">
+              <img src="/kategori/stage.png" alt="" />
+            </div>
+            {/* CONTENT */}
+            <div className="flex justify-between items-center">
+              <div className="mt-5">
+                {/* NAMA */}
+                <p className="text-[12px] text-primary md:text-[24px]">Stage</p>
+                {/* JUMLAH PRODUK */}
+                <p className="text-tersier text-[10px]">150+ Produk</p>
+              </div>
+              <a
+                href="/produk/id"
+                className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
+              >
+                <img
+                  src="/icons/diagonal arrow.svg"
+                  alt="arrow-go-to"
+                  className="w-[10px] md:w-[20px]"
+                />
+              </a>
+            </div>
+          </div>
+          {/* LED SCREEN */}
+          {/* CARD */}
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+            {/* IMG */}
+            <div className="w-[120px] md:w-[220px]  mx-auto">
+              <img src="/kategori/led.png" alt="" />
+            </div>
+            {/* CONTENT */}
+            <div className="flex justify-between items-center">
+              <div className="mt-5">
+                {/* NAMA */}
+                <p className="text-[12px] text-primary md:text-[24px]">LED Screen</p>
+                {/* JUMLAH PRODUK */}
+                <p className="text-tersier text-[10px]">150+ Produk</p>
+              </div>
+              <a
+                href="/produk/id"
+                className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
+              >
+                <img
+                  src="/icons/diagonal arrow.svg"
+                  alt="arrow-go-to"
+                  className="w-[10px] md:w-[20px]"
+                />
+              </a>
+            </div>
+          </div>
+          {/* Lighting */}
+          {/* CARD */}
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+            {/* IMG */}
+            <div className="w-[120px] md:w-[220px]  mx-auto">
+              <img src="/kategori/lighting.png" alt="" />
+            </div>
+            {/* CONTENT */}
+            <div className="flex justify-between items-center">
+              <div className="mt-5">
+                {/* NAMA */}
+                <p className="text-[12px] text-primary md:text-[24px]">Lighting</p>
+                {/* JUMLAH PRODUK */}
+                <p className="text-tersier text-[10px]">150+ Produk</p>
+              </div>
+              <a
+                href="/produk/id"
+                className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
+              >
+                <img
+                  src="/icons/diagonal arrow.svg"
+                  alt="arrow-go-to"
+                  className="w-[10px] md:w-[20px]"
+                />
+              </a>
+            </div>
+          </div>
+          {/* GEnset */}
+          {/* CARD */}
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+            {/* IMG */}
+            <div className="w-[120px] md:w-[220px] mx-auto">
+              <img src="/kategori/genset.png" alt="" />
+            </div>
+            {/* CONTENT */}
+            <div className="flex justify-between items-center">
+              <div className="mt-5">
+                {/* NAMA */}
+                <p className="text-[12px] text-primary md:text-[24px]">Genset</p>
+                {/* JUMLAH PRODUK */}
+                <p className="text-tersier text-[10px]">150+ Produk</p>
+              </div>
+              <a
+                href="/produk/id"
+                className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
+              >
+                <img
+                  src="/icons/diagonal arrow.svg"
+                  alt="arrow-go-to"
+                  className="w-[10px] md:w-[20px]"
+                />
+              </a>
+            </div>
+          </div>
+          {/* Perlengkapan */}
+          {/* CARD */}
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4">
+            {/* IMG */}
+            <div className="w-[120px] md:w-[220px] mx-auto">
+              <img src="/kategori/perlengkapan.png" alt="" />
+            </div>
+            {/* CONTENT */}
+            <div className="flex justify-between items-center">
+              <div className="mt-5">
+                {/* NAMA */}
+                <p className="text-[12px] text-primary md:text-[24px]">Perlengkapan</p>
+                {/* JUMLAH PRODUK */}
+                <p className="text-tersier text-[10px]">150+ Produk</p>
+              </div>
+              <a
+                href="/produk/id"
+                className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
+              >
+                <img
+                  src="/icons/diagonal arrow.svg"
+                  alt="arrow-go-to"
+                  className="w-[10px] md:w-[20px]"
+                />
+              </a>
+            </div>
+          </div>
+          
+        </section>
+      </div>
     </>
-  )
+  );
 }
 
 export default Produk
