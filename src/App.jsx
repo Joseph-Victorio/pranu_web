@@ -32,6 +32,7 @@ import SoundSystem from "./pages/kategori/SoundSystem";
 import Stage from "./pages/kategori/Stage";
 import Paket from "./pages/kategori/Paket";
 import Perlengkapan from "./pages/kategori/Perlengkapan";
+import Led from "./pages/kategori/Led";
 
 function App() {
  
@@ -60,6 +61,7 @@ function App() {
        <Route path="/produk-list/sound-system" element={<SoundSystem/>} />
        <Route path="/produk-list/stage" element={<Stage/>} />
        <Route path="/produk-list/perlengkapan" element={<Perlengkapan/>} />
+       <Route path="/produk-list/led" element={<Led/>} />
       
       <Route path="/admin">
         <Route path="/admin/login" element={<Login/>}/>

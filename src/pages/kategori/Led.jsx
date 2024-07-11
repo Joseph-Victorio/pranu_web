@@ -4,30 +4,29 @@ import ProdukCard from "../../components/ProdukCard"
 import { IoIosArrowRoundBack } from "react-icons/io";
 import KategoriHeader from "../../components/KategoriHeader";
 
-
-const Stage = () => {
-  const [Stage, setStage] = useState('')
+const Led = () => {
+    const [Led, setLed] = useState('')
 
     useEffect(()=>{
-        const fetchAllStage = async ()=>{
+        const fetchAllLed = async ()=>{
             try {
-               const res = await axios.get('http://localhost:8800/produk-list/stage')
-               setStage(res.data)
+               const res = await axios.get('http://localhost:8800/produk-list/led')
+               setLed(res.data)
             } catch (error) {
                 console.log(error)
             }
         }
-        fetchAllStage()
+        fetchAllLed()
     },[])
   return (
     <div className="p-5 md:px-20 font-rhodium">
         <KategoriHeader 
-            nama={'Stage'}
-            jumlah={Stage.length}/>
+            nama={'Led'}
+            jumlah={Led.length}/>
         <a href="/produk" className="text-primary text-2xl flex items-center gap-2 mb-5"><IoIosArrowRoundBack />kembali</a>
         {/* CARDS */}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xl:gap-10 ">
-            {Array.isArray(Stage) && Stage.map(produk=>(
+            {Array.isArray(Led) && Led.map(produk=>(
                 <>
                     {/* CARD */}
                     <ProdukCard
@@ -45,4 +44,4 @@ const Stage = () => {
   )
 }
 
-export default Stage
+export default Led
