@@ -7,6 +7,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import bodyParser from 'body-parser'
 
+
 const app = express()
 
 app.use(cors())
@@ -182,6 +183,87 @@ app.get('/produk-home', (req,res)=>{
     if(err){
       return res.json(err)
     }else{
+      return res.json(data)
+    }
+  })
+})
+// GENSET
+app.get('/produk-list/genset',(req,res)=>{
+  const q = "SELECT * FROM produk WHERE kategori = 'genset'"
+
+  db.query(q,(err,data)=>{
+    if(err){
+      return res.json(err)
+    }else{
+      return res.json(data)
+    }
+  })
+})
+// LIGHTING
+app.get('/produk-list/lighting', (req, res)=>{
+  const q = "SELECT * FROM produk where kategori = 'lighting'"
+
+  db.query(q,(err,data)=>{
+    if (err) {
+      return res.json(err)
+    } else {
+      return res.json(data)
+    }
+  })
+})
+// STAGE
+app.get('/produk-list/stage', (req, res)=>{
+  const q = "SELECT * FROM produk where kategori = 'stage'"
+
+  db.query(q,(err,data)=>{
+    if (err) {
+      return res.json(err)
+    } else {
+      return res.json(data)
+    }
+  })
+})
+// LED
+app.get('/produk-list/led', (req, res)=>{
+  const q = "SELECT * FROM produk where kategori LIKE '%led%'"
+
+  db.query(q,(err,data)=>{
+    if (err) {
+      return res.json(err)
+    } else {
+      return res.json(data)
+    }
+  })
+})
+// SOUND SYSTEM
+app.get('/produk-list/sound-system', (req, res)=>{
+  const q = "SELECT * FROM produk where kategori LIKE '%sound%'"
+  db.query(q,(err,data)=>{
+    if (err) {
+      return res.json(err)
+    } else {
+      return res.json(data)
+    }
+  })
+})
+// PERLENGKAPAN
+app.get('/produk-list/perlengkapan', (req, res)=>{
+  const q = "SELECT * FROM produk where kategori = 'perlengkapan'"
+  db.query(q,(err,data)=>{
+    if (err) {
+      return res.json(err)
+    } else {
+      return res.json(data)
+    }
+  })
+})
+// PERLENGKAPAN
+app.get('/produk-list/paket', (req, res)=>{
+  const q = "SELECT * FROM produk where kategori = 'paket'"
+  db.query(q,(err,data)=>{
+    if (err) {
+      return res.json(err)
+    } else {
       return res.json(data)
     }
   })

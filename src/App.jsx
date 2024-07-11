@@ -26,6 +26,13 @@ import KeranjangBelanja from "./pages/KeranjangBelanja";
 import GaleriList from "./pages/admin/galeri/GaleriList";
 import AddGaleri from "./pages/admin/galeri/AddGaleri";
 
+import Genset from "./pages/kategori/Genset";
+import Lighting from "./pages/kategori/Lighting"
+import SoundSystem from "./pages/kategori/SoundSystem";
+import Stage from "./pages/kategori/Stage";
+import Paket from "./pages/kategori/Paket";
+import Perlengkapan from "./pages/kategori/Perlengkapan";
+
 function App() {
  
   return (
@@ -45,6 +52,14 @@ function App() {
        <Route path="/artikel/:id" element={<ArtikelSingle/>}/>
        {/* PRODUCT DETAIL */}
        <Route path="/produk/:id" element={<ProdukDetail/>}/>
+
+       {/* Produk-produk */}
+       <Route path="/produk-list/genset" element={<Genset/>} />
+       <Route path="/produk-list/lighting" element={<Lighting/>} />
+       <Route path="/produk-list/paket" element={<Paket/>}/>
+       <Route path="/produk-list/sound-system" element={<SoundSystem/>} />
+       <Route path="/produk-list/stage" element={<Stage/>} />
+       <Route path="/produk-list/perlengkapan" element={<Perlengkapan/>} />
       
       <Route path="/admin">
         <Route path="/admin/login" element={<Login/>}/>

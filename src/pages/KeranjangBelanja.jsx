@@ -65,6 +65,7 @@ const KeranjangBelanja = () => {
   const handleDelete = (key) => {
     localStorage.removeItem(key);
     setBarang((prevBarang) => prevBarang.filter((item) => item.key !== key));
+    toast.success('Barang Berhasil di hapus!')
   };
 
   const handleTambah = (key) => {

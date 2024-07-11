@@ -27,7 +27,7 @@ const Produk = () => {
                 <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
               <a
-                href="/produk/id"
+                href="/produk-list/paket"
                 className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
               >
                 <img
@@ -54,7 +54,7 @@ const Produk = () => {
                 <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
               <a
-                href="/produk/id"
+                href="/produk-list/sound-system"
                 className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
               >
                 <img
@@ -81,7 +81,7 @@ const Produk = () => {
                 <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
               <a
-                href="/produk/id"
+                href="/produk-list/stage"
                 className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
               >
                 <img
@@ -108,7 +108,7 @@ const Produk = () => {
                 <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
               <a
-                href="/produk/id"
+                href="/produk-list/led"
                 className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
               >
                 <img
@@ -121,7 +121,7 @@ const Produk = () => {
           </div>
           {/* Lighting */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
               <img src="/kategori/lighting.png" alt="" />
@@ -135,7 +135,7 @@ const Produk = () => {
                 <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
               <a
-                href="/produk/id"
+                href="/produk-list/lighting"
                 className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
               >
                 <img
@@ -148,7 +148,7 @@ const Produk = () => {
           </div>
           {/* GEnset */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
               <img src="/kategori/genset.png" alt="" />
@@ -162,7 +162,7 @@ const Produk = () => {
                 <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
               <a
-                href="/produk/id"
+                href="/produk-list/genset"
                 className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
               >
                 <img
@@ -175,7 +175,7 @@ const Produk = () => {
           </div>
           {/* Perlengkapan */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
               <img src="/kategori/perlengkapan.png" alt="" />
@@ -189,7 +189,7 @@ const Produk = () => {
                 <p className="text-tersier text-[10px]">150+ Produk</p>
               </div>
               <a
-                href="/produk/id"
+                href="/produk-list/perlengkapan"
                 className="bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300"
               >
                 <img
