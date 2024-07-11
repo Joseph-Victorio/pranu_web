@@ -69,7 +69,7 @@ const HeaderCardCarousel = () => {
                     </p>
                     {/* JUMLAH PRODUK */}
                     <p className='text-tersier'>
-                      {Sound.length}
+                      {Sound.length} produk
                     </p>
                   </div>
                   <a 
@@ -102,7 +102,7 @@ const HeaderCardCarousel = () => {
                     </p>
                     {/* JUMLAH PRODUK */}
                     <p className='text-tersier'>
-                      {Lighting.length}
+                      {Lighting.length} produk
                     </p>
                   </div>
                   <a 
@@ -135,7 +135,7 @@ const HeaderCardCarousel = () => {
                     </p>
                     {/* JUMLAH PRODUK */}
                     <p className='text-tersier'>
-                      {Stage.length}
+                      {Stage.length} produk
                     </p>
                   </div>
                   <a 
