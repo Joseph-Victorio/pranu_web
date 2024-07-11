@@ -18,52 +18,52 @@ const Footer = () => {
             <div>
                 <h2 className="text-[24px] text-white mb-5">PRANUGUM PRODUCTION</h2>
                 <div className="flex flex-col gap-5">
-                    <Link
-                        to='/tentang-kami'
+                    <a
+                        href='/tentang-kami'
                         className="text-white">
                             Tentang Kami
-                    </Link>
-                    <Link
-                        to='/produk'
+                    </a>
+                    <a
+                        href='/produk'
                         className="text-white">
                             Produk
-                    </Link>
-                    <Link
-                        to='/artikel'
+                    </a>
+                    <a
+                        href='/#artikel'
                         className="text-white">
                             Artikel
-                    </Link>
-                    <Link
-                        to='/ulasan'
+                    </a>
+                    <a
+                        href='/#ulasan'
                         className="text-white">
                         Ulasan
-                    </Link>
+                    </a>
                 </div>
             </div>
             {/* PANDUAN */}
             <div>
                 <h2 className="text-[24px] text-white mb-5">BANTUAN & PANDUAN</h2>
                 <div className="flex flex-col gap-5">
-                    <Link
-                        to='/tentang-kami'
+                    <a
+                        href='/informasi'
                         className="text-white">
                             Cara Pesan
-                    </Link>
-                    <Link
-                        to='/produk'
+                    </a>
+                    <a
+                        href='/informasi'
                         className="text-white">
                             Syarat & Ketentuan
-                    </Link>
-                    <Link
-                        to='/artikel'
+                    </a>
+                    <a
+                        href='/informasi'
                         className="text-white">
                             FAQs
-                    </Link>
-                    <Link
-                        to='/ulasan'
+                    </a>
+                    <a
+                        href='/informasi'
                         className="text-white">
                         Kontak
-                    </Link>
+                    </a>
                 </div>
             </div>
             {/* SOCIAL MEDIA */}
