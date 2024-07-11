@@ -30,7 +30,7 @@ const Navbar = () => {
             {/* LOGO */}
             <div>
                 <img 
-                    src="/pranu_logo.svg" 
+                    src="/logo/logoBiru.png" 
                     alt="logo"
                     className='w-[72px]' />
             </div>

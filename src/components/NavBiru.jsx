@@ -21,7 +21,7 @@ const NavBiru = ({text}) => {
                 {/* LOGO */}
                 <div>
                     <img 
-                        src="/pranu_logo.svg" 
+                        src="/logo/logoBiru.png" 
                         alt="logo"
                         className='w-[72px]' />
                 </div>
@@ -73,7 +73,7 @@ const NavBiru = ({text}) => {
                 <img src="/icons/menu-left-white.svg" alt="" />
               </button>
               <img 
-                    src="/pranu_logo.svg" 
+                    src="/logo/logoBiru.png" 
                     alt=""
                     className='w-[50px]' />
               <div className="flex gap-2">
@@ -89,9 +89,9 @@ const NavBiru = ({text}) => {
             </nav>
             <p className='text-white text-2xl mt-9 font-rhodium'>{text}</p>
             <img 
-              src="/logo_tentang.svg" 
+              src="/logo/newlogoo.png" 
               alt=""
-              className='mx-auto mt-5 pb-32' />
+              className='mx-auto mt-5 pb-32 ' />
         </div>
         {Menu && 
             <div className='p-5 gap-5 bg-background text-[32px] fixed top-0 left-0 z-50 w-screen h-screen transition text-primary'>

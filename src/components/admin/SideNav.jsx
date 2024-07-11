@@ -33,7 +33,7 @@ const SideNav = () => {
             <div className='nav-content flex flex-col gap-1 mt-5 p-5  '>
             {/* HEADER */}
             <img 
-                src="/Logo_1.svg" 
+                src="/logo/PRANUGUMBiruPutih.png" 
                 alt="Logo"
                 className='mx-auto w-[90px]' />
             <div className="flex flex-col mt-2 ">
