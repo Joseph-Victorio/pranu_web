@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { motion } from 'framer-motion'
+import axios from 'axios'
 
 const imgBoxVariants ={
   hidden : {
@@ -22,6 +23,30 @@ const HeaderCardCarousel = () => {
     setStep(step ===3 ? 1 : step + 1);
     
   }
+  const [Sound, setSound] = useState('')
+  const [Lighting, setLighting] = useState('')
+  const [Stage, setStage] = useState('')
+
+  useEffect(()=>{
+    const fetchSound = async ()=>{
+      const res = await axios.get('http://localhost:8800/produk-list/sound-system')
+      setSound(res.data)
+    }
+    
+    const fetchLighting = async ()=>{
+      const res = await axios.get('http://localhost:8800/produk-list/lighting')
+      setLighting(res.data)
+    }
+    
+    const fetchStage = async ()=>{
+      const res = await axios.get('http://localhost:8800/produk-list/stage')
+      setStage(res.data)
+    }
+
+    fetchSound()
+    fetchLighting()
+    fetchStage()
+  })
   return (
     <>
         {/* CARD CAROUSEL */}
@@ -30,10 +55,10 @@ const HeaderCardCarousel = () => {
                     variants={imgBoxVariants}
                     initial="hidden"
                     animate="visible"
-                    className='max-w-[330px] md:w-[300px] lg:w-[330px] h-[420px] border-2 border-primary rounded-[16px] p-4'>
+                    className='max-w-[330px] md:w-[300px] lg:w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
                 {/* IMG */}
                 <div className='w-[300px] md:w-[270px] lg:w-[300px] mx-auto'>
-                  <img src="/soundsSystem.png" alt="" />
+                  <img src="/kategori/sound.png" alt="" />
                 </div>
                 {/* CONTENT */}
                 <div className='flex justify-between items-center'>
@@ -44,17 +69,17 @@ const HeaderCardCarousel = () => {
                     </p>
                     {/* JUMLAH PRODUK */}
                     <p className='text-tersier'>
-                      150+ Produk
+                      {Sound.length}
                     </p>
                   </div>
-                  <Link 
-                    to='/produk/id'
+                  <a 
+                    href='/produk-list/sound'
                     className='bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300'>
                     <img 
                       src="/icons/diagonal arrow.svg" 
                       alt="arrow-go-to"
                       className='w-[20px]' />
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             )}
@@ -63,10 +88,10 @@ const HeaderCardCarousel = () => {
                     variants={imgBoxVariants}
                     initial="hidden"
                     animate="visible"
-                    className='max-w-[330px] h-[420px] border-2 border-primary rounded-[16px] p-4'>
+                    className='max-w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
                 {/* IMG */}
                 <div className='w-[300px] mx-auto'>
-                  <img src="/ligthing.png" alt="" />
+                  <img src="/kategori/lighting.png" alt="" />
                 </div>
                 {/* CONTENT */}
                 <div className='flex justify-between items-center'>
@@ -77,17 +102,17 @@ const HeaderCardCarousel = () => {
                     </p>
                     {/* JUMLAH PRODUK */}
                     <p className='text-tersier'>
-                      150+ Produk
+                      {Lighting.length}
                     </p>
                   </div>
-                  <Link 
-                    to='/produk/id'
+                  <a 
+                    href='/produk-list/lighting'
                     className='bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300'>
                     <img 
                       src="/icons/diagonal arrow.svg" 
                       alt="arrow-go-to"
                       className='w-[20px]' />
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             )}
@@ -96,31 +121,31 @@ const HeaderCardCarousel = () => {
                     variants={imgBoxVariants}
                     initial="hidden"
                     animate="visible"
-                    className='max-w-[330px] h-[420px] border-2 border-primary rounded-[16px] p-4'>
+                    className='max-w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
                 {/* IMG */}
                 <div className='w-[300px] mx-auto'>
-                  <img src="/soundsSystem.png" alt="" />
+                  <img src="/kategori/stage.png" alt="" />
                 </div>
                 {/* CONTENT */}
                 <div className='flex justify-between items-center'>
                   <div className='mt-5'>
                     {/* NAMA */}
                     <p className='text-[24px] text-primary'>
-                      Sound System
+                      Stage
                     </p>
                     {/* JUMLAH PRODUK */}
                     <p className='text-tersier'>
-                      150+ Produk
+                      {Stage.length}
                     </p>
                   </div>
-                  <Link 
-                    to='/produk/id'
+                  <a 
+                    href='/produk-list/stage'
                     className='bg-primary p-3 rounded-full mt-5 active:bg-secondary hover:bg-secondary transition ease-in-out duration-300'>
                     <img 
                       src="/icons/diagonal arrow.svg" 
                       alt="arrow-go-to"
                       className='w-[20px]' />
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             )}
