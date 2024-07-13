@@ -11,7 +11,7 @@ const ProdukSaya = () => {
   useEffect(() => {
     const fetchAllProduk = async () => {
       try {
-        const res = await axios.get("https://api.pranugumproduction.com/produk.php");
+        const res = await axios.get("http://localhost/api/produk.php");
         setProduk(res.data.produkData || []);
       } catch (error) {
         console.log(error);
@@ -48,7 +48,7 @@ const ProdukSaya = () => {
               {/* IMG */}
               <div className="sm:w-[237px] w-[237px] mx-auto">
                 <img 
-                  src={`https://api.pranugumproduction.com/${produk.foto}`} 
+                  src={`http://localhost/api/${produk.foto}`} 
                   alt={produk.nama_produk}
                   className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]" 
                 />
@@ -62,11 +62,11 @@ const ProdukSaya = () => {
                 <p className="text-[10px] md:text-[18px] text-primary mt-1">{produk.nama_produk}</p>
                 {/* HARGA SEWA */}
                 <p className="text-secondary text-[10px] md:text-[18px] mt-1">{formatCurrencyIDR( produk.harga)}<span className="text-tersier">/hari</span></p>
-                {/* <a href={`/produk/${produk.id}`}>
+                <a href={`/produk/${produk.id}`}>
                   <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-2 md:text-[14px]">
                     Tambahkan
                   </button>
-                </a> */}
+                </a>
               </div>
             </div>
           ))}
