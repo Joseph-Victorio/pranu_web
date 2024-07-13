@@ -63,7 +63,7 @@ function App() {
        <Route path="/produk-list/perlengkapan" element={<Perlengkapan/>} />
        <Route path="/produk-list/led" element={<Led/>} />
       
-      <Route path="/admin">
+      
         <Route path="/admin/login" element={<Login/>}/>
         <Route path="/admin/dashboard" element={<Admin/>}/>
 
@@ -84,8 +84,6 @@ function App() {
         {/* Rute galeri */}
         <Route  path="/admin/galeri-list" element={<GaleriList/>}/>
         <Route  path="/admin/add-galeri" element={<AddGaleri/>}/>
-      </Route>
-
       
     </Routes>
     

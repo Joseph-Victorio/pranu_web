@@ -83,7 +83,7 @@ const Navbar = () => {
                     className="w-[30px]" />
 
             </button>
-            <img src="/pranu_logo.svg" alt="" />
+            <img src="/logo/logoBiru.png" className="w-[70px]" alt="" />
 
             <div className='text-[20px] gap-2 flex'>
                <Cart

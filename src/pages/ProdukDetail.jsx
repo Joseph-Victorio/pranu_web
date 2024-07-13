@@ -15,8 +15,8 @@ const ProdukDetail = () => {
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/produk/${id}`);
-        setDetail(res.data);
+        const res = await axios.get(`https://api.pranugumproduction.com/produk.php?id=${id}`);
+        setDetail(res.data.produkData || []);
       } catch (error) {
         console.log(error);
       }
@@ -27,8 +27,8 @@ const ProdukDetail = () => {
   useEffect(() => {
     const fetchTerkait = async () => {
       try {
-        const res = await axios.get('http://localhost:8800/produk-lighting');
-        setTerkait(res.data);
+        const res = await axios.get('https://api.pranugumproduction.com/produk.php');
+        setTerkait(res.data.produkData);
       } catch (error) {
         console.log(error);
       }
@@ -102,7 +102,7 @@ const ProdukDetail = () => {
             <div>
               <a
                 className=""
-                href="https://api.whatsapp.com/send?text=http://localhost:5173/produk/15"
+                href={`https://api.whatsapp.com/send?text=https://pranugumproduction.com/produk/${detail.id}`}
               >
                 <img
                   src="/icons/whatsapp.svg"
