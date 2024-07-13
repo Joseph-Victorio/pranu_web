@@ -84,11 +84,12 @@ const Home = () => {
         <ProdukSaya/>
         <TentangKamiSection/>
         <YangPercaya/>
+        <br />
         <div id='ulasan'>
-        <ApaKataMereka/>
+        {/* <ApaKataMereka/> */}
         </div>
         <div id='artikel'>
-        <ArtikelCard/>
+        {/* <ArtikelCard/> */}
         </div>
         <Footer/>
     </div>

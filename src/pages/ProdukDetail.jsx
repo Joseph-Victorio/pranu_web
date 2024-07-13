@@ -3,8 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { IoIosRemoveCircle } from "react-icons/io";
-import { IoMdAddCircle } from "react-icons/io";
+import { IoIosRemoveCircle, IoMdAddCircle } from "react-icons/io";
 import toast from "react-hot-toast";
 
 const ProdukDetail = () => {
@@ -15,8 +14,8 @@ const ProdukDetail = () => {
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/produk/${id}`);
-        setDetail(res.data);
+        const res = await axios.get(`http://localhost/api/produk.php?id=${id}`);
+        setDetail(res.data || {}); // Assuming your API response is an object containing product details
       } catch (error) {
         console.log(error);
       }
@@ -27,8 +26,8 @@ const ProdukDetail = () => {
   useEffect(() => {
     const fetchTerkait = async () => {
       try {
-        const res = await axios.get('http://localhost:8800/produk-lighting');
-        setTerkait(res.data);
+        const res = await axios.get('http://localhost/api/produk.php');
+        setTerkait(res.data.produkData || []); // Assuming your API response is an array of related products
       } catch (error) {
         console.log(error);
       }
@@ -74,10 +73,10 @@ const ProdukDetail = () => {
       harga: detail.harga
     };
     localStorage.setItem(detail.nama_produk, JSON.stringify(cart));
-    toast.success('Produk berhasil ditambahkan ke keranjang!')
-    setTimeout(()=>{
-      window.location.reload()
-    },1500)
+    toast.success('Produk berhasil ditambahkan ke keranjang!');
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   };
 
   return (
@@ -87,14 +86,14 @@ const ProdukDetail = () => {
       <div className="flex flex-col xl:flex-row items-center gap-5 p-5 font-rhodium xl:gap-10">
         {/* KIRI */}
         <div key={detail.id}>
-          <div className="md:w-[375px] md:h-[375px] border-2 border-primary rounded-[30px] p-5 bg-white ">
+          <div className="md:w-[375px] md:h-[375px] border-2 border-primary rounded-[30px] p-5 bg-white">
             <img
-              src={`${detail.foto}`}
+              src={`http://localhost/api/${detail.foto}`}
               alt={detail.nama_produk}
               className="rounded-[15px] shadow-md md:w-[350px] mx-auto"
             />
           </div>
-          <div className="flex items-center gap-5 ">
+          <div className="flex items-center gap-5">
             <p className="text-[24px] xl:text-[36px] md:text-[24px] mt-5 text-primary">
               Share :
             </p>
@@ -102,7 +101,7 @@ const ProdukDetail = () => {
             <div>
               <a
                 className=""
-                href="https://api.whatsapp.com/send?text=http://localhost:5173/produk/15"
+                href={`https://api.whatsapp.com/send?text=https://pranugumproduction.com/produk/${detail.id}`}
               >
                 <img
                   src="/icons/whatsapp.svg"
@@ -161,7 +160,7 @@ const ProdukDetail = () => {
             )}
           </div>
           {/* tombol tambah */}
-          <div className="flex gap-5 items-center mt-5" >
+          <div className="flex gap-5 items-center mt-5">
             <div className="flex items-center border-primary border-2 rounded-3xl w-[120px] md:w-[170px] justify-between">
               <button
                 onClick={kurang}
@@ -181,8 +180,8 @@ const ProdukDetail = () => {
             </div>
             <button
               className="text-white bg-primary rounded-[40px] px-6 py-2 text-[24px]"
-              type="submit"
-              onClick={(e) => { e.preventDefault(); onClickToCart(); }}
+              type="button"
+              onClick={onClickToCart}
             >
               Tambahkan
             </button>
@@ -193,38 +192,37 @@ const ProdukDetail = () => {
       <hr className="border-2 mb-5 border-gray-400" />
       <p className="text-primary text-[24px] md:text-[36px] p-5">Produk Terkait</p>
       <div className="flex overflow-x-scroll gap-5 p-5 mb-5">
-        {Array.isArray(terkait) &&
-          terkait.map((ter) => (
-            <div
-              className="w-[152px] h-[220px] md:w-[289px] md:h-[420px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto"
-              key={ter.id}
-            >
-              <div className="sm:w-[237px] w-[237px] mx-auto">
-                <img
-                  src={"../backend/uploads/produk/" + ter.foto}
-                  alt=""
-                  className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]"
-                />
-              </div>
-              <div className="w-[237px] mx-auto">
-                <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">
-                  {ter.kategori}
-                </p>
-                <p className="text-[10px] md:text-[18px] text-primary mt-1">
-                  {ter.nama_produk}
-                </p>
-                <p className="text-secondary text-[10px] md:text-[18px] mt-1">
-                  Rp {ter.harga}
-                  <span className="text-tersier">/hari</span>
-                </p>
-                <a href={`/produk/${ter.id}`}>
-                  <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-8 md:text-[14px]">
-                    Tambahkan
-                  </button>
-                </a>
-              </div>
+        {terkait.map((ter) => (
+          <div
+            key={ter.id}
+            className="w-[152px] h-[220px] md:w-[289px] md:h-[420px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto"
+          >
+            <div className="sm:w-[237px] w-[237px] mx-auto">
+              <img
+                src={`http://localhost/api/${ter.foto}`}
+                alt=""
+                className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]"
+              />
             </div>
-          ))}
+            <div className="w-[237px] mx-auto">
+              <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">
+                {ter.kategori}
+              </p>
+              <p className="text-[10px] md:text-[18px] text-primary mt-1">
+                {ter.nama_produk}
+              </p>
+              <p className="text-secondary text-[10px] md:text-[18px] mt-1">
+                Rp {ter.harga}
+                <span className="text-tersier">/hari</span>
+              </p>
+              <a href={`/produk/${ter.id}`}>
+                <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-8 md:text-[14px]">
+                  Tambahkan
+                </button>
+              </a>
+            </div>
+          </div>
+        ))}
       </div>
       <Footer />
     </div>

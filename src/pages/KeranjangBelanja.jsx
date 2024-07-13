@@ -139,7 +139,7 @@ const KeranjangBelanja = () => {
       };
       
 
-      await axios.post('http://localhost:8800/penyewa', updatedForm);
+      await axios.post('http://localhost/api/penyewa.php', updatedForm);
       setForm({
         nama: '',
         telepon: '',
@@ -177,7 +177,7 @@ const KeranjangBelanja = () => {
                   <div className="flex gap-5 items-center justify-between rounded-[14px] shadow-md px-2 py-2 md:pr-5">
                     <div className="flex gap-5 items-center">
                       <img
-                        src={bar.value.foto}
+                        src={`http://localhost/api/${bar.value.foto}`}
                         alt=""
                         className="w-[60px] h-[60px] md:w-[100px] md:h-[100px] rounded-[14px] shadow-md"
                       />
@@ -233,7 +233,7 @@ const KeranjangBelanja = () => {
         <form className="border-primary border-2 bg-white p-5 mt-5 rounded-[14px]">
           <p className="text-primary md:text-2xl">Formulir Penyewa</p>
           {/* NAMA */}
-          <div className="flex flex-col md:flex-row gap-5 ">
+          <div className="flex flex-col xl:flex-row gap-5 ">
             <div className="flex-1 mx-auto md:mx-0 ">
               <div className="flex gap-1 text-primary ">
                 <FaRegUser />
@@ -268,7 +268,7 @@ const KeranjangBelanja = () => {
           </div>
           <br />
           {/* tgl sewa */}
-          <div className="flex flex-col md:flex-row gap-5 ">
+          <div className="flex flex-col xl:flex-row gap-5 ">
             <div className="flex-1 mx-auto md:mx-0 ">
               <div className="flex gap-1 text-primary ">
                 <MdOutlineDateRange />
@@ -300,7 +300,7 @@ const KeranjangBelanja = () => {
               />
             </div>
           </div>
-          <div className="mx-auto md:mx-0 mt-5 w-[250px] md:w-[1120px] ">
+          <div className="mx-auto md:mx-0 mt-5 w-[250px] xl:w-[1120px] ">
             <div className="flex gap-1 text-primary items-start ">
               <CiLocationOn />
               <p>Alamat</p>
@@ -308,7 +308,7 @@ const KeranjangBelanja = () => {
             <textarea
               type="text"
               name="alamat"
-              className="border-2 border-primary bg-gray-200 rounded-[7px] p-2 w-[250px] md:w-[1120px] md:h-[75px] "
+              className="border-2 border-primary bg-gray-200 rounded-[7px] p-2 w-[250px] xl:w-[1120px] md:w-[625px] md:h-[75px] "
               placeholder="Alamat anda"
               required
               onChange={onChangeHandle}

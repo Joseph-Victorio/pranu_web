@@ -62,7 +62,13 @@ const Informasi = () => {
     e.preventDefault();
     
     try {
-      await axios.post("http://localhost:8800/kontak", KontakForm);
+      await axios.post("http://localhost/api/kontak.php", KontakForm);
+      setKontakForm({
+        nama_penanya: "",
+        jenis_pesan : "Pertanyaan",
+        telemail: "",
+        pesan: "",
+      })
       toast.success("Pesan Berhasil Dikirim");
       toast('Terima kasih, pesan mu akan kami proses ya, mohon ditunggu', {
         icon: '🙏',
@@ -295,6 +301,7 @@ const Informasi = () => {
                           name='telemail'
                           placeholder='Masukkan nomor telepon/email Anda'
                           required
+                          maxLength={13}
                           onChange={handleChange}
                           className='md:w-[397px] md:h-[62px] xl:w-[397px] xl:h-[62px] bg-background  rounded-[15px] h-[40px] border-primary border-[1px] px-4 focus:outline-primary' />
                       </div>
