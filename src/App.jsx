@@ -33,6 +33,7 @@ import Stage from "./pages/kategori/Stage";
 import Paket from "./pages/kategori/Paket";
 import Perlengkapan from "./pages/kategori/Perlengkapan";
 import Led from "./pages/kategori/Led";
+import Register from "./pages/auth/Register";
 
 function App() {
  
@@ -65,6 +66,8 @@ function App() {
       
       
         <Route path="/admin/login" element={<Login/>}/>
+        <Route path="/admin/register" element={<Register/>}/>
+
         <Route path="/admin/dashboard" element={<Admin/>}/>
 
       {/* rute produk */}
