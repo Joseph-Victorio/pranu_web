@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PiEye, PiEyeSlash } from 'react-icons/pi';
 import bcrypt from 'bcryptjs';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     // useState for password
@@ -66,7 +67,10 @@ const Login = () => {
             // Compare hashed password with stored hashed password
             const isMatch = await bcrypt.compare(passValue.password, formData[0].pass);
             if (isMatch && idAdmin === formData[0].username) {
-                window.location.href="/admin/dashboard"
+                toast.success("Berhasil Login!")
+                setTimeout(()=>{
+                    window.location.href="/admin/dashboard"
+                }, 1000)
             } else {
                 console.log('Password salah');
             }
