@@ -45,13 +45,13 @@ const ProdukDetail = () => {
 
   const [deskripsi, setDeskripsi] = useState(true);
   const onClickDesc = () => {
-    setDeskripsi(!deskripsi);
+    setDeskripsi(true);
     setKetentuan(false);
   };
 
   const [ketentuan, setKetentuan] = useState(false);
   const onClickKetentuan = () => {
-    setKetentuan(!ketentuan);
+    setKetentuan(true);
     setDeskripsi(false);
   };
 
