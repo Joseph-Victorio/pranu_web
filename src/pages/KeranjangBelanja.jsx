@@ -342,7 +342,7 @@ const KeranjangBelanja = () => {
           {/* tombol pesan */}
           <div className="p-5">
           <button 
-            className="w-full bg-primary text-secondary px-6 py-2 rounded-xl"
+            className="w-full bg-primary text-secondary px-6 py-2 rounded-xl hover:text-primary hover:bg-secondary duration-300 ease-in-out transition"
             onClick={pesanHandelClick}>
                 Pesan
           </button>
