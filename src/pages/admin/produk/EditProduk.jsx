@@ -80,7 +80,7 @@ const EditProduk = () => {
       }
   
       // Perform the PUT request
-      const response = await axios.put(`http://localhost/api/produk.php`, data, {
+      const response = await axios.post(`http://localhost/api/editProduk.php`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -157,7 +157,6 @@ const EditProduk = () => {
               name="kategori"
               value={formData.kategori}
               onChange={handleChange}
-              required
               className='outline-primary rounded-md px-2 border-primary'
             >
               <option value="" hidden>Pilih Kategori</option>
