@@ -186,7 +186,7 @@ const KeranjangBelanja = () => {
                           <p className="text-primary text-[20px]">
                             {bar.value.nama_produk}
                           </p>
-                          <p className="text-secondary text-[18px]">
+                          <p className="text-red-500 text-[18px]">
                             {formatCurrencyIDR(bar.value.harga)}
                           </p>
                         </div>
@@ -219,7 +219,7 @@ const KeranjangBelanja = () => {
                         </div>
                       </div>
                     </div>
-                    <p className="text-secondary text-[10px] md:text-[15px]">
+                    <p className="text-red-500 text-[10px] md:text-[15px]">
                       {formatCurrencyIDR(bar.value.jumlah * bar.value.harga)}
                     </p>
                   </div>
@@ -330,13 +330,13 @@ const KeranjangBelanja = () => {
           <div className="p-5">
             <div className="mt-5">
               <p className="text-primary text-[18px] md:text-[24px]">
-                Total Produk ({localStorage.length}): <span className="text-secondary">{formatCurrencyIDR(totalSum)}</span>
+                Total Produk ({localStorage.length}): <span className="text-red-500">{formatCurrencyIDR(totalSum)}</span>
               </p>
               <p className="text-primary text-[18px] md:text-[24px]">
-                Waktu Sewa: <span className="text-secondary">{daysDifference} hari</span> 
+                Waktu Sewa: <span className="text-red-500">{daysDifference} hari</span> 
               </p>
               <p className="text-primary text-[18px] md:text-[24px]">
-                Total Sementara: <span className="text-secondary">{formatCurrencyIDR(totalSum * daysDifference)}</span>
+                Total Sementara: <span className="text-red-500">{formatCurrencyIDR(totalSum * daysDifference)}</span>
               </p>
             </div>
           </div>
