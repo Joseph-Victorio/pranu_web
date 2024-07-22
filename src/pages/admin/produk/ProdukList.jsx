@@ -77,7 +77,7 @@ const ProdukList = () => {
                        <FaPencil/>
                       </Link>
                       <button className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition ' onClick={() => handleDelete(produk.id)}>
-                        <BsTrash className='text-secondary' />
+                        <BsTrash className='' />
                       </button>
                     </div>
                   </td>
