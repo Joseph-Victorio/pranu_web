@@ -25,7 +25,7 @@ const Home = () => {
         <section className='flex flex-col sm:flex-row   xl:flex-row min-w-fit font-rhodium items-center mt-10 mb-10'>
           {/* KIRI */}
           <div className='p-5 sm:p-[75px] md:p-5 lg:p-[75px] sm:w-1/2 md:w-[400px] lg:w-1/2 lg:flex-1 '>
-            <h1 className='sm:text-[57px] text-5xl text-primary'>Prangum <br />Production</h1>
+            <h1 className='sm:text-[57px] text-5xl text-primary'>Pranugum <br />Production</h1>
             <p className='mt-5 text-justify '>Pranugum Production siap menyediakan segala perlengkapan acara yang kamu butuhkan! Mulai dari panggung, lighting, sound system hingga LED.</p>
             <p className='mt-5 text-justify'>Percayakan pada kami untuk solusi terbaik dan produk berkualitas yang akan membuat acaramu berkesan. Yuk, temukan layanan terbaik dan produk terbaik untuk acaramu, di Pranugum Production!.</p>
             <Link
