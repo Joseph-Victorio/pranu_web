@@ -137,9 +137,8 @@ const KeranjangBelanja = () => {
         ...form,
         pesanan: keranjangKu.join(', '),
       };
-      
-
-      await axios.post('http://localhost/api/penyewa.php', updatedForm);
+       await axios.post('http://localhost/api/penyewa.php', updatedForm);
+     
       setForm({
         nama: '',
         telepon: '',
@@ -157,7 +156,7 @@ const KeranjangBelanja = () => {
       localStorage.clear();
 
     } catch (error) {
-      console.log(error);
+      console.log('Error:', error.response ? error.response.data : error.message);
     }
   };
 
