@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import toast from "react-hot-toast";
-import { useParams } from 'react-router-dom';
+import Modal from '../../../components/Modal'; // Make sure the path is correct
+
+const categories = [
+  'Paket Produk',
+  'Sound System',
+  'Stage',
+  'LED Screen',
+  'Lighting',
+  'Genset',
+  'Perlengkapan Acara'
+];
 
 const AddProduk = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +22,7 @@ const AddProduk = () => {
     ketentuan: '',
     foto: null,
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -48,10 +59,23 @@ const AddProduk = () => {
         ketentuan: '',
         foto: null,
       });
+      setIsModalOpen(false); // Close the modal after submission
     } catch (error) {
       console.error('Error uploading data:', error);
       toast.error('An error occurred while processing your request.');
+      setIsModalOpen(false); // Close the modal if there's an error
     }
+  };
+  const handleBantuan = ()=>{
+    setIsModalOpen(true);
+  }
+
+  const handleConfirm = async () => {
+    
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -60,72 +84,83 @@ const AddProduk = () => {
       <hr className='border-secondary' />
       <a 
         href="/admin/produk-list"
-        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-5 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out ml-10'>
+        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-5 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out md:ml-5 '>
           <p>&#8592;</p> <p>Kembali</p>
       </a>
-      <form onSubmit={handleSubmit} className='md:w-[500px] md:mx-auto md:text-[24px]'>
-        <div className="flex flex-col gap-1 mb-2">
-          <label htmlFor="nama_produk" className='text-primary font-semibold'>Nama Produk:</label>
-          <input
-            type="text"
-            id="nama_produk"
-            name="nama_produk"
-            value={formData.nama_produk}
-            onChange={handleChange}
-            required
-            placeholder='Nama Produk'
-            className='outline-primary rounded-md px-2 border-primary'
-          />
+      <form onSubmit={handleSubmit} className='md:ml-5 md:mx-auto md:text-[24px]'>
+        <div className="flex xl:flex-row xl:gap-5 flex-col">
+          {/* nama */}
+          <div className="flex flex-col gap-1 mb-2">
+            <label htmlFor="nama_produk" className='text-primary font-semibold'>Nama Produk:</label>
+            <input
+              type="text"
+              id="nama_produk"
+              name="nama_produk"
+              value={formData.nama_produk}
+              onChange={handleChange}
+              required
+              placeholder='Nama Produk'
+              className='outline-primary rounded-md px-2 border-primary'
+            />
+          </div>
+          {/* harga */}
+          <div className="flex flex-col gap-1 mb-2">
+            <label htmlFor="harga" className='text-primary font-semibold'>Harga:</label>
+            <input
+              type="number"
+              id="harga"
+              name="harga"
+              value={formData.harga}
+              placeholder='Harga'
+              onChange={handleChange}
+              required
+              className='outline-primary rounded-md px-2 border-primary'
+            />
+          </div>
+          {/* kategori */}
+          <div className="flex flex-col gap-1 mb-2">
+            <label htmlFor="kategori" className='text-primary font-semibold'>Kategori:</label>
+            <select
+              id="kategori"
+              name="kategori"
+              value={formData.kategori}
+              onChange={handleChange}
+              required
+              className='outline-primary rounded-md px-2 border-primary'
+            >
+              <option value="" hidden>Pilih Kategori</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div className="flex flex-col gap-1 mb-2">
-          <label htmlFor="harga" className='text-primary font-semibold'>Harga:</label>
-          <input
-            type="number"
-            id="harga"
-            name="harga"
-            value={formData.harga}
-            placeholder='Harga'
-            onChange={handleChange}
-            required
-            className='outline-primary rounded-md px-2 border-primary'
-          />
-        </div>
-        <div className="flex flex-col gap-1 mb-2">
-          <label htmlFor="kategori" className='text-primary font-semibold'>Kategori:</label>
-          <input
-            type="text"
-            id="kategori"
-            name="kategori"
-            value={formData.kategori}
-            placeholder='Kategori'
-            onChange={handleChange}
-            required
-            className='outline-primary rounded-md px-2 border-primary'
-          />
-        </div>
-        <div className="flex flex-col gap-1 mb-2">
-          <label htmlFor="deskripsi" className='text-primary font-semibold'>Deskripsi:</label>
-          <textarea
-            id="deskripsi"
-            name="deskripsi"
-            value={formData.deskripsi}
-            placeholder='Deskripsi'
-            onChange={handleChange}
-            required
-            className='outline-primary rounded-md px-2 border-primary'
-          />
-        </div>
-        <div className="flex flex-col gap-1 mb-2">
-          <label htmlFor="ketentuan" className='text-primary font-semibold'>Ketentuan:</label>
-          <textarea
-            id="ketentuan"
-            name="ketentuan"
-            value={formData.ketentuan}
-            placeholder='Ketentuan'
-            onChange={handleChange}
-            required
-            className='outline-primary rounded-md px-2 border-primary'
-          />
+        <p onClick={handleBantuan} className='cursor-pointer text-[10px] text-red-600'>*Bantuan pengisian deskripsi dan ketentuan</p>
+        <div className='flex xl:flex-row flex-col xl:gap-5'>
+          <div className="flex flex-col gap-1 mb-2">
+            <label htmlFor="deskripsi" className='text-primary font-semibold'>Deskripsi:</label>
+            <textarea
+              id="deskripsi"
+              name="deskripsi"
+              value={formData.deskripsi}
+              placeholder='Deskripsi'
+              onChange={handleChange}
+              required
+              className='outline-primary rounded-md px-2 text-[14px] border-primary xl:w-[550px] xl:h-[120px]'
+            />
+          </div>
+          <div className="flex flex-col gap-1 mb-2">
+            <label htmlFor="ketentuan" className='text-primary font-semibold'>Ketentuan:</label>
+            <textarea
+              id="ketentuan"
+              name="ketentuan"
+              value={formData.ketentuan}
+              placeholder='Ketentuan'
+              onChange={handleChange}
+              required
+              className='outline-primary rounded-md px-2 border-primary xl:w-[550px] xl:h-[120px]'
+            />
+          </div>
         </div>
         <div className="flex flex-col gap-1 mb-2">
           <label htmlFor="foto" className='text-primary font-semibold'>Foto:</label>
@@ -135,15 +170,21 @@ const AddProduk = () => {
             name="foto"
             onChange={handleFileChange}
             accept="image/*"
+            className='w-[330px]'
           />
         </div>
         <button 
           type="submit"
-          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4'
+          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4 hover:bg-secondary hover:text-primary ease-in-out duration-300 transition'
         >
           Simpan Produk
         </button>
       </form>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+      />
     </div>
   );
 };
