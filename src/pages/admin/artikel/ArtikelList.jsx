@@ -17,7 +17,7 @@ const ArtikelList = () => {
   useEffect(() => {
     const fetchAllArtikel = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/artikel");
+        const res = await axios.get("https://api.pranugumproduction.com/artikel");
         setartikel(res.data);
       } catch (error) {
         console.log(error);
@@ -29,7 +29,7 @@ const ArtikelList = () => {
   const handleDelete = async (id) => {
     try {
       toast.success("Berhasil Menghapus Artikel!")
-      await axios.delete('http://localhost:8800/artikel/'+id);
+      await axios.delete('https://api.pranugumproduction.com/artikel/'+id);
       setTimeout(()=>{
         window.location.reload()
       },500)
