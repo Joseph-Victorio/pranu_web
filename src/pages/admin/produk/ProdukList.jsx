@@ -47,7 +47,7 @@ const ProdukList = () => {
         <p className='text-3xl p-5'>List Produk</p>
         <hr className='border-primary border-b-2 ' />
         <Link to={'/admin/add-produk'} className='float-right'>
-          <p className='mt-3 bg-primary text-secondary px-6 py-2 md:w-[200px] w-[200px] text-center rounded-md m-2'>
+          <p className='mt-3 bg-primary text-secondary px-6 py-2 md:w-[200px] w-[200px] text-center rounded-md m-2 hover:bg-secondary hover:text-primary ease-in-out duration-300 transition'>
             Tambah Produk
           </p>
         </Link>
