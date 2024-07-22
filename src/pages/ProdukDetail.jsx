@@ -14,8 +14,8 @@ const ProdukDetail = () => {
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        const res = await axios.get(`http://localhost/api/produk.php?id=${id}`);
-        setDetail(res.data || {}); // Assuming your API response is an object containing product details
+        const res = await axios.get(`https://api.pranugumproduction.com/produk.php?id=${id}`);
+        setDetail(res.data || {});
       } catch (error) {
         console.log(error);
       }
@@ -26,8 +26,8 @@ const ProdukDetail = () => {
   useEffect(() => {
     const fetchTerkait = async () => {
       try {
-        const res = await axios.get('http://localhost/api/produk.php');
-        setTerkait(res.data.produkData || []); // Assuming your API response is an array of related products
+        const res = await axios.get('https://api.pranugumproduction.com/produk.php');
+        setTerkait(res.data.produkData || []); 
       } catch (error) {
         console.log(error);
       }
@@ -88,7 +88,7 @@ const ProdukDetail = () => {
         <div key={detail.id}>
           <div className="md:w-[375px] md:h-[375px] border-2 border-primary rounded-[30px] p-5 bg-white">
             <img
-              src={`http://localhost/api/${detail.foto}`}
+              src={`https://api.pranugumproduction.com/${detail.foto}`}
               alt={detail.nama_produk}
               className="rounded-[15px] shadow-md md:w-[350px] mx-auto"
             />

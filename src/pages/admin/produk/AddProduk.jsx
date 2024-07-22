@@ -43,7 +43,7 @@ const AddProduk = () => {
     }
 
     try {
-      await axios.post('http://localhost/api/produk.php', form, {
+      await axios.post('https://api.pranugumproduction.com/produk.php', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

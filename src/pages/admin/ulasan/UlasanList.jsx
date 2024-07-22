@@ -17,7 +17,7 @@ const UlasanList = () => {
   useEffect(() => {
     const fetchAllUlasan = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/ulasan");
+        const res = await axios.get("https://api.pranugumproduction.com/ulasan");
         setUlasan(res.data);
       } catch (error) {
         console.log(error);
@@ -29,7 +29,7 @@ const UlasanList = () => {
   const handleDelete = async (id) => {
     try {
       toast.success("Berhasil Menghapus Ulasan!")
-      await axios.delete('http://localhost:8800/ulasan/'+id);
+      await axios.delete('https://api.pranugumproduction.com/ulasan/'+id);
       setTimeout(()=>{
         window.location.reload()
       },200)
