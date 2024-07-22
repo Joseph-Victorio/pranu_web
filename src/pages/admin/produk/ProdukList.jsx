@@ -47,7 +47,7 @@ const ProdukList = () => {
         <p className='text-3xl p-5'>List Produk</p>
         <hr className='border-primary border-b-2 ' />
         <Link to={'/admin/add-produk'} className='float-right'>
-          <p className='mt-3 bg-primary text-secondary px-6 py-2 md:w-[200px] w-[200px] text-center rounded-md m-2'>
+          <p className='mt-3 bg-primary text-secondary px-6 py-2 md:w-[200px] w-[200px] text-center rounded-md m-2  hover:bg-secondary  hover:text-primary duration-300 ease-in-out transition '>
             Tambah Produk
           </p>
         </Link>
@@ -72,10 +72,10 @@ const ProdukList = () => {
                   <td className='p-2'><p>{produk.kategori}</p></td>
                   <td className='p-2'>
                     <div className='flex gap-2'>
-                      <Link to={`/admin/edit-produk/${produk.id}`} className='bg-primary p-2 rounded-md'>
+                      <Link to={`/admin/edit-produk/${produk.id}`} className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition '>
                        
                       </Link>
-                      <button className='bg-primary p-2 rounded-md' onClick={() => handleDelete(produk.id)}>
+                      <button className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition ' onClick={() => handleDelete(produk.id)}>
                         <BsTrash className='text-secondary' />
                       </button>
                     </div>
