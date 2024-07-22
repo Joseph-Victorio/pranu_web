@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
 import { BsTrash } from 'react-icons/bs';
+import { CiEdit } from "react-icons/ci";
 
 import SideNav from '../../../components/admin/SideNav';
 
@@ -73,7 +74,7 @@ const ProdukList = () => {
                   <td className='p-2'>
                     <div className='flex gap-2'>
                       <Link to={`/admin/edit-produk/${produk.id}`} className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition '>
-                       
+                       <CiEdit/>
                       </Link>
                       <button className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition ' onClick={() => handleDelete(produk.id)}>
                         <BsTrash className='text-secondary' />
