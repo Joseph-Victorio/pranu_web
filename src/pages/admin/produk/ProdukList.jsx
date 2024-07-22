@@ -14,7 +14,7 @@ const ProdukList = () => {
   useEffect(() => {
     const fetchAllProduk = async () => {
       try {
-        const res = await axios.get("http://localhost/api/produk.php");
+        const res = await axios.get("https://api.pranugumproduction.com/produk.php");
         setProduk(res.data.produkData); 
       } catch (error) {
         console.log(error);
@@ -25,7 +25,7 @@ const ProdukList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost/api/produk.php?id=${id}`);
+      await axios.delete(`https://api.pranugumproduction.com/produk.php?id=${id}`);
       setProduk(produks.filter(produk => produk.id !== id));
     } catch (error) {
       console.log(error);
@@ -66,7 +66,7 @@ const ProdukList = () => {
             <tbody>
               {currentProducts.map((produk) => (
                 <tr className='text-center' key={produk.id}>
-                  <td className='p-2'><img src={`http://localhost/api/${produk.foto}`} alt="" /></td>
+                  <td className='p-2'><img src={`https://api.pranugumproduction.com/${produk.foto}`} alt="" /></td>
                   <td className='p-2'><p>{produk.nama_produk}</p></td>
                   <td className='p-2'><p>{produk.harga}</p></td>
                   <td className='p-2'><p>{produk.kategori}</p></td>

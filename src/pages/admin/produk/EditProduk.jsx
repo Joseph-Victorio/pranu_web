@@ -30,7 +30,7 @@ const EditProduk = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost/api/produk.php?id=${id}`);
+        const response = await axios.get(`https://api.pranugumproduction.com/produk.php?id=${id}`);
         const { nama_produk, harga, kategori, foto, deskripsi, ketentuan } = response.data;
         setFormData({
           nama_produk: nama_produk || '',
@@ -40,7 +40,7 @@ const EditProduk = () => {
           ketentuan: ketentuan || '',
           foto: foto || 'no-image.jpeg', // Set default photo if none provided
         });
-        setCurrentFoto(`http://localhost/api/${foto}`); // Set current photo URL
+        setCurrentFoto(`https://api.pranugumproduction.com/${foto}`); // Set current photo URL
       } catch (error) {
         console.error('Error fetching data:', error);
         toast.error('Terjadi error saat mengambil data.');
@@ -80,7 +80,7 @@ const EditProduk = () => {
       }
   
       // Perform the PUT request
-      const response = await axios.post(`http://localhost/api/editProduk.php`, data, {
+      const response = await axios.post(`https://api.pranugumproduction.com/editProduk.php`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
