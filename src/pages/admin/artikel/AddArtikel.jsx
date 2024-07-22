@@ -26,7 +26,7 @@ const AddArtikel = () => {
         data.append(key, formData[key]);
       }
 
-      await axios.post('http://localhost:8800/artikel/', data, {
+      await axios.post('https://api.pranugumproduction.com/artikel/', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
