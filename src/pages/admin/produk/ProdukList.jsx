@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
 import { BsTrash } from 'react-icons/bs';
+import { CiEdit } from "react-icons/ci";
 
 import SideNav from '../../../components/admin/SideNav';
 
@@ -72,11 +73,11 @@ const ProdukList = () => {
                   <td className='p-2'><p>{produk.kategori}</p></td>
                   <td className='p-2'>
                     <div className='flex gap-2'>
-                      <Link to={`/admin/edit-produk/${produk.id}`} className='bg-primary p-2 rounded-md'>
-                       
+                      <Link to={`/admin/edit-produk/${produk.id}`} className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition '>
+                      <CiEdit className='w-full ' />
                       </Link>
-                      <button className='bg-primary p-2 rounded-md' onClick={() => handleDelete(produk.id)}>
-                        <BsTrash className='text-secondary' />
+                      <button className='g-primary p-2 rounded-md bg-primary hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition ' onClick={() => handleDelete(produk.id)}>
+                        <BsTrash className='w-full' />
                       </button>
                     </div>
                   </td>
@@ -87,14 +88,14 @@ const ProdukList = () => {
         </div>
 
         <ReactPaginate
-          previousLabel={"Previous"}
+          previousLabel={"Previous "}
           nextLabel={"Next"}
           breakLabel={"..."}
           pageCount={Math.ceil(produks.length / itemsPerPage)}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={handlePageClick}
-          containerClassName={"pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 md:ml-14"}
+          containerClassName={"pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 md:ml-14 "}
           activeClassName={"active"}
         />
       </div>
