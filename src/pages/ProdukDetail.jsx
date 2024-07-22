@@ -45,7 +45,7 @@ const ProdukDetail = () => {
 
   const [deskripsi, setDeskripsi] = useState(true);
   const onClickDesc = () => {
-    setDeskripsi(true);
+    setDeskripsi(true)
     setKetentuan(false);
   };
 
@@ -149,14 +149,10 @@ const ProdukDetail = () => {
           </div>
           <div className="text-justify p-1 h-[150px] md:h-auto overflow-y-scroll md:overflow-hidden mt-5">
             {deskripsi && (
-              <p>
-                {detail.deskripsi}
-              </p>
+             <div dangerouslySetInnerHTML={{ __html: detail.deskripsi }} />
             )}
             {ketentuan && (
-              <p>
-                {detail.ketentuan}
-              </p>
+              <div dangerouslySetInnerHTML={{ __html: detail.ketentuan }} />
             )}
           </div>
           {/* tombol tambah */}
