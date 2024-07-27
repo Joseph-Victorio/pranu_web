@@ -34,7 +34,7 @@ const Register = () => {
     form.append('pass', hashedPass); // Use hashed password in form data
 
     try {
-      await axios.post('http://localhost/api/admin.php', form, {
+      await axios.post('https://api.pranugumproduction.com/admin.php', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
