@@ -5,13 +5,13 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import KategoriHeader from "../../components/KategoriHeader";
 
 const Lighting = () => {
-  const [Lighting, setLighting] = useState('')
+  const [Lighting, setLighting] = useState([])
 
     useEffect(()=>{
         const fetchAllLighting = async ()=>{
             try {
-               const res = await axios.get('http://localhost:8800/produk-list/lighting')
-               setLighting(res.data)
+               const res = await axios.get('https://api.pranugumproduction.com/lighting.php')
+               setLighting(res.data.produkData)
             } catch (error) {
                 console.log(error)
             }
@@ -26,7 +26,7 @@ const Lighting = () => {
         <a href="/produk" className="text-primary text-2xl flex items-center gap-2 mb-5"><IoIosArrowRoundBack />kembali</a>
         {/* CARDS */}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xl:gap-10 ">
-            {Array.isArray(Lighting) && Lighting.map(produk=>(
+            {Lighting.map(produk=>(
                 <>
                     {/* CARD */}
                     <ProdukCard

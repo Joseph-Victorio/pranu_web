@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Modal from '../../../components/Modal'; // Make sure the path is correct
 
 const AddArtikel = () => {
   const [formData, setFormData] = useState({
     judul: '',
     penulis: '',
     isi: '',
-    foto: 'no-image.jpeg',
+    foto: null,
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -20,108 +22,125 @@ const AddArtikel = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = new FormData();
-      for (let key in formData) {
-        data.append(key, formData[key]);
-      }
+    const data = new FormData();
+    for (const key in formData) {
+      data.append(key, formData[key]);
+    }
 
-      await axios.post('https://api.pranugumproduction.com/artikel/', data, {
+    try {
+      await axios.post('https://api.pranugumproduction.com/artikel.php', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
       toast.success('Artikel Berhasil Ditambahkan', {
         duration: 4000,
       });
-
       setFormData({
         judul: '',
         penulis: '',
         isi: '',
-        foto: '',
+        foto: null,
       });
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Error uploading data:', error);
       toast.error('Terjadi error saat memproses data.');
+      setIsModalOpen(false); 
     }
+  };
+
+  const handleBantuan = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = async () => {
+    // Implement your confirm logic here
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className='p-5 font-rhodium'>
       <h1 className='text-primary text-4xl mb-4 ml-10'>Upload Artikel</h1>
       <hr className='border-secondary' />
-      <a
-        href='/admin/artikel-list'
-        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-5 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out ml-10'
-      >
-        <p>&#8592;</p> <p>Kembali</p>
+      <a 
+        href="/admin/artikel-list"
+        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-2 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out md:ml-5 '>
+          <p>&#8592;</p> <p>Kembali</p>
       </a>
-      <form onSubmit={handleSubmit} className='md:w-[500px] md:mx-auto md:text-[24px]'>
-        <div>
-          <div className='flex flex-col gap-1 mb-2'>
-            <label htmlFor='judul' className='text-primary font-semibold'>
-              Judul:
-            </label>
+      <form onSubmit={handleSubmit} className='md:ml-5 md:mx-auto md:text-[24px]'>
+        <div className="flex xl:flex-row xl:gap-5 flex-col">
+          {/* judul */}
+          <div className="flex flex-col gap-1 mb-2 flex-1">
+            <label htmlFor="judul" className='text-primary font-semibold'>Judul:</label>
             <input
-              type='text'
-              id='judul'
-              name='judul'
+              type="text"
+              id="judul"
+              name="judul"
               value={formData.judul}
               onChange={handleChange}
               required
-              placeholder='Judul'
-              className='outline-primary rounded-md px-2 border-primary'
+              placeholder='Judul Artikel'
+              className='outline-primary rounded-md px-2 border-2 flex-1 border-primary'
             />
           </div>
-          <div className='flex flex-col gap-1 mb-2'>
-            <label htmlFor='penulis' className='text-primary font-semibold'>
-              Penulis:
-            </label>
+          {/* penulis */}
+          <div className="flex flex-col gap-1 mb-2 flex-1">
+            <label htmlFor="penulis" className='text-primary  font-semibold'>Penulis:</label>
             <input
-              type='text'
-              id='penulis'
-              name='penulis'
+              type="text"
+              id="penulis"
+              name="penulis"
               value={formData.penulis}
-              placeholder='Penulis'
+              placeholder='Penulis Artikel'
               onChange={handleChange}
               required
-              className='outline-primary rounded-md px-2 border-primary'
+              className='outline-primary rounded-md px-2 border-2 flex-1 border-primary'
             />
           </div>
         </div>
-        <div className='flex flex-col gap-1 mb-2'>
-          <label htmlFor='isi' className='text-primary font-semibold'>
-            Isi:
-          </label>
-          <textarea
-            id='isi'
-            name='isi'
-            value={formData.isi}
-            onChange={handleChange}
-            placeholder='Isi'
-            className='border-primary border-2 rounded-md h-[300px] p-2'
-          />
+        
+        <div className='flex xl:flex-row flex-col xl:gap-5 '>
+          <div className="flex flex-col gap-1 mb-2 flex-1">
+            <label htmlFor="isi" className='text-primary font-semibold'>Isi Artikel:</label>
+            <textarea
+              id="isi"
+              name="isi"
+              value={formData.isi}
+              placeholder='Isi Artikel'
+              onChange={handleChange}
+              required
+              className='outline-primary rounded-md px-2 text-[14px] border-2 border-primary  xl:h-[120px]'
+            />
+          </div>
         </div>
-        <div className='flex flex-col gap-1 mb-2'>
-          <label htmlFor='foto' className='text-primary font-semibold'>
-            Foto:
-          </label>
+        <p onClick={handleBantuan} className='cursor-pointer text-[10px] text-red-600'>*Bantuan pengisian isi artikel</p>
+        <div className="flex flex-col gap-1 mb-2">
+          <label htmlFor="foto" className='text-primary font-semibold'>Foto:</label>
           <input
-            type='file'
-            id='foto'
-            name='foto'
+            type="file"
+            id="foto"
+            name="foto"
             onChange={handleFileChange}
-            accept='image/*'
+            accept="image/*"
+            className='w-[330px]'
           />
         </div>
-        <button
-          type='submit'
-          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4'>
+        <button 
+          type="submit"
+          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4 hover:bg-secondary hover:text-primary ease-in-out duration-300 transition w-full'
+        >
           Simpan Artikel
         </button>
       </form>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+      />
     </div>
   );
 };

@@ -10,8 +10,8 @@ const SoundSystem = () => {
   useEffect(()=>{
       const fetchAllSound = async ()=>{
           try {
-             const res = await axios.get('http://localhost:8800/produk-list/sound-system')
-             setSound(res.data)
+             const res = await axios.get('https://api.pranugumproduction.com/sound-system.php')
+             setSound(res.data.produkData)
           } catch (error) {
               console.log(error)
           }
@@ -26,7 +26,7 @@ const SoundSystem = () => {
         <a href="/produk" className="text-primary text-2xl flex items-center gap-2 mb-5"><IoIosArrowRoundBack />kembali</a>
         {/* CARDS */}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xl:gap-10 ">
-            {Array.isArray(Sound) && Sound.map(produk=>(
+            {Sound.map(produk=>(
                 <>
                     {/* CARD */}
                     <ProdukCard

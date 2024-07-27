@@ -63,8 +63,19 @@ const TentangKamiSection = () => {
                         <AccordionDetails>
                             <Typography>
                                 <p className="font-rhodium text-justify">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                    1. Konsultasi :
+                                    Untuk membahas kebutuhan acara, Anda dapat berkonsultasi dengan tim Pranugum Production secara gratis, tersedia layanan 24 jam. <br />
+
+                                    2. Survey :
+                                    Jika diperlukan, tim Pranugum Production akan melakukan survei ke lokasi acara untuk memahami kebutuhan secara detail.<br />
+
+                                    3. Pengiriman dan Instalasi:
+                                    Setelah kebutuhan teridentifikasi, tim Pranugum Production akan mengirimkan produk yang disewa dan melakukan instalasi.<br />
+
+                                    4. Acara:
+                                    Setelah instalasi selesai, operator dan teknisi Pranugum Production akan siap mendukung selama acara berlangsung.<br />
+
+                                    Untuk informasi lebih lengkap terkait cara pemesanan, Anda dapat membuka halaman informasi.
                                 </p>
                             </Typography>
                         </AccordionDetails>
@@ -81,15 +92,15 @@ const TentangKamiSection = () => {
                         >
                             <Typography >
                                 <p className="font-rhodium text-primary">
-                                   Apakah Harga Sudah Termasuk Harga Sewa?
+                                Produk Apa Saja Yang Dapat Disewa?
+
                                 </p>
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
                                 <p className="font-rhodium text-justify">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                Pranugum Production menyediakan berbagai produk yang dapat disewa dalam bentuk paket yang sudah dikategorikan pada kategori Paket Produk.
                                 </p>
                             </Typography>
                         </AccordionDetails>
@@ -106,44 +117,24 @@ const TentangKamiSection = () => {
                         >
                             <Typography >
                                 <p className="font-rhodium text-primary">
-                                    Berapa Lama Proses Order?
+                                Total Harga Sudah Termasuk Apa Saja?
+
                                 </p>
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
                                 <p className="font-rhodium text-justify">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                1. Harga paket yang disewakan mencakup biaya loading, instalasi, dan unloading, serta layanan operator dan teknisi. <br />
+
+                                2. Harga sewa dapat dinegosiasikan untuk pemesanan dalam jumlah besar atau untuk jangka waktu tertentu. <br />
+
+                                Untuk informasi lebih lengkap terkait syarat dan ketentuan, Anda dapat membuka halaman informasi.
                                 </p>
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    {/* 4 */}
-                    <Accordion 
-                        className='border-2 border-primary rounded-[30px] '
-                        expanded={expanded === 'panel4'} 
-                        onChange={handleChange('panel4')}>
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        >
-                            <Typography >
-                                <p className="font-rhodium text-primary">
-                                    Apakah Harga Sudah Termasuk Operator?
-                                </p>
-                            </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography>
-                                <p className="font-rhodium text-justify">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </p>
-                            </Typography>
-                        </AccordionDetails>
-                    </Accordion>
+                    
                     
                 </div>
                 {/* <Link >

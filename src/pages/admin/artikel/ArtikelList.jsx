@@ -17,8 +17,8 @@ const ArtikelList = () => {
   useEffect(() => {
     const fetchAllArtikel = async () => {
       try {
-        const res = await axios.get("https://api.pranugumproduction.com/artikel");
-        setartikel(res.data);
+        const res = await axios.get("https://api.pranugumproduction.com/artikel.php");
+        setartikel(res.data.artikelData);
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +29,7 @@ const ArtikelList = () => {
   const handleDelete = async (id) => {
     try {
       toast.success("Berhasil Menghapus Artikel!")
-      await axios.delete('https://api.pranugumproduction.com/artikel/'+id);
+      await axios.delete('https://api.pranugumproduction.com/artikel.php?id='+id);
       setTimeout(()=>{
         window.location.reload()
       },500)
@@ -77,9 +77,9 @@ const ArtikelList = () => {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(currentArtikels) && currentArtikels.map(artikel => (
+              {currentArtikels.map(artikel => (
                 <tr className=' text-center' key={artikel.id}>
-                  <td className='p-2'><img src={artikel.foto=== 0 ?'/logo_login.png':'../backend/uploads/artikel/' + artikel.foto } alt="" className='w-[150px]'/></td>
+                  <td className='p-2'><img src={artikel.foto=== 0 ?'/logo_login.png':'https://api.pranugumproduction.com/' + artikel.foto } alt="" className='w-[150px]'/></td>
                   <td className='p-2 text-sm w-[150px]'><p>{artikel.judul}</p></td>
                   <td className='p-2'><p>{artikel.penulis}</p></td>
                   <td className='line-clamp-2 md:line-clamp-1 mt-5 px-2'><p dangerouslySetInnerHTML={{ __html: artikel.isi }}/></td>

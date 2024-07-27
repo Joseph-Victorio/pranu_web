@@ -59,11 +59,11 @@ const AddProduk = () => {
         ketentuan: '',
         foto: null,
       });
-      setIsModalOpen(false); // Close the modal after submission
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Error uploading data:', error);
       toast.error('An error occurred while processing your request.');
-      setIsModalOpen(false); // Close the modal if there's an error
+      setIsModalOpen(false); 
     }
   };
   const handleBantuan = ()=>{
@@ -84,13 +84,13 @@ const AddProduk = () => {
       <hr className='border-secondary' />
       <a 
         href="/admin/produk-list"
-        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-5 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out md:ml-5 '>
+        className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-2 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out md:ml-5 '>
           <p>&#8592;</p> <p>Kembali</p>
       </a>
       <form onSubmit={handleSubmit} className='md:ml-5 md:mx-auto md:text-[24px]'>
         <div className="flex xl:flex-row xl:gap-5 flex-col">
           {/* nama */}
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="nama_produk" className='text-primary font-semibold'>Nama Produk:</label>
             <input
               type="text"
@@ -100,12 +100,12 @@ const AddProduk = () => {
               onChange={handleChange}
               required
               placeholder='Nama Produk'
-              className='outline-primary rounded-md px-2 border-primary'
+              className='outline-primary rounded-md px-2 border-2 flex-1 border-primary'
             />
           </div>
           {/* harga */}
-          <div className="flex flex-col gap-1 mb-2">
-            <label htmlFor="harga" className='text-primary font-semibold'>Harga:</label>
+          <div className="flex flex-col gap-1 mb-2 flex-1">
+            <label htmlFor="harga" className='text-primary  font-semibold'>Harga:</label>
             <input
               type="number"
               id="harga"
@@ -113,12 +113,11 @@ const AddProduk = () => {
               value={formData.harga}
               placeholder='Harga'
               onChange={handleChange}
-              required
-              className='outline-primary rounded-md px-2 border-primary'
+              className='outline-primary rounded-md px-2 border-2 flex-1 border-primary'
             />
           </div>
           {/* kategori */}
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="kategori" className='text-primary font-semibold'>Kategori:</label>
             <select
               id="kategori"
@@ -126,7 +125,7 @@ const AddProduk = () => {
               value={formData.kategori}
               onChange={handleChange}
               required
-              className='outline-primary rounded-md px-2 border-primary'
+              className='outline-primary rounded-md px-2 border-2 flex-1 border-primary'
             >
               <option value="" hidden>Pilih Kategori</option>
               {categories.map((category, index) => (
@@ -135,9 +134,9 @@ const AddProduk = () => {
             </select>
           </div>
         </div>
-        <p onClick={handleBantuan} className='cursor-pointer text-[10px] text-red-600'>*Bantuan pengisian deskripsi dan ketentuan</p>
-        <div className='flex xl:flex-row flex-col xl:gap-5'>
-          <div className="flex flex-col gap-1 mb-2">
+        
+        <div className='flex xl:flex-row flex-col xl:gap-5 '>
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="deskripsi" className='text-primary font-semibold'>Deskripsi:</label>
             <textarea
               id="deskripsi"
@@ -146,10 +145,10 @@ const AddProduk = () => {
               placeholder='Deskripsi'
               onChange={handleChange}
               required
-              className='outline-primary rounded-md px-2 text-[14px] border-primary xl:w-[550px] xl:h-[120px]'
+              className='outline-primary rounded-md px-2 text-[14px] border-2 border-primary  xl:h-[120px]'
             />
           </div>
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="ketentuan" className='text-primary font-semibold'>Ketentuan:</label>
             <textarea
               id="ketentuan"
@@ -158,10 +157,11 @@ const AddProduk = () => {
               placeholder='Ketentuan'
               onChange={handleChange}
               required
-              className='outline-primary rounded-md px-2 border-primary xl:w-[550px] xl:h-[120px]'
+              className='outline-primary rounded-md px-2 border-primary  xl:h-[120px] border-2 '
             />
           </div>
         </div>
+        <p onClick={handleBantuan} className='cursor-pointer text-[10px] text-red-600'>*Bantuan pengisian deskripsi dan ketentuan</p>
         <div className="flex flex-col gap-1 mb-2">
           <label htmlFor="foto" className='text-primary font-semibold'>Foto:</label>
           <input
@@ -175,7 +175,7 @@ const AddProduk = () => {
         </div>
         <button 
           type="submit"
-          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4 hover:bg-secondary hover:text-primary ease-in-out duration-300 transition'
+          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4 hover:bg-secondary hover:text-primary ease-in-out duration-300 transition w-full'
         >
           Simpan Produk
         </button>

@@ -125,7 +125,6 @@ const Informasi = () => {
           <div className="bg-secondary border-2 border-primary xl:w-[900px] xl:h-[97px] rounded-[15px]">
             {Pesan && <p className=" h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 mt-4 text-primary">Cara Mudah Memesan</p>}
             {Syarat && <p className="h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 mt-4 text-primary">Syarat Dan Ketentuan</p>}
-            {Kebijakan && <p className="h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5 mt-4 text-primary">Kebijakan Privasi</p>}
             {Kontak && <p className="h-[50px] md:text-[40px] xl:text-[40px] text-[20px] text-center md:mt-5  mt-4 text-primary">Kontak Pranugum Production</p>}
           </div>
           {/* CARA PESAN */}
@@ -209,42 +208,6 @@ const Informasi = () => {
               </p><br />
               <p className='text-[10px] md:text-[20px] xl:text-[20px]'>
                 4. Pembatalan yang dilakukan saat barang sudah sampai di lokasi acara akan dikenakan biaya sewa 1 hari.
-              </p>
-            </div>
-          )}
-          {/* KEBIJAKA PRIVASI */}
-          {Kebijakan && (
-            <div className="text-[10px] md:text-[20px] xl:text-[20px] text-justify p-5">
-              <p>
-                Menyewa produk di Pranugum Production sangat mudah dan cepat. Ikuti langkah-langkah berikut untuk memastikan kamu mendapatkan semua perlengkapan acara yang dibutuhkan:
-              </p><br />
-              <p>
-                1. KLIK ITEM YANG TELAH DIPILIH<br />
-                Pilih produk atau peralatan yang kamu butuhkan dari katalog kami.
-              </p><br />
-              <p>
-                2. CEK BARANG DI KERANJANG<br />
-                Setelah memilih produk, produk akan masuk ke dalam halaman keranjang. Periksa kembali barang-barang yang telah kamu pilih untuk memastikan semuanya sesuai dengan kebutuhan.
-              </p><br />
-              <p>
-                3. ISI FORM PEMESANAN <br />
-                Lengkapi form pemesanan dengan detail acara dan informasi kontak kamu.
-              </p><br />
-              <p>
-                4. HUBUNGI ADMIN VIA WHATSAPP <br />
-                Setelah mengisi form, kamu akan diarahkan ke WhatsApp Pranugum Production untuk terhubung langsung dengan admin kami. Diskusikan kebutuhanmu dan negosiasikan harga sewa.
-              </p><br />
-              <p>
-                5. DEAL HARGA <br />
-                Setelah mencapai kesepakatan harga, kami akan mengirimkan Surat Perjanjian Kerjasama. Ini berlaku terutama jika kamu memesan semua kebutuhan produksi acara.
-              </p><br />
-              <p>
-              6. KONFIRMASI PESANAN <br />
-              Tanda tangani Surat Perjanjian Kerjasama untuk mengkonfirmasi pesananmu agar dapat kami proses pengiriman.
-              </p><br />
-              <p>
-              7. PENGIRIMAN PRODUK <br />
-              Produk yang kamu sewa akan dikirimkan sesuai dengan detail dalam surat perjanjian, memastikan semua kebutuhan acaramu terpenuhi tepat waktu.
               </p>
             </div>
           )}

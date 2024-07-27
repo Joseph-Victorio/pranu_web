@@ -147,7 +147,7 @@ const ProdukDetail = () => {
               Ketentuan Produk
             </p>
           </div>
-          <div className="text-justify p-1 h-[150px] md:h-auto overflow-y-scroll md:overflow-hidden mt-5">
+          <div className="text-justify p-1 h-[150px] md:h-[150px] overflow-y-scroll mt-5">
             {deskripsi && (
              <div dangerouslySetInnerHTML={{ __html: detail.deskripsi }} />
             )}
@@ -195,7 +195,7 @@ const ProdukDetail = () => {
           >
             <div className="sm:w-[237px] w-[237px] mx-auto">
               <img
-                src={`http://localhost/api/${ter.foto}`}
+                src={`https://api.pranugumproduction.com/${ter.foto}`}
                 alt=""
                 className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]"
               />

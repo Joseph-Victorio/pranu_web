@@ -1,16 +1,122 @@
 import React from 'react'
 import NavBiru from '../components/NavBiru'
-
+import Footer from '../components/Footer'
+import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 const Produk = () => {
+  const [Genset, setGenset] = useState([])
+  const [Paket, setPaket] = useState([])
+  const [Stage, setStage] = useState([])
+  const [Sound, setSound] = useState([])
+  const [Lighting, setLighting] = useState([])
+  const [Perlengkapan, setPerlengkapan] = useState([]);
+  const [Led, setLed] = useState([])
+
+  useEffect(() => {
+    const fetchAllGenset = async () => {
+      try {
+        const res = await axios.get("https://api.pranugumproduction.com/genset.php")
+        if (res.data.produkData) {
+          setGenset(res.data.produkData)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchAllGenset()
+  }, [])
+
+  useEffect(() => {
+    const fetchAllPaket = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/paket.php')
+        if (res.data.produkData) {
+          setPaket(res.data.produkData)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchAllPaket()
+  }, [])
+
+  useEffect(() => {
+    const fetchAllStage = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/stage.php')
+        if (res.data.produkData) {
+          setStage(res.data.produkData)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchAllStage()
+  }, [])
+
+  useEffect(() => {
+    const fetchAllSound = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/sound-system.php')
+        if (res.data.produkData) {
+          setSound(res.data.produkData)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchAllSound()
+  }, [])
+  
+
+    useEffect(()=>{
+        const fetchAllLighting = async ()=>{
+            try {
+               const res = await axios.get('https://api.pranugumproduction.com/lighting.php')
+               if (res.data.produkData) {
+                setLighting(res.data.produkData)
+              }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAllLighting()
+    },[])
+    
+
+    useEffect(() => {
+        const fetchAllPerlengkapan = async () => {
+            try {
+                const res = await axios.get("https://api.pranugumproduction.com/perlengkapan.php");
+                setPerlengkapan(res.data.produkData);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchAllPerlengkapan();
+    }, []);
+   
+
+    useEffect(()=>{
+        const fetchAllLed = async ()=>{
+            try {
+               const res = await axios.get('https://api.pranugumproduction.com/led.php')
+               if(res.data.produkData){
+                setLed(res.data.produkData)
+               }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAllLed()
+    },[])
   return (
     <>
       <NavBiru text={"Produk Kami"} />
       <p className='text-primary text-2xl xl:text-4xl px-5 xl:px-10 mt-5 font-rhodium'>Kategori</p>
-      <div className='px-4 xl:px-10 mt-5 py-5 font-rhodium'> 
+      <div className='px-4 xl:px-10 mt-2 py-5 font-rhodium'> 
         <section className="grid  grid-cols-2 md:grid-cols-4 gap-2 ">
-         
           {/* PAKET */}
           {/* CARD */}
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
@@ -24,7 +130,7 @@ const Produk = () => {
                 {/* NAMA */}
                 <p className="text-[12px] xl:text-[24px] text-primary">Paket Produk</p>
                 {/* JUMLAH PRODUK */}
-                <p className="text-tersier text-[10px]">150+ Produk</p>
+                <p className="text-tersier text-[10px]">{Paket.length} Produk</p>
               </div>
               <a
                 href="/produk-list/paket"
@@ -51,7 +157,7 @@ const Produk = () => {
                 {/* NAMA */}
                 <p className="text-[12px] text-primary md:text-[24px]">Sound System</p>
                 {/* JUMLAH PRODUK */}
-                <p className="text-tersier text-[10px]">150+ Produk</p>
+                <p className="text-tersier text-[10px]">{Sound.length} Produk</p>
               </div>
               <a
                 href="/produk-list/sound-system"
@@ -78,7 +184,7 @@ const Produk = () => {
                 {/* NAMA */}
                 <p className="text-[12px] text-primary md:text-[24px]">Stage</p>
                 {/* JUMLAH PRODUK */}
-                <p className="text-tersier text-[10px]">150+ Produk</p>
+                <p className="text-tersier text-[10px]">{Stage.length} Produk</p>
               </div>
               <a
                 href="/produk-list/stage"
@@ -105,7 +211,7 @@ const Produk = () => {
                 {/* NAMA */}
                 <p className="text-[12px] text-primary md:text-[24px]">LED Screen</p>
                 {/* JUMLAH PRODUK */}
-                <p className="text-tersier text-[10px]">150+ Produk</p>
+                <p className="text-tersier text-[10px]">{Led.length} Produk</p>
               </div>
               <a
                 href="/produk-list/led"
@@ -132,7 +238,7 @@ const Produk = () => {
                 {/* NAMA */}
                 <p className="text-[12px] text-primary md:text-[24px]">Lighting</p>
                 {/* JUMLAH PRODUK */}
-                <p className="text-tersier text-[10px]">150+ Produk</p>
+                <p className="text-tersier text-[10px]">{Lighting.length} Produk</p>
               </div>
               <a
                 href="/produk-list/lighting"
@@ -159,7 +265,7 @@ const Produk = () => {
                 {/* NAMA */}
                 <p className="text-[12px] text-primary md:text-[24px]">Genset</p>
                 {/* JUMLAH PRODUK */}
-                <p className="text-tersier text-[10px]">150+ Produk</p>
+                <p className="text-tersier text-[10px]">{Genset.length} produk</p>
               </div>
               <a
                 href="/produk-list/genset"
@@ -186,7 +292,7 @@ const Produk = () => {
                 {/* NAMA */}
                 <p className="text-[12px] text-primary md:text-[24px]">Perlengkapan</p>
                 {/* JUMLAH PRODUK */}
-                <p className="text-tersier text-[10px]">150+ Produk</p>
+                <p className="text-tersier text-[10px]">{Perlengkapan.length} Produk</p>
               </div>
               <a
                 href="/produk-list/perlengkapan"
@@ -200,11 +306,12 @@ const Produk = () => {
               </a>
             </div>
           </div>
-          
         </section>
       </div>
+      <br />
+      <Footer/>
     </>
-  );
+  )
 }
 
 export default Produk

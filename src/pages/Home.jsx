@@ -89,7 +89,7 @@ const Home = () => {
         {/* <ApaKataMereka/> */}
         </div>
         <div id='artikel'>
-        {/* <ArtikelCard/> */}
+        <ArtikelCard/>
         </div>
         <Footer/>
     </div>

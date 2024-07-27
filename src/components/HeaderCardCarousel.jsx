@@ -23,24 +23,24 @@ const HeaderCardCarousel = () => {
     setStep(step ===3 ? 1 : step + 1);
     
   }
-  const [Sound, setSound] = useState('')
-  const [Lighting, setLighting] = useState('')
-  const [Stage, setStage] = useState('')
+  const [Sound, setSound] = useState([])
+  const [Lighting, setLighting] = useState([])
+  const [Stage, setStage] = useState([])
 
   useEffect(()=>{
     const fetchSound = async ()=>{
-      const res = await axios.get('http://localhost:8800/produk-list/sound-system')
-      setSound(res.data)
+      const res = await axios.get('https://api.pranugumproduction.com/sound-system.php')
+      setSound(res.data.produkData)
     }
     
     const fetchLighting = async ()=>{
-      const res = await axios.get('http://localhost:8800/produk-list/lighting')
-      setLighting(res.data)
+      const res = await axios.get('https://api.pranugumproduction.com/lighting.php')
+      setLighting(res.data.produkData)
     }
     
     const fetchStage = async ()=>{
-      const res = await axios.get('http://localhost:8800/produk-list/stage')
-      setStage(res.data)
+      const res = await axios.get('https://api.pranugumproduction.com/stage.php')
+      setStage(res.data.produkData)
     }
 
     fetchSound()

@@ -137,7 +137,7 @@ const KeranjangBelanja = () => {
         ...form,
         pesanan: keranjangKu.join(', '),
       };
-       await axios.post('http://localhost/api/penyewa.php', updatedForm);
+       await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
      
       setForm({
         nama: '',
@@ -176,7 +176,7 @@ const KeranjangBelanja = () => {
                   <div className="flex gap-5 items-center justify-between rounded-[14px] shadow-md px-2 py-2 md:pr-5">
                     <div className="flex gap-5 items-center">
                       <img
-                        src={`http://localhost/api/${bar.value.foto}`}
+                        src={`https://api.pranugumproduction.com/${bar.value.foto}`}
                         alt=""
                         className="w-[60px] h-[60px] md:w-[100px] md:h-[100px] rounded-[14px] shadow-md"
                       />

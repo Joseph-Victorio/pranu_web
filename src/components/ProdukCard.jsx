@@ -16,7 +16,7 @@ const ProdukCard = ({ foto, kategori,nama,harga,produk_id}) => {
       {/* IMG */}
       <div className="sm:w-[237px] w-[237px] mx-auto">
         <img
-          src={"../backend/uploads/produk/" + foto}
+          src={'https://api.pranugumproduction.com/'+foto}
           alt=""
           className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]"
         />

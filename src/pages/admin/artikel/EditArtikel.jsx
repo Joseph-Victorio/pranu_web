@@ -60,7 +60,7 @@ const EditArtikel = () => {
         data.append('foto', formData.foto)
       } 
       
-      await axios.put(`http://localhost:8800/artikel/${id}`, data, {
+      await axios.put(`https://api.pranugumproduction.com/editArtikel.php`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

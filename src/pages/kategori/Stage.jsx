@@ -11,8 +11,8 @@ const Stage = () => {
     useEffect(()=>{
         const fetchAllStage = async ()=>{
             try {
-               const res = await axios.get('http://localhost:8800/produk-list/stage')
-               setStage(res.data)
+               const res = await axios.get('https://api.pranugumproduction.com/stage.php')
+               setStage(res.data.produkData)
             } catch (error) {
                 console.log(error)
             }
@@ -27,7 +27,7 @@ const Stage = () => {
         <a href="/produk" className="text-primary text-2xl flex items-center gap-2 mb-5"><IoIosArrowRoundBack />kembali</a>
         {/* CARDS */}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xl:gap-10 ">
-            {Array.isArray(Stage) && Stage.map(produk=>(
+            {Stage.map(produk=>(
                 <>
                     {/* CARD */}
                     <ProdukCard
