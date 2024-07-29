@@ -70,9 +70,9 @@ const Footer = () => {
             <div>
                 <h2 className="text-[24px] text-white mb-5">SOCIAL MEDIA</h2>
                 <div className="flex gap-2">
-                    <Link><img src="/icons/insta.svg" alt="" /></Link>
-                    <Link><img src="/icons/facebook.svg" alt="" /></Link>
-                    <Link><img src="/icons/wa.svg" alt="" /></Link>
+                    <Link to={'https://www.instagram.com/pranu.pro?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='}><img src="/icons/insta.svg" alt="" /></Link>
+                    <Link to={''}><img src="/icons/facebook.svg" alt="" /></Link>
+                    <Link to={'https://wa.me/6281295079288/'}><img src="/icons/wa.svg" alt="" /></Link>
                 </div>
             </div>
         </div>

@@ -86,7 +86,7 @@ const Home = () => {
         <YangPercaya/>
         <br />
         <div id='ulasan'>
-        {/* <ApaKataMereka/> */}
+        <ApaKataMereka/>
         </div>
         <div id='artikel'>
         <ArtikelCard/>

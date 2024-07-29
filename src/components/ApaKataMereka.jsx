@@ -47,13 +47,13 @@ const ApaKataMereka = () => {
     ]
   
   };
-  const [ulasan, setUlasan] = useState('')
+  const [ulasan, setUlasan] = useState([])
 
   useEffect(()=>{
     const fetchAllUlasan = async ()=>{
       try {
-        const res = await axios.get('http://localhost:8800/ulasan')
-        setUlasan(res.data)
+        const res = await axios.get('https://api.pranugumproduction.com/ulasan.php')
+        setUlasan(res.data.ulasanData || [])
       } catch (error) {
         console.log(error)
       }
@@ -68,15 +68,15 @@ const ApaKataMereka = () => {
     
       <Slider {...settings} >
         {/* cards */}
-        {Array.isArray(ulasan) && ulasan.map(ul=>(
+        { ulasan.map(ul=>(
           <div className="p-1" >
-          <div className=" h-[300px] border-2 border-primary rounded-[30px] p-5 " key={ul.id}>
+          <div className=" h-[300px] w-[350px] mx-auto border-2 border-primary rounded-[30px] p-5 " key={ul.id}>
             {/* PROFILE */}
             <div className="text-center">
               <img 
-                src={ul.foto === "" ?'/Logo_1.svg' :`../backend/uploads/ulasan/${ul.foto}`} 
+                src={ul.foto === "" ?'/Logo_1.svg' :`https://api.pranugumproduction.com/${ul.foto}`} 
                 alt=""
-                className="rounded-full w-[80px] mx-auto" />
+                className="rounded-full w-[80px] mx-auto border-2 border-primary" />
                 {/* NAMA */}
                 <p className="sm:text-[30px] text-primary">{ul.nama}</p>
             </div>

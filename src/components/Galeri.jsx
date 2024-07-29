@@ -43,7 +43,10 @@ const Galeri = () => {
   }
   return (
     <section className="sm:p-8 p-5">
-      <p className="text-primary text-3xl mb-7">Galeri</p>
+      <p className="text-primary text-3xl mb-5">Galeri</p>
+      <a href={'/galeri'}>
+          <p className="text-tersier mb-5 text-right hover:text-gray-600 ease-in-out duration-300">Lihat semua &#62;</p>
+        </a>
       <Slider {...settings}>
         {/* CARD */}
         <div className="p-1">

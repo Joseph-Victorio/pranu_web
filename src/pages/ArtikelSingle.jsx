@@ -38,18 +38,19 @@ const ArtikelSingle = () => {
                 <img 
                     src={'https://api.pranugumproduction.com/'+SingleArtikel.foto} 
                     alt=""
-                    className="w-full bg-cover" />
+                    className="mx-auto bg-cover w-[300px] xl:w-[400px]" />
             </div>
             {/* penulisnya */}
             <p className="text-tersier font-semibold mt-4 md:text-[20px]">Posted By {SingleArtikel.penulis}</p>
             {/* judulnya */}
-            <p className="font-bold text-left text-[36px] md:text-[40px] lg:text-[72px] mt-1">
+            <p className="font-bold text-left text-[36px] md:text-[40px] mt-1">
                 {SingleArtikel.judul}
             </p>
-        </div>
-        <div
+            <div
             dangerouslySetInnerHTML={{ __html: SingleArtikel.isi }}
-            className="px-6 mb-10 text-justify"/>
+            className="mb-10 text-justify"/>
+        </div>
+        
     
     </div>
     <Footer/>

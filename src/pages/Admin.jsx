@@ -23,8 +23,8 @@ const Admin = () => {
   useEffect(() => {
     const fetchAllPenyewa = async () => {
       try {
-        const res = await axios.get('http://localhost:8800/penyewa');
-        setPenyewa(res.data);
+        const res = await axios.get('https://api.pranugumproduction.com/penyewa.php');
+        setPenyewa(res.data.penyewa);
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses tampilan penyewa");
@@ -50,7 +50,7 @@ const Admin = () => {
         {/* Export Button */}
         <button 
           onClick={exportToExcel} 
-          className="bg-secondary text-primary p-2 rounded-md mt-4">
+          className="bg-secondary text-primary p-2 rounded-md mt-4 hover:bg-primary hover:text-secondary duration-300 ease-in-out">
           Export to Excel
         </button>
         {/* TABLE LIST */}
@@ -68,7 +68,7 @@ const Admin = () => {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(currentPenyewa) && currentPenyewa.map(penyewa => (
+              {currentPenyewa.map(penyewa => (
                 <tr className='text-center' key={penyewa.id}>
                   <td className='p-2 text-sm w-[150px]'><p>{penyewa.nama}</p></td>
                   <td className='p-2 text-sm w-[150px]'><p>{penyewa.telepon}</p></td>

@@ -115,11 +115,11 @@ const Produk = () => {
     <>
       <NavBiru text={"Produk Kami"} />
       <p className='text-primary text-2xl xl:text-4xl px-5 xl:px-10 mt-5 font-rhodium'>Kategori</p>
-      <div className='px-4 xl:px-10 mt-2 py-5 font-rhodium'> 
+      <div className='px-4 xl:px-10 mt-2 py-5 font-rhodium '> 
         <section className="grid  grid-cols-2 md:grid-cols-4 gap-2 ">
           {/* PAKET */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
               <img src="/kategori/sound.png" alt="" />
@@ -146,7 +146,7 @@ const Produk = () => {
           </div>
           {/* SOUND SYSTEM */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
               <img src="/kategori/sound.png" alt="" />
@@ -173,7 +173,7 @@ const Produk = () => {
           </div>
           {/* STAGE */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
               <img src="/kategori/stage.png" alt="" />
@@ -200,7 +200,7 @@ const Produk = () => {
           </div>
           {/* LED SCREEN */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 ">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
               <img src="/kategori/led.png" alt="" />
@@ -227,7 +227,7 @@ const Produk = () => {
           </div>
           {/* Lighting */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
               <img src="/kategori/lighting.png" alt="" />
@@ -254,7 +254,7 @@ const Produk = () => {
           </div>
           {/* GEnset */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
               <img src="/kategori/genset.png" alt="" />
@@ -281,7 +281,7 @@ const Produk = () => {
           </div>
           {/* Perlengkapan */}
           {/* CARD */}
-          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5">
+          <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
               <img src="/kategori/perlengkapan.png" alt="" />

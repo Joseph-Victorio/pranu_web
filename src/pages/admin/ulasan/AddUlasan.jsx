@@ -25,7 +25,7 @@ const AddUlasan = () => {
             data.append(key, formData[key]);
           }
     
-          await axios.post('http://localhost:8800/ulasan/', data, {
+          await axios.post('https://api.pranugumproduction.com/ulasan.php', data, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

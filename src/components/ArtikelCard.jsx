@@ -60,7 +60,7 @@ const ArtikelCard = () => {
   }, []);
 
   return (
-    <section className="font-rhodium p-5 sm:px-[75px] mb-10">
+    <section className="font-rhodium p-5 sm:px-[75px] mb-10" id="artikel">
       <h2 className="text-primary text-[24px] sm:text-[40px] text-center mb-5">
         Artikel
       </h2>
@@ -70,28 +70,28 @@ const ArtikelCard = () => {
         {artikel.length > 0 ? (
           artikel.map((art) => (
             <div className="p-1" key={art.id}>
-              <div className="card border-2 border-primary bg-white rounded-[30px] p-5 shadow-sm h-[500px]">
+              <div className="card border-2 border-primary bg-white rounded-[30px] p-5 shadow-sm h-[400px] w-[350px] mx-auto">
                 {/* PROFILE */}
                 <div className="text-center">
                   <div className="relative mb-10">
                     <img
                       src={art.foto === null ? "/Logo_1.svg" : `https://api.pranugumproduction.com/${art.foto}`}
                       alt=""
-                      className="w-[250px] mx-auto"
+                      className="w-[288px] mx-auto h-[144px] rounded-lg"
                     />
-                    <Link
-                      to={`/artikel/${art.id}`}
+                    <a
+                      href={`/artikel/${art.id}`}
                       className="absolute bottom-[-20px] left-[50%] translate-x-[-50%]"
                     >
                       <DiagonalBtn2 />
-                    </Link>
+                    </a>
                   </div>
                   {/* NAMA & ISI*/}
                   <p className="sm:text-[20px] text-primary">{art.nama}</p>
                   <br />
                   <div
                     dangerouslySetInnerHTML={{ __html: art.isi }}
-                    className="line-clamp-2"
+                    className="line-clamp-5 text-justify"
                   />
                 </div>
               </div>

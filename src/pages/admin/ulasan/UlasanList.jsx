@@ -17,8 +17,8 @@ const UlasanList = () => {
   useEffect(() => {
     const fetchAllUlasan = async () => {
       try {
-        const res = await axios.get("https://api.pranugumproduction.com/ulasan");
-        setUlasan(res.data);
+        const res = await axios.get("https://api.pranugumproduction.com/ulasan.php");
+        setUlasan(res.data.ulasanData);
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +29,7 @@ const UlasanList = () => {
   const handleDelete = async (id) => {
     try {
       toast.success("Berhasil Menghapus Ulasan!")
-      await axios.delete('https://api.pranugumproduction.com/ulasan/'+id);
+      await axios.delete('https://api.pranugumproduction.com/ulasan.php?id='+id);
       setTimeout(()=>{
         window.location.reload()
       },200)
@@ -75,9 +75,9 @@ const UlasanList = () => {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(currentulasans) && currentulasans.map(ulasan => (
+              {currentulasans.map(ulasan => (
                 <tr className=' text-center' key={ulasan.id}>
-                  <td className='p-2'><img src={ulasan.foto=== 0 ?'/logo_login.png':'../backend/uploads/ulasan/' + ulasan.foto } alt="" className='w-[150px]'/></td>
+                  <td className='p-2'><img src={ulasan.foto=== 0 ?'/logo_login.png':'https://api.pranugumproduction.com/' + ulasan.foto } alt="" className='w-[150px]'/></td>
                   <td className='p-2 text-sm w-[150px]'><p>{ulasan.nama}</p></td>
                   <td className='line-clamp-2 md:line-clamp-2 xl:line-clamp-2 mt-5 px-2 w-[200px]'><p className='line-clamp-2'>{ulasan.ulasan}</p></td>
                   <td className=' p-2'>

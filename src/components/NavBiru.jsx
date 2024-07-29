@@ -28,22 +28,22 @@ const NavBiru = ({text}) => {
                 <div className='flex items-center text-[20px] gap-10 '>
               <NavLink
                     to='/'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
+                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "hover:border-b-2 hover:border-white  ease-in-out duration-200 p-1")}>
                     Beranda
               </NavLink>
               <NavLink
                     to='/tentang-kami'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
+                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "hover:border-b-2 hover:border-white  ease-in-out duration-200 p-1")}>
                     Tentang Kami
               </NavLink>
               <NavLink
                     to='/produk'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
+                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "hover:border-b-2 hover:border-white  ease-in-out duration-200 p-1")}>
                     Produk
               </NavLink>
               <NavLink
                     to='/informasi'
-                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
+                    className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "hover:border-b-2 hover:border-white  ease-in-out duration-200 p-1")}>
                     Informasi
               </NavLink>
               

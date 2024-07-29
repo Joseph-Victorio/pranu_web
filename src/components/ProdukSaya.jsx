@@ -38,9 +38,9 @@ const ProdukSaya = () => {
         <h2 className="text-[30px] text-primary">Produk Kami</h2>
 
         {/* lihatsemua */}
-        <Link to={'/produk'}>
+        <a href={'/produk'}>
           <p className="text-tersier mb-5 text-right">Lihat semua &#62;</p>
-        </Link>
+        </a>
         {/* CARDS */}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xl:gap-10">
           {Array.isArray(produks) && produks.map(produk => (

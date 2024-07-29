@@ -24,7 +24,7 @@ const AddGaleri = () => {
             data.append(key, formData[key]);
           }
     
-          await axios.post('http://localhost:8800/galeri', data, {
+          await axios.post('https://api.pranugumproduction.com/galeri.php', data, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

@@ -17,8 +17,8 @@ const GaleriList = () => {
     useEffect(() => {
       const fetchAllGaleri = async () => {
         try {
-          const res = await axios.get("http://localhost:8800/galeri");
-          setGaleri(res.data);
+          const res = await axios.get("https://api.pranugumproduction.com/galeri.php");
+          setGaleri(res.data.galeriData);
         } catch (error) {
           console.log(error);
         }
@@ -29,7 +29,7 @@ const GaleriList = () => {
     const handleDelete = async (id) => {
       try {
         toast.success("Berhasil Menghapus Foto!")
-        await axios.delete('http://localhost:8800/galeri/'+id);
+        await axios.delete('https://api.pranugumproduction.com/galeri.php?id='+id);
         setTimeout(()=>{
           window.location.reload()
         },500)
@@ -75,9 +75,9 @@ const GaleriList = () => {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(currentgaleris) && currentgaleris.map(foto => (
+              { currentgaleris.map(foto => (
                 <tr className=' text-center' key={foto.id}>
-                  <td className='p-2'><img src={foto.foto=== 0 ?'/logo_login.png':'../backend/uploads/galeri/' + foto.foto } alt="" className='w-[150px]'/></td>
+                  <td className='p-2'><img src={foto.foto=== 0 ?'/logo_login.png':'https://api.pranugumproduction.com/' + foto.foto } alt="" className='w-[150px]'/></td>
                   <td className='p-2 text-sm w-[150px]'><p>{foto.nama}</p></td>
                   <td className='p-2'><p>{foto.tanggal}</p></td>
                   <td className=' p-2'>

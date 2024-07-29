@@ -33,6 +33,7 @@ import Stage from "./pages/kategori/Stage";
 import Paket from "./pages/kategori/Paket";
 import Perlengkapan from "./pages/kategori/Perlengkapan";
 import Led from "./pages/kategori/Led";
+import Galeri from "./pages/Galeri";
 
 function App() {
  
@@ -48,6 +49,7 @@ function App() {
       <Route path="/produk" element={<Produk/>}/>
       <Route path="/informasi" element={<Informasi/>}/>
       <Route path="/keranjang" element={<KeranjangBelanja/>}/>
+      <Route path="/galeri" element={<Galeri/>}/>
 
        {/* Single Artikel */}
        <Route path="/artikel/:id" element={<ArtikelSingle/>}/>

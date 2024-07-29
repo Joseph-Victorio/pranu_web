@@ -37,22 +37,22 @@ const Navbar = () => {
             <div className='flex items-center text-[20px] gap-10 '>
            <NavLink
                 to='/'
-                className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
+                className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "p-1")}>
                 Beranda
            </NavLink>
            <NavLink
                 to='/tentang-kami'
-                className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "")}>
+                className={({isActive}) =>(isActive ? 'border-b-2 border-white p-1': "hover:border-b-2 hover:border-primary hover:p-1 ease-in-out duration-300 p-1")}>
                 Tentang Kami
            </NavLink>
            <NavLink
                 to='/produk'
-                className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
+                className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "hover:border-b-2 hover:border-primary hover:p-1 ease-in-out duration-300 p-1")}>
                 Produk
            </NavLink>
            <NavLink
                 to='/informasi'
-                className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "")}>
+                className={({isActive}) =>(isActive ? 'border-b-2 border-primary p-1': "hover:border-b-2 hover:border-primary hover:p-1 ease-in-out duration-300  p-1")}>
                 Informasi
            </NavLink>
            
