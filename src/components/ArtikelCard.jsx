@@ -73,7 +73,7 @@ const ArtikelCard = () => {
               <div className="card border-2 border-primary bg-white rounded-[30px] p-5 shadow-sm h-[400px] w-[350px] mx-auto">
                 {/* PROFILE */}
                 <div className="text-center">
-                  <div className="relative mb-10">
+                  <div className="relative mb-8">
                     <img
                       src={art.foto === null ? "/Logo_1.svg" : `https://api.pranugumproduction.com/${art.foto}`}
                       alt=""
@@ -87,8 +87,8 @@ const ArtikelCard = () => {
                     </a>
                   </div>
                   {/* NAMA & ISI*/}
-                  <p className="sm:text-[20px] text-primary">{art.nama}</p>
-                  <br />
+                  <p className="sm:text-[14px] text-primary text-left">{art.judul}</p>
+                 <br />
                   <div
                     dangerouslySetInnerHTML={{ __html: art.isi }}
                     className="line-clamp-5 text-justify"
