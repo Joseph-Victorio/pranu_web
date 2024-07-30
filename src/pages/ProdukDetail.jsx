@@ -119,11 +119,12 @@ const ProdukDetail = () => {
             {detail.nama_produk}
           </p>
           <p className="text-tersier">Kategori: {detail.kategori}</p>
+          {detail.kategori === 'Paket Produk' && (
           <p className="text-[24px] md:text-[36px] text-secondary md:mt-5">
             {formatCurrencyIDR(detail.harga)}
             <span className="text-gray-500 font-normal">/hari</span>
           </p>
-
+          )}
           {/* deskripsi */}
           <div className="flex">
             <p
@@ -147,7 +148,7 @@ const ProdukDetail = () => {
               Ketentuan Produk
             </p>
           </div>
-          <div className="text-justify p-1 h-[150px] md:h-[150px] overflow-y-scroll mt-5">
+          <div className={detail.kategori==='Paket Produk' ? 'text-justify p-1 h-[150px] md:h-[150px] overflow-y-scroll mt-5' : 'text-justify p-1 h-[150px] md:h-[200px] overflow-y-scroll mt-5'}>
             {deskripsi && (
              <div dangerouslySetInnerHTML={{ __html: detail.deskripsi }} />
             )}
@@ -155,7 +156,9 @@ const ProdukDetail = () => {
               <div dangerouslySetInnerHTML={{ __html: detail.ketentuan }} />
             )}
           </div>
-          {/* tombol tambah */}
+          {detail.kategori === 'Paket Produk' && (
+            <>
+              {/* tombol tambah */}
           <div className="flex gap-5 items-center mt-5">
             <div className="flex items-center border-primary border-2 rounded-3xl w-[120px] md:w-[170px] justify-between">
               <button
@@ -182,6 +185,8 @@ const ProdukDetail = () => {
               Tambahkan
             </button>
           </div>
+            </>
+          )}
         </div>
       </div>
       {/* BAWAH */}
@@ -189,7 +194,8 @@ const ProdukDetail = () => {
       <p className="text-primary text-[24px] md:text-[36px] p-5">Produk Terkait</p>
       <div className="flex overflow-x-scroll gap-5 p-5 mb-5">
         {terkait.map((ter) => (
-          <div
+          ter.kategori === 'Paket Produk' ? (
+            <div
             key={ter.id}
             className="w-[152px] h-[220px] md:w-[289px] md:h-[420px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto"
           >
@@ -208,7 +214,7 @@ const ProdukDetail = () => {
                 {ter.nama_produk}
               </p>
               <p className="text-secondary text-[10px] md:text-[18px] mt-1">
-                Rp {ter.harga}
+               {formatCurrencyIDR(ter.harga)}
                 <span className="text-tersier">/hari</span>
               </p>
               <a href={`/produk/${ter.id}`}>
@@ -218,6 +224,34 @@ const ProdukDetail = () => {
               </a>
             </div>
           </div>
+          ): (
+            <div
+            key={ter.id}
+            className="w-[152px] h-[220px] md:w-[289px] md:h-[420px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto"
+          >
+            <div className="sm:w-[237px] w-[237px] mx-auto">
+              <img
+                src={`https://api.pranugumproduction.com/${ter.foto}`}
+                alt=""
+                className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]"
+              />
+            </div>
+            <div className="w-[237px] mx-auto">
+              <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">
+                {ter.kategori}
+              </p>
+              <p className="text-[10px] md:text-[18px] text-primary mt-1">
+                {ter.nama_produk}
+              </p>
+              
+              <a href={`/produk/${ter.id}`}>
+                <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-16 md:text-[14px] hover:bg-secondary duration-300 ease-in-out">
+                  Lihat Detail Produk
+                </button>
+              </a>
+            </div>
+          </div>
+          )
         ))}
       </div>
       <Footer />

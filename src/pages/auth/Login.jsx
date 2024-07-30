@@ -67,12 +67,20 @@ const Login = () => {
             // Compare hashed password with stored hashed password
             const isMatch = await bcrypt.compare(passValue.password, formData[0].pass);
             if (isMatch && idAdmin === formData[0].username) {
+                const login = async ()=>{
+                    await axios.post('https://api.pranugumproduction.com/login.php', {
+                        username: idAdmin,
+                        login: "TRUE"
+                    })
+                }
+                login()
                 toast.success("Berhasil Login!")
                 setTimeout(()=>{
                     window.location.href="/admin/dashboard"
                 }, 1000)
             } else {
                 console.log('Password salah');
+                toast.error('Username atau Password Salah')
             }
         } catch (error) {
             console.error('Error during login:', error);

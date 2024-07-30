@@ -13,31 +13,28 @@ import { useState } from 'react'
 const Informasi = () => {
   const [Pesan, setPesan] = useState(true)
   const [Syarat, setSyarat] = useState(false)
-  const [Kebijakan, setKebijakan] = useState(false)
   const [Kontak, setKontak] = useState(false)
 
   const pesanHandle = () => {
     setPesan(true)
     setSyarat(false)
-    setKebijakan(false)
+    
+
     setKontak(false)
   }
   const syaratHandle = () => {
     setPesan(false)
     setSyarat(true)
-    setKebijakan(false)
+    
+
     setKontak(false)
   }
-  const kebijakanHandle = () => {
-    setPesan(false)
-    setSyarat(false)
-    setKontak(false)
-    setKebijakan(true)
-  }
+ 
   const kontakHandle = () => {
     setPesan(false)
     setSyarat(false)
-    setKebijakan(false)
+    
+
     setKontak(true)
   }
 
@@ -104,11 +101,6 @@ const Informasi = () => {
               <button onClick={syaratHandle}>
                 <p className={Syarat ? 'text-primary text-[10px] md:text-[20px] xl:text-[20px] text-left' : 'text-tersier text-[10px] md:text-[20px] xl:text-[20px] text-left'}>
                   Syarat & Ketentuan
-                </p>
-              </button>
-              <button onClick={kebijakanHandle}>
-                <p className={Kebijakan ? 'text-primary text-[10px] md:text-[20px] xl:text-[20px] text-left' : 'text-tersier text-[10px] md:text-[20px] xl:text-[20px] text-left'}>
-                  Kebijakan Privasi
                 </p>
               </button>
               <button onClick={kontakHandle}>

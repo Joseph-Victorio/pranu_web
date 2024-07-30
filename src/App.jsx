@@ -34,6 +34,9 @@ import Paket from "./pages/kategori/Paket";
 import Perlengkapan from "./pages/kategori/Perlengkapan";
 import Led from "./pages/kategori/Led";
 import Galeri from "./pages/Galeri";
+import Register from "./pages/auth/Register";
+import Perduan from "./pages/admin/kelola/Perduan";
+import Penyewa from "./pages/admin/kelola/Penyewa";
 
 function App() {
  
@@ -67,6 +70,7 @@ function App() {
       
       
         <Route path="/admin/login" element={<Login/>}/>
+        <Route path="/admin/register" element={<Register/>}/>
         <Route path="/admin/dashboard" element={<Admin/>}/>
 
       {/* rute produk */}
@@ -86,6 +90,10 @@ function App() {
         {/* Rute galeri */}
         <Route  path="/admin/galeri-list" element={<GaleriList/>}/>
         <Route  path="/admin/add-galeri" element={<AddGaleri/>}/>
+
+        {/* rute pengaduan & penyewa*/}
+        <Route path="/admin/pertanyaan-pengaduan" element={<Perduan/>}/>
+        <Route path="/admin/penyewa" element={<Penyewa/>}/>
       
     </Routes>
     

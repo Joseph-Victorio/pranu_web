@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import toast from "react-hot-toast"
+import { useNavigate } from 'react-router-dom'
 
 import SideNav from '../../../components/admin/SideNav'
 
@@ -13,6 +14,33 @@ const UlasanList = () => {
   const [ulasans, setUlasan] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5); //atur paginationnya
+
+  const [permission, setPermission] = useState([]);
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/admin.php');
+        setPermission(res.data.userAdmin);
+      } catch (error) {
+        console.log(error);
+        toast.error("Terjadi error saat memproses data admin");
+      }
+    };
+    fetchAdmin();
+  }, []);
+
+  useEffect(() => {
+    // Redirect if the user does not have permission
+    const checkPermission = () => {
+      const userHasAccess = permission.some(p => p.login === "TRUE");
+      if (userHasAccess === "FALSE") {
+        navigate('/'); // Correctly use navigate function
+      }
+    };
+    checkPermission();
+  }, [permission, navigate]);
 
   useEffect(() => {
     const fetchAllUlasan = async () => {

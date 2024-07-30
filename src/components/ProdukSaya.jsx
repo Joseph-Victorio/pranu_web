@@ -44,31 +44,57 @@ const ProdukSaya = () => {
         {/* CARDS */}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xl:gap-10">
           {Array.isArray(produks) && produks.map(produk => (
+           produk.kategori === 'Paket Produk' ? (
             <div className="w-[152px] h-[220px] md:w-[289px] md:h-[400px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto" key={produk.id}>
-              {/* IMG */}
-              <div className="sm:w-[237px] w-[237px] mx-auto">
-                <img 
-                  src={`https://api.pranugumproduction.com/${produk.foto}`} 
-                  alt={produk.nama_produk}
-                  className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]" 
-                />
-              </div>
-
-              {/* CONTENT */}
-              <div className="w-[237px] mx-auto">
-                {/* CATEGORY */}
-                <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">{produk.kategori}</p>
-                {/* NAMA */}
-                <p className="text-[10px] md:text-[18px] text-primary mt-1">{produk.nama_produk}</p>
-                {/* HARGA SEWA */}
-                <p className="text-secondary text-[10px] md:text-[18px] mt-1">{formatCurrencyIDR( produk.harga)}<span className="text-tersier">/hari</span></p>
-                <a href={`/produk/${produk.id}`}>
-                  <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-2 md:text-[14px] hover:bg-secondary ease-in-out transition duration-300 ">
-                    Tambahkan
-                  </button>
-                </a>
-              </div>
+            {/* IMG */}
+            <div className="sm:w-[237px] w-[237px] mx-auto">
+              <img 
+                src={`https://api.pranugumproduction.com/${produk.foto}`} 
+                alt={produk.nama_produk}
+                className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]" 
+              />
             </div>
+
+            {/* CONTENT */}
+            <div className="w-[237px] mx-auto">
+              {/* CATEGORY */}
+              <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">{produk.kategori}</p>
+              {/* NAMA */}
+              <p className="text-[10px] md:text-[18px] text-primary mt-1">{produk.nama_produk}</p>
+              {/* HARGA SEWA */}
+              <p className="text-secondary text-[10px] md:text-[18px] mt-1">{formatCurrencyIDR( produk.harga)}<span className="text-tersier">/hari</span></p>
+              <a href={`/produk/${produk.id}`}>
+                <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-2 md:text-[14px] hover:bg-secondary ease-in-out transition duration-300 ">
+                  Tambahkan
+                </button>
+              </a>
+            </div>
+          </div>
+           ):(
+            <div className="w-[152px] h-[220px] md:w-[289px] md:h-[400px] xl:w-[280px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-2 bg-white mx-auto" key={produk.id}>
+            {/* IMG */}
+            <div className="sm:w-[237px] w-[237px] mx-auto">
+              <img 
+                src={`https://api.pranugumproduction.com/${produk.foto}`} 
+                alt={produk.nama_produk}
+                className="w-[132px] h-[117.89px] md:w-[237px] md:h-[216px] rounded-[15px]" 
+              />
+            </div>
+
+            {/* CONTENT */}
+            <div className="w-[237px] mx-auto">
+              {/* CATEGORY */}
+              <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">{produk.kategori}</p>
+              {/* NAMA */}
+              <p className="text-[10px] md:text-[18px] text-primary mt-1">{produk.nama_produk}</p>
+              <a href={`/produk/${produk.id}`}>
+                <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-10 md:text-[14px] hover:bg-secondary ease-in-out  duration-300 ">
+                  Lihat Detail Produk
+                </button>
+              </a>
+            </div>
+          </div>
+           )
           ))}
         </div>
       </section>

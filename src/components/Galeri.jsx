@@ -42,7 +42,7 @@ const Galeri = () => {
   
   }
   return (
-    <section className="sm:p-8 p-5">
+    <section className="sm:p-8 p-5 font-rhodium">
       <p className="text-primary text-3xl mb-5">Galeri</p>
       <a href={'/galeri'}>
           <p className="text-tersier mb-5 text-right hover:text-gray-600 ease-in-out duration-300">Lihat semua &#62;</p>

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import toast from "react-hot-toast";
-import Modal from '../../../components/Modal'; // Make sure the path is correct
+import Modal from '../../../components/Modal'; 
+
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
   'Paket Produk',
@@ -23,6 +25,32 @@ const AddProduk = () => {
     foto: null,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [permission, setPermission] = useState([]);
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/admin.php');
+        setPermission(res.data.userAdmin);
+      } catch (error) {
+        console.log(error);
+        toast.error("Terjadi error saat memproses data admin");
+      }
+    };
+    fetchAdmin();
+  }, []);
+
+  useEffect(() => {
+    // Redirect if the user does not have permission
+    const checkPermission = () => {
+      const per = permission.map(p => p.login === "TRUE");
+      if (per !== "TRUE") {
+        navigate('/'); // Correctly use navigate function
+      }
+    };
+    checkPermission();
+  }, [permission, navigate]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

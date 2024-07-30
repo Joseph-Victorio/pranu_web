@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddUlasan = () => {
     const [formData, setFormData] = useState({
@@ -8,6 +9,32 @@ const AddUlasan = () => {
         ulasan: '',
         foto: 'no-image.jpeg',
       });
+      const [permission, setPermission] = useState([]);
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/admin.php');
+        setPermission(res.data.userAdmin);
+      } catch (error) {
+        console.log(error);
+        toast.error("Terjadi error saat memproses data admin");
+      }
+    };
+    fetchAdmin();
+  }, []);
+
+  useEffect(() => {
+    // Redirect if the user does not have permission
+    const checkPermission = () => {
+      const userHasAccess = permission.some(p => p.login === "TRUE");
+      if (userHasAccess === "FALSE") {
+        navigate('/'); // Correctly use navigate function
+      }
+    };
+    checkPermission();
+  }, [permission, navigate]);
     
       const handleChange = (e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

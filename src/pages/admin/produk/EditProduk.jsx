@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
-import Modal from '../../../components/Modal'; // Make sure the path is correct
+import { useParams, useNavigate } from 'react-router-dom';
+import Modal from '../../../components/Modal'; 
 
 const categories = [
   'Paket Produk',
@@ -26,6 +26,32 @@ const EditProduk = () => {
     foto: 'no-image.jpeg', // Default photo if none provided
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [permission, setPermission] = useState([]);
+  const navigate = useNavigate(); 
+  
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/admin.php');
+        setPermission(res.data.userAdmin);
+      } catch (error) {
+        console.log(error);
+        toast.error("Terjadi error saat memproses data admin");
+      }
+    };
+    fetchAdmin();
+  }, []);
+
+  useEffect(() => {
+    // Redirect if the user does not have permission
+    const checkPermission = () => {
+      const userHasAccess = permission.some(p => p.login === "TRUE");
+      if (userHasAccess === "FALSE") {
+        navigate('/'); // Correctly use navigate function
+      }
+    };
+    checkPermission();
+  }, [permission, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -122,7 +148,7 @@ const EditProduk = () => {
       <form onSubmit={handleSubmit} className='md:ml-5 md:mx-auto md:text-[24px]'>
         <div className="flex xl:flex-row xl:gap-5 flex-col">
           {/* nama */}
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="nama_produk" className='text-primary font-semibold'>Nama Produk:</label>
             <input
               type="text"
@@ -132,11 +158,11 @@ const EditProduk = () => {
               onChange={handleChange}
               required
               placeholder='Nama Produk'
-              className='outline-primary rounded-md px-2 border-primary'
+              className='outline-primary rounded-md px-2 border-2 border-primary flex-1'
             />
           </div>
           {/* harga */}
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="harga" className='text-primary font-semibold'>Harga:</label>
             <input
               type="number"
@@ -145,19 +171,19 @@ const EditProduk = () => {
               value={formData.harga}
               placeholder='Harga'
               onChange={handleChange}
-              required
-              className='outline-primary rounded-md px-2 border-primary'
+              className='outline-primary rounded-md px-2 border-2 border-primary flex-1'
             />
           </div>
           {/* kategori */}
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="kategori" className='text-primary font-semibold'>Kategori:</label>
             <select
               id="kategori"
               name="kategori"
               value={formData.kategori}
               onChange={handleChange}
-              className='outline-primary rounded-md px-2 border-primary'
+              required
+              className='outline-primary rounded-md px-2 border-2 border-primary flex-1'
             >
               <option value="" hidden>Pilih Kategori</option>
               {categories.map((category, index) => (
@@ -166,9 +192,9 @@ const EditProduk = () => {
             </select>
           </div>
         </div>
-        <p onClick={handleBantuan} className='cursor-pointer text-[10px] text-red-600'>*Bantuan pengisian deskripsi dan ketentuan</p>
+        
         <div className='flex xl:flex-row flex-col xl:gap-5'>
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="deskripsi" className='text-primary font-semibold'>Deskripsi:</label>
             <textarea
               id="deskripsi"
@@ -177,10 +203,10 @@ const EditProduk = () => {
               placeholder='Deskripsi'
               onChange={handleChange}
               required
-              className='outline-primary rounded-md px-2 text-[14px] border-primary xl:w-[550px] xl:h-[120px]'
+              className='outline-primary rounded-md px-2 text-[14px] border-2 border-primary xl:h-[120px]'
             />
           </div>
-          <div className="flex flex-col gap-1 mb-2">
+          <div className="flex flex-col gap-1 mb-2 flex-1">
             <label htmlFor="ketentuan" className='text-primary font-semibold'>Ketentuan:</label>
             <textarea
               id="ketentuan"
@@ -189,10 +215,11 @@ const EditProduk = () => {
               placeholder='Ketentuan'
               onChange={handleChange}
               required
-              className='outline-primary rounded-md px-2 border-primary xl:w-[550px] xl:h-[120px]'
+              className='outline-primary rounded-md px-2 border-2 border-primary xl:h-[120px]'
             />
           </div>
         </div>
+        <p onClick={handleBantuan} className='cursor-pointer text-[10px] text-red-600'>*Bantuan pengisian deskripsi dan ketentuan</p>
         <div className="flex flex-col gap-1 mb-2">
           <label htmlFor="foto" className='text-primary font-semibold'>Foto:</label>
           <input
@@ -209,13 +236,13 @@ const EditProduk = () => {
             <img
               src={currentFoto}
               alt='Current'
-              className='w-[100px]'
+              className='w-[100px] h-[100px] object-cover'
             />
           </div>
         )}
         <button
           type="submit"
-          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4 hover:bg-secondary hover:text-primary ease-in-out duration-300 transition'
+          className='px-6 py-2 bg-primary text-secondary rounded-md mt-4 hover:bg-secondary hover:text-primary ease-in-out duration-300 transition w-full'
         >
           Edit Produk
         </button>

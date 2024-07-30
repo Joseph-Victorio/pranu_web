@@ -7,11 +7,39 @@ import { BsTrash } from 'react-icons/bs';
 import { FaPencil } from "react-icons/fa6"
 
 import SideNav from '../../../components/admin/SideNav';
+import { useNavigate } from 'react-router-dom';
 
 const ProdukList = () => {
   const [produks, setProduk] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5); 
+  const [permission, setPermission] = useState([]);
+  const navigate = useNavigate(); // Correctly initialize useNavigate
+
+  // Fetch permissions and redirect if necessary
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/admin.php');
+        setPermission(res.data.userAdmin);
+      } catch (error) {
+        console.log(error);
+        toast.error("Terjadi error saat memproses data admin");
+      }
+    };
+    fetchAdmin();
+  }, []);
+
+  useEffect(() => {
+    // Redirect if the user does not have permission
+    const checkPermission = () => {
+      const userHasAccess = permission.some(p => p.login === "TRUE");
+      if (userHasAccess === "FALSE") {
+        navigate('/'); // Correctly use navigate function
+      }
+    };
+    checkPermission();
+  }, [permission, navigate]);
   useEffect(() => {
     const fetchAllProduk = async () => {
       try {

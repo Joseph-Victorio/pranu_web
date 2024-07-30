@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const EditUlasan = () => {
     const { id } = useParams()
@@ -12,6 +13,31 @@ const EditUlasan = () => {
       ulasan: '',
       foto: null
     })
+    const [permission, setPermission] = useState([]);
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      try {
+        const res = await axios.get('https://api.pranugumproduction.com/admin.php');
+        setPermission(res.data.userAdmin);
+      } catch (error) {
+        console.log(error);
+        toast.error("Terjadi error saat memproses data admin");
+      }
+    };
+    fetchAdmin();
+  }, []);
+
+  useEffect(() => {
+    const checkPermission = () => {
+      const userHasAccess = permission.some(p => p.login === "TRUE");
+      if (userHasAccess === "FALSE") {
+        navigate('/'); 
+      }
+    };
+    checkPermission();
+  }, [permission, navigate]);
     
   
     useEffect(() => {

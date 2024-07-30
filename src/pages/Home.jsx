@@ -30,7 +30,7 @@ const Home = () => {
             <p className='mt-5 text-justify'>Percayakan pada kami untuk solusi terbaik dan produk berkualitas yang akan membuat acaramu berkesan. Yuk, temukan layanan terbaik dan produk terbaik untuk acaramu, di Pranugum Production!.</p>
             <Link
               to='/produk'
-              className='bg-primary rounded-full w-[274px] text-white px-6 py-4 flex gap-1 items-center text-[22px] mt-5 hover:bg-hover transition ease-in-out duration-300'>
+              className='bg-primary rounded-full w-[274px] text-white px-6 py-4 flex gap-1 items-center text-[22px] mt-5 hover:bg-secondary ease-in-out duration-300'>
                 <p className='mx-auto'>Sewa Sekarang</p>
                 <img src="/icons/right.svg" alt="" />
             </Link>
