@@ -81,36 +81,36 @@ const ArtikelList = () => {
     <div className='flex gap-5 mt-20 sm:mt-0'>
       <SideNav />
       {/* KANAN */}
-      <div className='font-rhodium text-primary xl:p-5 mt-2 w-full md:ml-[250px]'>
+      <div className='font-rhodium text-primary px-5 w-full md:ml-[250px]'>
         <p className='text-3xl p-5'>List Artikel</p>
         <hr className='border-primary border-b-2 ' />
         <Link
           to={'/admin/add-artikel'}
-          className='float-right'>
+          className='flex justify-end px-4 mt-2'>
           <p className='mt-3 bg-primary text-secondary px-6 py-2 md:w-[200px] w-[200px] text-center rounded-md m-2'>
             Tambah artikel
           </p>
         </Link>
 
         {/* TABLE LIST */}
-        <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[800px] lg:overflow-x-scroll p-3'>
-          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[750px] md:w-[750px] mx-auto '>
+        <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[1000px] lg:overflow-x-scroll p-3'>
+          <table className='rounded-md ring-2 ring-primary border-collapse  w-[950px]  mx-auto '>
             <thead>
               <tr className=' bg-secondary rounded-md ring-2 ring-primary'>
-                <th className=' bg-secondary rounded-l-md p-2 w-[100px] md:text-[14px]'>foto</th>
-                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 '>Judul Artikel</th>
-                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] '>Nama Penulis</th>
-                <th className=' bg-secondary p-2 md:text-[14px] md:px-6'>Isi</th>
-                <th className=' bg-secondary rounded-r-md p-2 md:text-[14px] md:px-6'>Aksi</th>
+                <th className=' bg-secondary rounded-l-md p-2 w-[100px] md:text-[14px] border-r-2 border-primary'>foto</th>
+                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 border-r-2 border-primary'>Judul Artikel</th>
+                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary'>Nama Penulis</th>
+                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 border-r-2 border-primary'>Isi</th>
+                <th className=' bg-secondary rounded-r-md p-2 md:text-[14px] md:px-6 '>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {currentArtikels.map(artikel => (
                 <tr className=' text-center' key={artikel.id}>
-                  <td className='p-2'><img src={artikel.foto=== 0 ?'/logo_login.png':'https://api.pranugumproduction.com/' + artikel.foto } alt="" className='w-[150px]'/></td>
-                  <td className='p-2 text-sm w-[150px]'><p>{artikel.judul}</p></td>
-                  <td className='p-2'><p>{artikel.penulis}</p></td>
-                  <td className='line-clamp-2 md:line-clamp-1 mt-5 px-2'><p dangerouslySetInnerHTML={{ __html: artikel.isi }}/></td>
+                  <td className='p-2 border-r-2 border-primary w-[150px]'><img src={artikel.foto=== 0 ?'/logo_login.png':'https://api.pranugumproduction.com/' + artikel.foto } alt="" className='w-[150px]'/></td>
+                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{artikel.judul}</p></td>
+                  <td className='p-2 border-r-2 border-primary'><p>{artikel.penulis}</p></td>
+                  <td className=' mt-5 px-2 border-r-2 border-primary'><p dangerouslySetInnerHTML={{ __html: artikel.isi }} className='line-clamp-2 md:line-clamp-3'/></td>
                   <td className=' p-2'>
                     <div
                       className='flex gap-2 '>
@@ -128,7 +128,7 @@ const ArtikelList = () => {
               ))}
             </tbody>
           </table>
-          
+          <hr className='border-b-2 border-primary mt-5 mx-3'/>
         </div>
         <ReactPaginate
               previousLabel={"Previous"}
@@ -138,7 +138,7 @@ const ArtikelList = () => {
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
               onPageChange={handlePageClick}
-              containerClassName={"pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 md:ml-14 ml-5"}
+              containerClassName={"pagination flex justify-between w-[300px]  text-secondary bg-primary rounded-md p-1 px-4 md:ml-6 ml-5 mb-5"}
               activeClassName={"active"}
             />
       </div>

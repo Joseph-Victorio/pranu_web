@@ -83,20 +83,20 @@ const GaleriList = () => {
         <div className='flex gap-5 mt-20 sm:mt-0'>
             <SideNav />
             {/* KANAN */}
-            <div className='font-rhodium text-primary xl:p-5 mt-2 w-full md:ml-[250px]'>
+            <div className='font-rhodium text-primary xl:px-5 p  w-full md:ml-[250px]'>
                 <p className='text-3xl p-5'>List Foto</p>
                 <hr className='border-primary border-b-2 ' />
                 <Link
                     to={'/admin/add-galeri'}
-                    className='float-right'>
+                    className='flex justify-end px-10 mt-5'>
                     <p className='mt-3 bg-primary text-secondary px-6 py-2 md:w-[200px] w-[200px] text-center rounded-md m-2'>
                         Tambah Foto
                     </p>
                 </Link>
 
                 {/* TABLE LIST */}
-                <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[800px] lg:overflow-x-scroll p-3'>
-                    <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[750px] md:w-[750px] mx-auto '>
+                <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[1000px] lg:overflow-x-scroll p-3'>
+                    <table className='rounded-md ring-2 ring-primary border-collapse  w-[750px] md:w-[900px] mx-auto '>
                         <thead>
                             <tr className=' bg-secondary rounded-md ring-2 ring-primary'>
                                 <th className=' bg-secondary rounded-l-md p-2 w-[100px] md:text-[14px]'>foto</th>
@@ -108,9 +108,9 @@ const GaleriList = () => {
                         <tbody>
                             {currentgaleris.map(foto => (
                                 <tr className=' text-center' key={foto.id}>
-                                    <td className='p-2'><img src={foto.foto === 0 ? '/logo_login.png' : 'https://api.pranugumproduction.com/' + foto.foto} alt="" className='w-[150px]' /></td>
-                                    <td className='p-2 text-sm w-[150px]'><p>{foto.nama}</p></td>
-                                    <td className='p-2'><p>{foto.tanggal}</p></td>
+                                    <td className='p-2 border-r-2 border-primary w-[150px]'><img src={foto.foto === 0 ? '/logo_login.png' : 'https://api.pranugumproduction.com/' + foto.foto} alt="" className='w-[150px]' /></td>
+                                    <td className='p-2 text-sm  border-r-2 border-primary'><p>{foto.nama}</p></td>
+                                    <td className='p-2 border-r-2 border-primary'><p>{foto.tanggal}</p></td>
                                     <td className=' p-2'>
                                         <div
                                             className='text-center mx-auto w-[50px]'>
@@ -123,6 +123,7 @@ const GaleriList = () => {
                             ))}
                         </tbody>
                     </table>
+                    <hr className='border-b-2 border-primary mt-5 mx-9'/>
                 </div>
                 <ReactPaginate
                     previousLabel={"Previous"}
@@ -132,7 +133,7 @@ const GaleriList = () => {
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={handlePageClick}
-                    containerClassName={"pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 md:ml-14 ml-5"}
+                    containerClassName={"pagination flex justify-between w-[300px] mt-2 text-secondary bg-primary rounded-md p-1 px-4 md:ml-12 ml-5"}
                     activeClassName={"active"}
                 />
             </div>

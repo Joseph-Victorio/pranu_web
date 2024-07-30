@@ -85,32 +85,32 @@ const UlasanList = () => {
         <hr className='border-primary border-b-2 ' />
         <Link
           to={'/admin/add-ulasan'}
-          className='float-right'>
+          className='flex justify-end px-10'>
           <p className='mt-3 bg-primary text-secondary px-6 py-2 md:w-[200px] w-[200px] text-center rounded-md m-2'>
             Tambah Ulasan
           </p>
         </Link>
 
         {/* TABLE LIST */}
-        <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px]  xl:w-[750px] xl:overflow-hidden lg:overflow-x-scroll p-3 mx-auto'>
-          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[750px] md:w-[500px] mx-auto '>
+        <div className='overflow-x-scroll w-[350px] md:w-[500px] lg:w-[750px]  xl:w-[1000px] xl:overflow-hidden lg:overflow-x-scroll p-3 mx-auto'>
+          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[750px] md:w-[900px] mx-auto '>
             <thead>
               <tr className=' bg-secondary rounded-md ring-2 ring-primary'>
-                <th className=' bg-secondary rounded-l-md p-2 w-[100px] md:text-[14px]'>foto</th>
-                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 '> Nama</th>
-                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] '>Ulasan</th>
+                <th className=' bg-secondary rounded-l-md p-2 w-[100px] md:text-[14px] border-r-2 border-primary'>foto</th>
+                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 border-r-2 border-primary'> Nama</th>
+                <th className=' bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary'>Ulasan</th>
                 <th className=' bg-secondary rounded-r-md p-2 md:text-[14px] md:px-6'>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {currentulasans.map(ulasan => (
                 <tr className=' text-center' key={ulasan.id}>
-                  <td className='p-2'><img src={ulasan.foto=== 0 ?'/logo_login.png':'https://api.pranugumproduction.com/' + ulasan.foto } alt="" className='w-[150px]'/></td>
-                  <td className='p-2 text-sm w-[150px]'><p>{ulasan.nama}</p></td>
-                  <td className='line-clamp-2 md:line-clamp-2 xl:line-clamp-2 mt-5 px-2 w-[200px]'><p className='line-clamp-2'>{ulasan.ulasan}</p></td>
+                  <td className='p-2 border-r-2 border-primary w-[150px]'><img src={ulasan.foto=== 0 ?'/logo_login.png':'https://api.pranugumproduction.com/' + ulasan.foto } alt="" /></td>
+                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{ulasan.nama}</p></td>
+                  <td className=' mt-5 px-2  border-r-2 border-primary w-[500px]'><p className='line-clamp-2'>{ulasan.ulasan}</p></td>
                   <td className=' p-2'>
                     <div
-                      className='flex gap-2 '>
+                      className='flex gap-2 justify-center '>
                         <Link 
                         to={`/admin/edit-ulasan/${ulasan.id}`}
                           className='bg-primary p-2 rounded-md'>
@@ -125,7 +125,7 @@ const UlasanList = () => {
               ))}
             </tbody>
           </table>
-          
+          <hr className='border-b-2 border-primary mt-5 mx-9'/>
         </div>
         <ReactPaginate
               previousLabel={"Previous"}
@@ -135,7 +135,7 @@ const UlasanList = () => {
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
               onPageChange={handlePageClick}
-              containerClassName={"pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 md:ml-14 ml-5"}
+              containerClassName={"pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 md:ml-12 ml-5"}
               activeClassName={"active"}
             />
       </div>
