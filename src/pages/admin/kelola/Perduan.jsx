@@ -1,11 +1,10 @@
+import React, { useState, useEffect } from 'react';
 import SideNav from '../../../components/admin/SideNav';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import toast from "react-hot-toast";
 import * as XLSX from 'xlsx';
 import { useNavigate } from 'react-router-dom';
-
 import { VscSearch } from "react-icons/vsc";
 
 const Perduan = () => {
@@ -15,6 +14,7 @@ const Perduan = () => {
   const [itemsPerPage] = useState(5);
   const [permission, setPermission] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,23 +22,20 @@ const Perduan = () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const cek = res.data.userAdmin.map(p => p.login);
+        if (cek[0] === "FALSE") {
+          navigate('/');
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false);
       }
     };
     fetchAdmin();
-  }, []);
-
-  useEffect(() => {
-    const checkPermission = () => {
-      const userHasAccess = permission.some(p => p.login === "TRUE");
-      if (userHasAccess === "FALSE") {
-        navigate('/');
-      }
-    };
-    checkPermission();
-  }, [permission, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     const fetchAllData = async () => {
@@ -81,6 +78,14 @@ const Perduan = () => {
     setFilteredData(filtered);
     setCurrentPage(0); 
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex gap-5">

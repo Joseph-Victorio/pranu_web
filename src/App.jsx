@@ -37,6 +37,7 @@ import Galeri from "./pages/Galeri";
 import Register from "./pages/auth/Register";
 import Perduan from "./pages/admin/kelola/Perduan";
 import Penyewa from "./pages/admin/kelola/Penyewa";
+import Footer from "./components/Footer";
 
 function App() {
  
@@ -96,7 +97,6 @@ function App() {
         <Route path="/admin/penyewa" element={<Penyewa/>}/>
       
     </Routes>
-    
   </>
   )
 }

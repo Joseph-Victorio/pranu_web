@@ -27,6 +27,7 @@ const EditProduk = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [permission, setPermission] = useState([]);
+  const [loading, setLoading] = useState(true); // Added loading state
   const navigate = useNavigate(); 
   
   useEffect(() => {
@@ -34,26 +35,24 @@ const EditProduk = () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const hasPermission = res.data.userAdmin.some(p => p.login === "TRUE");
+        if (!hasPermission) {
+          navigate('/'); // Redirect if the user does not have permission
+        } else {
+          setLoading(false); // Set loading to false when data is fetched and permission is confirmed
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false); // Ensure loading is stopped on error
       }
     };
     fetchAdmin();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
-    // Redirect if the user does not have permission
-    const checkPermission = () => {
-      const userHasAccess = permission.some(p => p.login === "TRUE");
-      if (userHasAccess === "FALSE") {
-        navigate('/'); // Correctly use navigate function
-      }
-    };
-    checkPermission();
-  }, [permission, navigate]);
+    if (loading) return; // Skip fetching product data if loading is true
 
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`https://api.pranugumproduction.com/produk.php?id=${id}`);
@@ -74,7 +73,7 @@ const EditProduk = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, loading]); // Add loading to dependency array to refetch when loading changes
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -137,6 +136,14 @@ const EditProduk = () => {
     // Add any confirmation logic here if needed
     setIsModalOpen(false);
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
 
   return (
     <div className='p-5 font-rhodium'>

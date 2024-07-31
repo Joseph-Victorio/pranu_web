@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import toast from 'react-hot-toast'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useParams, useNavigate } from 'react-router-dom';
+import Modal from '../../../components/Modal'; // Assuming you have a Modal component
 
 const EditUlasan = () => {
-    const { id } = useParams()
-    const [currentFoto, setCurrentFoto] = useState('')
-  
-    const [formData, setFormData] = useState({
-      nama: '',
-      ulasan: '',
-      foto: null
-    })
-    const [permission, setPermission] = useState([]);
+  const { id } = useParams();
+  const [currentFoto, setCurrentFoto] = useState('');
+  const [formData, setFormData] = useState({
+    nama: '',
+    ulasan: '',
+    foto: null,
+  });
+  const [permission, setPermission] = useState([]);
+  const [loading, setLoading] = useState(true); // Added loading state
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state for help
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -21,85 +22,105 @@ const EditUlasan = () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const hasPermission = res.data.userAdmin.some(p => p.login === "TRUE");
+        if (!hasPermission) {
+          navigate('/'); // Redirect if the user does not have permission
+        } else {
+          setLoading(false); // Set loading to false when permissions are confirmed
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false); // Ensure loading is stopped on error
       }
     };
     fetchAdmin();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
-    const checkPermission = () => {
-      const userHasAccess = permission.some(p => p.login === "TRUE");
-      if (userHasAccess === "FALSE") {
-        navigate('/'); 
+    if (loading) return; // Skip fetching data if loading is true
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://api.pranugumproduction.com/ulasan.php?id=${id}`);
+        const { nama, ulasan, foto } = response.data;
+        setFormData({
+          nama: nama || '',
+          ulasan: ulasan || '',
+          foto: foto || '',
+        });
+        setCurrentFoto(foto ? `https://api.pranugumproduction.com/${foto}` : 'no-image.jpeg'); // Set current photo URL
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        toast.error('Terjadi error saat mengambil data.');
       }
     };
-    checkPermission();
-  }, [permission, navigate]);
-    
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`http://localhost:8800/ulasan/${id}`)
-          const { nama, ulasan,  foto } = response.data
-          setFormData({
-            nama: nama || '',
-            ulasan: ulasan || '',
-            foto: foto || ''
-          })
-          setCurrentFoto(foto) 
-        } catch (error) {
-          console.error('Error fetching data:', error)
-          toast.error('Terjadi error saat mengambil data.')
-        }
+
+    fetchData();
+  }, [id, loading]); // Add loading to dependency array to refetch when loading changes
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({
+      ...formData,
+      foto: e.target.files[0],
+    });
+    setCurrentFoto(URL.createObjectURL(e.target.files[0])); // Preview image
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = new FormData();
+      data.append('nama', formData.nama);
+      data.append('ulasan', formData.ulasan);
+      if (formData.foto) {
+        data.append('foto', formData.foto);
       }
-  
-      fetchData()
-    }, [id])
-  
-    const handleChange = (e) => {
-      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+
+      await axios.put(`https://api.pranugumproduction.com/ulasan.php?id=${id}`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      toast.success('Ulasan Berhasil Diupdate', {
+        duration: 2000,
+      });
+
+      setTimeout(() => {
+        navigate('/admin/ulasan-list');
+      }, 2000);
+    } catch (error) {
+      console.error('Error updating data:', error);
+      toast.error('Terjadi error saat memproses data.');
     }
-  
-    const handleFileChange = (e) => {
-        setFormData({
-          ...formData,
-          foto: e.target.files[0],
-        })
-        setCurrentFoto(URL.createObjectURL(e.target.files[0])) // Preview image
-    }
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault()
-      try {
-        const data = new FormData()
-        data.append('nama', formData.nama)
-        data.append('ulasan', formData.ulasan)
-        if (formData.foto) {
-          data.append('foto', formData.foto)
-        } 
-        
-        await axios.put(`http://localhost:8800/ulasan/${id}`, data, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-  
-        toast.success('Ulasan Berhasil Diupdate', {
-          duration: 2000,
-        })
-        
-        setTimeout(() => {
-          window.location="/admin/ulasan-list"
-        }, 2000);
-      } catch (error) {
-        console.error('Error updating data:', error)
-        toast.error('Terjadi error saat memproses data.')
-      }
-    }
+  };
+
+  const handleBantuan = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleConfirm = async () => {
+    // Add any confirmation logic here if needed
+    setIsModalOpen(false);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
+
   return (
     <div className='p-5 font-rhodium'>
       <h1 className='text-primary text-4xl mb-4'>Edit Ulasan</h1>
@@ -115,7 +136,7 @@ const EditUlasan = () => {
         <div>
           <div className='flex flex-col gap-1 mb-2'>
             <label htmlFor='nama' className='text-primary font-semibold'>
-              nama:
+              Nama:
             </label>
             <input
               type='text'
@@ -124,7 +145,7 @@ const EditUlasan = () => {
               value={formData.nama}
               onChange={handleChange}
               required
-              placeholder='nama'
+              placeholder='Nama'
               className='outline-primary rounded-md px-2 border-primary'
             />
           </div>
@@ -133,7 +154,6 @@ const EditUlasan = () => {
               Ulasan:
             </label>
             <textarea
-              type='text'
               id='ulasan'
               name='ulasan'
               value={formData.ulasan}
@@ -157,22 +177,27 @@ const EditUlasan = () => {
           />
         </div>
         {currentFoto && (
-              <div className='mb-2'>
-                <img
-                  src={currentFoto}
-                  alt='Current'
-                  className='w-[150px] h-auto'
-                />
-              </div>
-            )}
+          <div className='mb-2'>
+            <img
+              src={currentFoto}
+              alt='Current'
+              className='w-[150px] h-auto'
+            />
+          </div>
+        )}
         <button
           type='submit'
           className='px-6 py-2 bg-primary text-secondary rounded-md mt-4'>
           Edit Ulasan
         </button>
       </form>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+      />
     </div>
-  )
+  );
 }
 
-export default EditUlasan
+export default EditUlasan;

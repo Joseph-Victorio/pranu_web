@@ -4,42 +4,40 @@ import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
 import { BsTrash } from 'react-icons/bs';
-import { FaPencil } from "react-icons/fa6"
+import { FaPencil } from "react-icons/fa6";
 
 import SideNav from '../../../components/admin/SideNav';
 import { useNavigate } from 'react-router-dom';
+import toast from "react-hot-toast";
 
 const ProdukList = () => {
   const [produks, setProduk] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5); 
   const [permission, setPermission] = useState([]);
-  const navigate = useNavigate(); // Correctly initialize useNavigate
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); 
 
-  // Fetch permissions and redirect if necessary
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const cek = res.data.userAdmin.map(p => p.login);
+        if (cek[0] === "FALSE") {
+          navigate('/');
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false);
       }
     };
     fetchAdmin();
-  }, []);
+  }, [navigate]);
 
-  useEffect(() => {
-    // Redirect if the user does not have permission
-    const checkPermission = () => {
-      const userHasAccess = permission.some(p => p.login === "TRUE");
-      if (userHasAccess === "FALSE") {
-        navigate('/'); // Correctly use navigate function
-      }
-    };
-    checkPermission();
-  }, [permission, navigate]);
   useEffect(() => {
     const fetchAllProduk = async () => {
       try {
@@ -68,6 +66,14 @@ const ProdukList = () => {
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
 
   return (
     <div className='flex gap-5 mt-20 sm:mt-0'>
@@ -102,7 +108,7 @@ const ProdukList = () => {
                   <td className='p-2'>
                     <div className='flex gap-2 justify-center'>
                       <Link to={`/admin/edit-produk/${produk.id}`} className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition '>
-                       <FaPencil/>
+                        <FaPencil />
                       </Link>
                       <button className='bg-primary p-2 rounded-md hover:bg-secondary text-secondary  hover:text-primary duration-300 ease-in-out transition ' onClick={() => handleDelete(produk.id)}>
                         <BsTrash className='' />

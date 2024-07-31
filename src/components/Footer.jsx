@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
-    <footer className="bg-primary  ">
+    <footer className="bg-primary fixed bottom-0 xl:static mt-5 ">
         <div className="flex flex-col p-5 sm:p-[75px] sm:flex-row justify-between font-rhodium gap-[40px]">
             {/* LOGO */}
             <div className="mx-auto sm:mx-0 flex flex-1 flex-col gap-2 items-center">

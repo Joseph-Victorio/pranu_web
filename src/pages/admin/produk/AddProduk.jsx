@@ -1,8 +1,7 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from "react-hot-toast";
 import Modal from '../../../components/Modal'; 
-
 import { useNavigate } from 'react-router-dom';
 
 const categories = [
@@ -26,6 +25,7 @@ const AddProduk = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [permission, setPermission] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -33,24 +33,20 @@ const AddProduk = () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const cek = res.data.userAdmin.map(p => p.login);
+        if (cek[0] === "FALSE") {
+          navigate('/');
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false);
       }
     };
     fetchAdmin();
-  }, []);
-
-  useEffect(() => {
-    // Redirect if the user does not have permission
-    const checkPermission = () => {
-      const per = permission.map(p => p.login === "TRUE");
-      if (per !== "TRUE") {
-        navigate('/'); // Correctly use navigate function
-      }
-    };
-    checkPermission();
-  }, [permission, navigate]);
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -94,17 +90,26 @@ const AddProduk = () => {
       setIsModalOpen(false); 
     }
   };
-  const handleBantuan = ()=>{
+
+  const handleBantuan = () => {
     setIsModalOpen(true);
   }
 
   const handleConfirm = async () => {
-    
+    // Confirmation logic here
   };
 
   const handleClose = () => {
     setIsModalOpen(false);
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
 
   return (
     <div className='p-5 font-rhodium'>

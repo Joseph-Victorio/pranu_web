@@ -125,7 +125,7 @@ const Produk = () => {
               <img src="/kategori/paket.png" alt="" className='md:h-[190px] w-auto mx-auto'/>
             </div>
             {/* CONTENT */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-[-10px]">
               <div className="mt-5">
                 {/* NAMA */}
                 <p className="text-[12px] xl:text-[24px] text-primary">Paket Produk</p>

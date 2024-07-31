@@ -4,12 +4,13 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const AddUlasan = () => {
-    const [formData, setFormData] = useState({
-        nama: '',
-        ulasan: '',
-        foto: 'no-image.jpeg',
-      });
-      const [permission, setPermission] = useState([]);
+  const [formData, setFormData] = useState({
+    nama: '',
+    ulasan: '',
+    foto: null,
+  });
+  const [permission, setPermission] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -17,61 +18,66 @@ const AddUlasan = () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const userHasAccess = res.data.userAdmin.some(p => p.login === "TRUE");
+        if (!userHasAccess) {
+          navigate('/');
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false);
       }
     };
     fetchAdmin();
-  }, []);
+  }, [navigate]);
 
-  useEffect(() => {
-    // Redirect if the user does not have permission
-    const checkPermission = () => {
-      const userHasAccess = permission.some(p => p.login === "TRUE");
-      if (userHasAccess === "FALSE") {
-        navigate('/'); // Correctly use navigate function
-      }
-    };
-    checkPermission();
-  }, [permission, navigate]);
-    
-      const handleChange = (e) => {
-        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-      };
-    
-      const handleFileChange = (e) => {
-        setFormData((prev) => ({ ...prev, foto: e.target.files[0] }));
-      };
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-          const data = new FormData();
-          for (let key in formData) {
-            data.append(key, formData[key]);
-          }
-    
-          await axios.post('https://api.pranugumproduction.com/ulasan.php', data, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
-    
-          toast.success('Artikel Berhasil Ditambahkan', {
-            duration: 4000,
-          });
-    
-          setFormData({
-            nama: '',
-            ulasan: '',
-            foto: '',
-          });
-        } catch (error) {
-          console.error('Error uploading data:', error);
-          toast.error('Terjadi error saat memproses data.');
-        }
-      };
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData((prev) => ({ ...prev, foto: e.target.files[0] }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    for (let key in formData) {
+      data.append(key, formData[key]);
+    }
+
+    try {
+      await axios.post('https://api.pranugumproduction.com/ulasan.php', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      toast.success('Ulasan Berhasil Ditambahkan', {
+        duration: 4000,
+      });
+
+      setFormData({
+        nama: '',
+        ulasan: '',
+        foto: null,
+      });
+    } catch (error) {
+      console.error('Error uploading data:', error);
+      toast.error('Terjadi error saat memproses data.');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
+
   return (
     <div className='p-5 font-rhodium'>
       <h1 className='text-primary text-4xl mb-4'>Upload Ulasan</h1>
@@ -86,7 +92,7 @@ const AddUlasan = () => {
         <div>
           <div className='flex flex-col gap-1 mb-2'>
             <label htmlFor='nama' className='text-primary font-semibold'>
-              nama:
+              Nama:
             </label>
             <input
               type='text'
@@ -95,7 +101,7 @@ const AddUlasan = () => {
               value={formData.nama}
               onChange={handleChange}
               required
-              placeholder='nama'
+              placeholder='Nama'
               className='outline-primary rounded-md px-2 border-primary'
             />
           </div>
@@ -134,7 +140,7 @@ const AddUlasan = () => {
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default AddUlasan
+export default AddUlasan;

@@ -14,6 +14,7 @@ const Penyewa = () => {
   const [itemsPerPage] = useState(5);
   const [permission, setPermission] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,23 +22,20 @@ const Penyewa = () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const cek = res.data.userAdmin.map(p => p.login);
+        if (cek[0] === "FALSE") {
+          navigate('/');
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false);
       }
     };
     fetchAdmin();
-  }, []);
-
-  useEffect(() => {
-    const checkPermission = () => {
-      const userHasAccess = permission.some(p => p.login === "TRUE");
-      if (userHasAccess === "FALSE") {
-        navigate('/');
-      }
-    };
-    checkPermission();
-  }, [permission, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     const fetchAllData = async () => {
@@ -81,31 +79,39 @@ const Penyewa = () => {
     setCurrentPage(0);
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
+
   return (
     <div className="flex gap-5">
       <SideNav />
-      <div className="font-rhodium text-primary xl:p-5  w-full md:ml-[250px]">
-        <p className="text-3xl p-5 ">Data Penyewa</p>
+      <div className="font-rhodium text-primary xl:p-5 w-full md:ml-[250px]">
+        <p className="text-3xl p-5">Data Penyewa</p>
         <hr className="border-primary border-b-2" />
         <div className="flex justify-between items-baseline px-5">
-        <button 
-          onClick={exportToExcel} 
-          className="bg-primary text-secondary p-2 rounded-md mt-4 hover:bg-secondary hover:text-primary duration-300 ease-in-out float-right text-[12px] md:text-[16px]">
-          Export to Excel
-        </button>
-        <div className='flex relative mb-1'>
-          <input 
-            type="text" 
-            value={searchTerm} 
-            onChange={handleSearch} 
-            className="border-b-2 outline-none border-primary bg-transparent text-primary p-2 w-full"
-            placeholder="Cari..."
-          />
-          <VscSearch className='text-secondary absolute right-2 top-1/2 transform -translate-y-1/2'/>
-        </div>
+          <button 
+            onClick={exportToExcel} 
+            className="bg-primary text-secondary p-2 rounded-md mt-4 hover:bg-secondary hover:text-primary duration-300 ease-in-out float-right text-[12px] md:text-[16px]">
+            Export to Excel
+          </button>
+          <div className='flex relative mb-1'>
+            <input 
+              type="text" 
+              value={searchTerm} 
+              onChange={handleSearch} 
+              className="border-b-2 outline-none border-primary bg-transparent text-primary p-2 w-full"
+              placeholder="Cari..."
+            />
+            <VscSearch className='text-secondary absolute right-2 top-1/2 transform -translate-y-1/2'/>
+          </div>
         </div>
         <div className='overflow-x-scroll w-full md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[1000px] lg:overflow-x-scroll p-3 px-5'>
-          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[950px]  mx-auto '>
+          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[950px] mx-auto '>
             <thead>
               <tr className='bg-secondary rounded-md ring-2 ring-primary'>
                 <th className='bg-secondary rounded-l-md p-2 w-[150px] md:text-[14px] border-r-2 border-primary'>Nama</th>
@@ -126,7 +132,7 @@ const Penyewa = () => {
                   <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{new Date(item.balik).toLocaleDateString('id-ID')}</p></td>
                   <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.alamat}</p></td>
                   <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.pesanan}</p></td>
-                  <td className='p-2 text-sm w-[150px] '><p>{new Date(item.tgl_pesanan).toLocaleDateString('id-ID')}</p></td>
+                  <td className='p-2 text-sm w-[150px]'><p>{new Date(item.tgl_pesanan).toLocaleDateString('id-ID')}</p></td>
                 </tr>
               ))}
             </tbody>

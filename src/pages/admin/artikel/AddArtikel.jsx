@@ -13,6 +13,7 @@ const AddArtikel = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [permission, setPermission] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -20,24 +21,20 @@ const AddArtikel = () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/admin.php');
         setPermission(res.data.userAdmin);
+        const userHasAccess = res.data.userAdmin.some(p => p.login === "TRUE");
+        if (!userHasAccess) {
+          navigate('/');
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
+        setLoading(false);
       }
     };
     fetchAdmin();
-  }, []);
-
-  useEffect(() => {
-    // Redirect if the user does not have permission
-    const checkPermission = () => {
-      const userHasAccess = permission.some(p => p.login === "TRUE");
-      if (userHasAccess === "FALSE") {
-        navigate('/'); // Correctly use navigate function
-      }
-    };
-    checkPermission();
-  }, [permission, navigate]);
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -89,6 +86,14 @@ const AddArtikel = () => {
     setIsModalOpen(false);
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+      </div>
+    );
+  }
+
   return (
     <div className='p-5 font-rhodium'>
       <h1 className='text-primary text-4xl mb-4 ml-10'>Upload Artikel</h1>
@@ -116,7 +121,7 @@ const AddArtikel = () => {
           </div>
           {/* penulis */}
           <div className="flex flex-col gap-1 mb-2 flex-1">
-            <label htmlFor="penulis" className='text-primary  font-semibold'>Penulis:</label>
+            <label htmlFor="penulis" className='text-primary font-semibold'>Penulis:</label>
             <input
               type="text"
               id="penulis"
