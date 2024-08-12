@@ -70,7 +70,7 @@ const ApaKataMereka = () => {
         {/* cards */}
         { ulasan.map(ul=>(
           <div className="p-1" >
-          <div className=" h-[300px] w-[350px] mx-auto border-2 border-primary rounded-[30px] p-5 " key={ul.id}>
+          <div className=" h-[300px] md:w-[350px] mx-auto border-2 border-primary rounded-[30px] p-5 " key={ul.id}>
             {/* PROFILE */}
             <div className="text-center">
               <img 

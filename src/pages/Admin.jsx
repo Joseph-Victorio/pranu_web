@@ -109,11 +109,11 @@ const Admin = () => {
                   <td className='p-2 text-sm  border-r-2 border-primary'><p>{index + 1 + currentPage * itemsPerPage}</p></td>
                   <td className='p-2 text-sm  border-r-2 border-primary'><p>{penyewa.nama}</p></td>
                   <td className='p-2 text-sm  border-r-2 border-primary'><p>{penyewa.telepon}</p></td>
-                  <td className='p-2 text-sm  border-r-2 border-primary'><p>{new Date(penyewa.sewa).toLocaleDateString('id-ID')}</p></td>
-                  <td className='p-2 text-sm  border-r-2 border-primary'><p>{new Date(penyewa.balik).toLocaleDateString('id-ID')}</p></td>
+                  <td className='p-2 text-sm  border-r-2 border-primary'><p>{penyewa.sewa}</p></td>
+                  <td className='p-2 text-sm  border-r-2 border-primary'><p>{penyewa.balik}</p></td>
                   <td className='p-2 text-sm  border-r-2 border-primary'><p>{penyewa.alamat}</p></td>
                   <td className='p-2 text-sm  border-r-2 border-primary'><p>{penyewa.pesanan}</p></td>
-                  <td className='p-2 text-sm '><p>{new Date(penyewa.tgl_pesanan).toLocaleDateString('id-ID')}</p></td>
+                  <td className='p-2 text-sm '><p>{penyewa.tgl_pesanan}</p></td>
                 </tr>
               ))}
             </tbody>

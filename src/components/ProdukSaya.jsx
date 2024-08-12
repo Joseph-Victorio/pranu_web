@@ -88,7 +88,7 @@ const ProdukSaya = () => {
               {/* NAMA */}
               <p className="text-[10px] md:text-[18px] text-primary mt-1">{produk.nama_produk}</p>
               <a href={`/produk/${produk.id}`}>
-                <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] md:mt-10 md:text-[14px] hover:bg-secondary ease-in-out  duration-300 ">
+                <button className="bg-primary rounded-full w-[133px] h-[18px] md:w-[237px] md:h-[38px] text-white text-[10px] mt-6 md:mt-10 md:text-[14px] hover:bg-secondary ease-in-out  duration-300 ">
                   Lihat Detail Produk
                 </button>
               </a>

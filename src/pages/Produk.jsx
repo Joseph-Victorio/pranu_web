@@ -89,7 +89,7 @@ const Produk = () => {
         const fetchAllPerlengkapan = async () => {
             try {
                 const res = await axios.get("https://api.pranugumproduction.com/perlengkapan.php");
-                setPerlengkapan(res.data.produkData);
+                setPerlengkapan(res.data.produkData || []);
             } catch (error) {
                 console.log(error);
             }
@@ -103,7 +103,7 @@ const Produk = () => {
             try {
                const res = await axios.get('https://api.pranugumproduction.com/led.php')
                if(res.data.produkData){
-                setLed(res.data.produkData)
+                setLed(res.data.produkData || [])
                }
             } catch (error) {
                 console.log(error)

@@ -129,16 +129,19 @@ const KeranjangBelanja = () => {
   const pesanHandelClick = async (e) => {
     e.preventDefault();
     try {
-      setForm({
-        sewa : form.sewa = new Date(form.sewa).toLocaleDateString('id-ID'),
-        balik: form.balik = new Date(form.balik).toLocaleDateString('id-ID')
-      })
+      const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' };
+      const formattedSewa = new Date(form.sewa).toLocaleString('id-ID', options);
+      const formattedBalik = new Date(form.balik).toLocaleString('id-ID', options);
+      
       const updatedForm = {
         ...form,
+        sewa: formattedSewa,
+        balik: formattedBalik,
         pesanan: keranjangKu.join(', '),
       };
-       await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
-     
+  
+      await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
+  
       setForm({
         nama: '',
         telepon: '',
@@ -148,17 +151,21 @@ const KeranjangBelanja = () => {
         pesanan: ''
       });
       setDaysDifference(0);
-
-      window.location = daysDifference > 1
-        ? `https://wa.me/6281295079288?text=Saya mau sewa ${keranjangKu.join(', ')} untuk ${daysDifference} hari, buat tanggal ${form.sewa} sampai tanggal ${form.balik}, apakah barang ready?`
-        : `https://wa.me/6281295079288?text=Saya mau pesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, buat tanggal ${form.sewa}, apakah barang ready?`;
-
+  
+      const waLink = daysDifference > 1
+        ? `https://wa.me/6281295079288?text=Saya mau sewa ${keranjangKu.join(', ')} untuk ${daysDifference} hari, buat tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, apakah barang ready?`
+        : `https://wa.me/6281295079288?text=Saya mau pesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, buat tanggal ${formattedSewa}, apakah barang ready?`;
+  
+      window.location = waLink;
+  
       localStorage.clear();
-
+  
     } catch (error) {
       console.log('Error:', error.response ? error.response.data : error.message);
     }
   };
+  
+  
 
   return (
     <div>

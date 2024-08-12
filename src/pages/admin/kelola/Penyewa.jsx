@@ -128,12 +128,13 @@ const Penyewa = () => {
                 <tr className='text-center' key={item.id}>
                   <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.nama}</p></td>
                   <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.telepon}</p></td>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{new Date(item.sewa).toLocaleDateString('id-ID')}</p></td>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{new Date(item.balik).toLocaleDateString('id-ID')}</p></td>
+                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.sewa}</p></td>
+                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{ item.balik}</p></td>
                   <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.alamat}</p></td>
                   <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.pesanan}</p></td>
-                  <td className='p-2 text-sm w-[150px]'><p>{new Date(item.tgl_pesanan).toLocaleDateString('id-ID')}</p></td>
+                  <td className='p-2 text-sm w-[150px]'><p>{item.tgl_pesanan}</p></td>
                 </tr>
+                
               ))}
             </tbody>
           </table>

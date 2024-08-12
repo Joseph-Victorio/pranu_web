@@ -70,7 +70,7 @@ const ArtikelCard = () => {
         {artikel.length > 0 ? (
           artikel.map((art) => (
             <div className="p-1" key={art.id}>
-              <div className="card border-2 border-primary bg-white rounded-[30px] p-5 shadow-sm h-[400px] w-[350px] mx-auto">
+              <div className="card border-2 border-primary bg-white rounded-[30px] p-5 shadow-sm h-[400px] md:w-[350px] mx-auto">
                 {/* PROFILE */}
                 <div className="text-center">
                   <div className="relative mb-8">
