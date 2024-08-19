@@ -47,7 +47,7 @@ const HeaderCardCarousel = () => {
     const fetchLighting = async () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/lighting.php');
-        setLighting(res.data.produkData);
+        setLighting(res.data.produkData || []);
       } catch (error) {
         console.error('Error fetching lighting data:', error);
       }
@@ -58,7 +58,7 @@ const HeaderCardCarousel = () => {
     const fetchStage = async () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/stage.php');
-        setStage(res.data);
+        setStage(res.data.produkData || []);
       } catch (error) {
         console.error('Error fetching stage data:', error);
       }
@@ -77,11 +77,11 @@ const HeaderCardCarousel = () => {
           className='max-w-[330px] md:w-[300px] lg:w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
           {/* IMG */}
           <div className='w-[250px] md:w-[270px] lg:w-[300px]  mx-auto'>
-            <img src="/kategori/paket.png" alt="Paket Produk" className='h-[200px] mx-auto w-full' />
+            <img src="/kategori/Paket Produk.png" alt="Paket Produk" className=' mx-auto w-full' />
           </div>
           {/* CONTENT */}
           <div className='flex justify-between items-center'>
-            <div className='mt-5'>
+            <div className='mt-2'>
               {/* NAMA */}
               <p className='text-[24px] text-primary'>
                 Paket Produk
@@ -110,11 +110,11 @@ const HeaderCardCarousel = () => {
           className='max-w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
           {/* IMG */}
           <div className='w-[250px] mx-auto'>
-            <img src="/kategori/lighting.png" alt="Lighting" />
+            <img src="/kategori/Lighting.png" alt="Lighting" />
           </div>
           {/* CONTENT */}
           <div className='flex justify-between items-center'>
-            <div className='mt-5'>
+            <div className='mt-2'>
               {/* NAMA */}
               <p className='text-[24px] text-primary'>
                 Lighting
@@ -143,11 +143,11 @@ const HeaderCardCarousel = () => {
           className='max-w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
           {/* IMG */}
           <div className='w-[250px] mx-auto'>
-            <img src="/kategori/stage.png" alt="Stage" />
+            <img src="/kategori/Stage.png" alt="Stage" />
           </div>
           {/* CONTENT */}
           <div className='flex justify-between items-center'>
-            <div className='mt-5'>
+            <div className='mt-2'>
               {/* NAMA */}
               <p className='text-[24px] text-primary'>
                 Stage

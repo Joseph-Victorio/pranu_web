@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 const ProdukList = () => {
   const [produks, setProduk] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage] = useState(5); 
+  const [itemsPerPage] = useState(10); 
   const [permission, setPermission] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); 

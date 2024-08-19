@@ -193,7 +193,7 @@ const ProdukDetail = () => {
       <hr className="border-2 mb-5 border-gray-400" />
       <p className="text-primary text-[24px] md:text-[36px] p-5">Produk Terkait</p>
       <div className="flex overflow-x-scroll gap-5 p-5 mb-5">
-        {terkait.map((ter) => (
+        {terkait.slice(0,10).map((ter) => (
           ter.kategori === 'Paket Produk' ? (
             <div
             key={ter.id}
