@@ -25,11 +25,11 @@ const ProdukCard = ({ foto, kategori,nama,harga,produk_id}) => {
       {/* CONTENT */}
       <div className=" w-[237px] mx-auto">
         {/* CATEGORY */}
-        <p className="text-tersier text-[8px] md:text-[14px] mt-2 md:mt-4">
+        <p className="text-tersier text-[8px] md:text-[10px] mt-2 md:mt-4">
           {kategori}
         </p>
         {/* NAMA */}
-        <p className="text-[10px] md:text-[18px] text-primary mt-1">
+        <p className="text-[10px] md:text-[12px]  text-primary mt-1">
           {nama}
         </p>
         {/* HARGA SEWA */}

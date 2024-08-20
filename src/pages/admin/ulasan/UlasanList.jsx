@@ -12,7 +12,7 @@ import { BsTrash } from "react-icons/bs";
 const UlasanList = () => {
   const [ulasans, setUlasan] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage] = useState(5); // Set pagination
+  const [itemsPerPage] = useState(10); // Set pagination
 
   const [permission, setPermission] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
@@ -42,7 +42,7 @@ const UlasanList = () => {
     const fetchAllUlasan = async () => {
       try {
         const res = await axios.get("https://api.pranugumproduction.com/ulasan.php");
-        setUlasan(res.data.ulasanData);
+        setUlasan(res.data.ulasanData || []);
         setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
         console.log(error);

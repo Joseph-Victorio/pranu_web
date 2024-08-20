@@ -42,7 +42,7 @@ const ProdukList = () => {
     const fetchAllProduk = async () => {
       try {
         const res = await axios.get("https://api.pranugumproduction.com/produk.php");
-        setProduk(res.data.produkData); 
+        setProduk(res.data.produkData || []); 
       } catch (error) {
         console.log(error);
       }

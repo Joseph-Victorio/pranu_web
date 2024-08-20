@@ -10,7 +10,7 @@ import { BsTrash } from "react-icons/bs";
 const ArtikelList = () => {
   const [artikels, setArtikel] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage] = useState(5); 
+  const [itemsPerPage] = useState(10); 
   const [permission, setPermission] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); 
@@ -39,7 +39,7 @@ const ArtikelList = () => {
     const fetchAllArtikel = async () => {
       try {
         const res = await axios.get("https://api.pranugumproduction.com/artikel.php");
-        setArtikel(res.data.artikelData);
+        setArtikel(res.data.artikelData || []);
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data artikel");

@@ -52,7 +52,7 @@ const Galeri = () => {
         <div className="p-1">
           <div className="border-2 border-primary rounded-xl p-2 md:w-[300px] xl:w-[350px] ">
             <img 
-              src="/galeri/image 5.png" 
+              src="/galeri/YOTNC1.png" 
               alt=""
               className="w-full" />
           </div>
@@ -61,7 +61,7 @@ const Galeri = () => {
         <div className="p-1">
           <div className="border-2 border-primary rounded-xl p-2 md:w-[300px] xl:w-[350px] ">
             <img 
-              src="/galeri/image 6.png" 
+              src="/galeri/YOTNC2.png" 
               alt=""
               className="w-full" />
           </div>
@@ -70,9 +70,9 @@ const Galeri = () => {
         <div className="p-1">
           <div className="border-2 border-primary rounded-xl p-2 md:w-[300px] xl:w-[350px] ">
             <img 
-              src="/galeri/image 7.png" 
+              src="/galeri/YOTNC3.png" 
               alt=""
-              className="w-full" />
+              className="w-full h-[240px] bg-cover object-cover rounded-md" />
           </div>
         </div>
         

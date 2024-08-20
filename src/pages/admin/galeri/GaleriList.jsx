@@ -9,7 +9,7 @@ import { BsTrash } from "react-icons/bs";
 const GaleriList = () => {
     const [galeris, setGaleri] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [itemsPerPage] = useState(5); 
+    const [itemsPerPage] = useState(10); 
     const [permission, setPermission] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
     const navigate = useNavigate(); 
@@ -41,7 +41,7 @@ const GaleriList = () => {
         const fetchAllGaleri = async () => {
             try {
                 const res = await axios.get("https://api.pranugumproduction.com/galeri.php");
-                setGaleri(res.data.galeriData);
+                setGaleri(res.data.galeriData || []);
             } catch (error) {
                 console.log(error);
             }

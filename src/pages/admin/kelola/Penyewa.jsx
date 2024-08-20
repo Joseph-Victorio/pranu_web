@@ -41,8 +41,8 @@ const Penyewa = () => {
     const fetchAllData = async () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/penyewa.php');
-        setData(res.data.penyewa);
-        setFilteredData(res.data.penyewa);
+        setData(res.data.penyewa || []);
+        setFilteredData(res.data.penyewa || []);
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses tampilan penyewa");

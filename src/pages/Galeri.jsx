@@ -12,7 +12,7 @@ const Galeri = () => {
         const fetchAllFoto = async ()=>{
             try {
                 const res = await axios.get('https://api.pranugumproduction.com/galeri.php')
-                setFoto(res.data.galeriData)
+                setFoto(res.data.galeriData || [])
             } catch (error) {
                 console.log(error)
             }
@@ -25,7 +25,7 @@ const Galeri = () => {
             <Navbar/>
             <a 
                 href="/tentang-kami"
-                className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-2 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out md:ml-5 mb-5'>
+                className='font-bold w-[100px] text-[15px] md:text-[20px] flex mt-2 items-center gap-2 text-primary hover:text-secondary transition duration-300 ease-in-out md:ml-16 mb-5'>
                 <p>&#8592;</p> <p>Kembali</p>
             </a>
             <div className='px-6 mb-10 columns-2 md:columns-3 xl:columns-4 gap-4'>

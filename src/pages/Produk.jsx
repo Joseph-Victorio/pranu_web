@@ -121,8 +121,8 @@ const Produk = () => {
           {/* CARD */}
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
-            <div className="w-[120px] md:w-[220px] md:h-[200px]  mx-auto">
-              <img src="/kategori/Paket Produk.png" alt="" className='md:h-[190px] w-auto mx-auto'/>
+            <div className="w-[120px] md:w-[220px] mx-auto">
+              <img src="/kategori/Paket Produk.png" alt="" className=' w-auto mx-auto'/>
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center mt-[-10px]">

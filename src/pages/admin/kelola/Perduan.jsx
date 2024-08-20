@@ -41,8 +41,8 @@ const Perduan = () => {
     const fetchAllData = async () => {
       try {
         const res = await axios.get('https://api.pranugumproduction.com/kontak.php');
-        setData(res.data.kontak);
-        setFilteredData(res.data.kontak);
+        setData(res.data.kontak || []);
+        setFilteredData(res.data.kontak || []);
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses tampilan perduan");
