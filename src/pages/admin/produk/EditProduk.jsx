@@ -99,12 +99,11 @@ const EditProduk = () => {
       data.append('deskripsi', formData.deskripsi);
       data.append('ketentuan', formData.ketentuan);
       
-      // Only append 'foto' if it's a File object (not a string like 'no-image.jpeg')
       if (formData.foto instanceof File) {
         data.append('foto', formData.foto);
       }
   
-      // Perform the PUT request
+  
       const response = await axios.post(`https://api.pranugumproduction.com/editProduk.php`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',

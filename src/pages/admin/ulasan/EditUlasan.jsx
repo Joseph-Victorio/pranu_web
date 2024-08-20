@@ -24,21 +24,21 @@ const EditUlasan = () => {
         setPermission(res.data.userAdmin);
         const hasPermission = res.data.userAdmin.some(p => p.login === "TRUE");
         if (!hasPermission) {
-          navigate('/'); // Redirect if the user does not have permission
+          navigate('/'); 
         } else {
-          setLoading(false); // Set loading to false when permissions are confirmed
+          setLoading(false); 
         }
       } catch (error) {
         console.log(error);
         toast.error("Terjadi error saat memproses data admin");
-        setLoading(false); // Ensure loading is stopped on error
+        setLoading(false); 
       }
     };
     fetchAdmin();
   }, [navigate]);
 
   useEffect(() => {
-    if (loading) return; // Skip fetching data if loading is true
+    if (loading) return; 
 
     const fetchData = async () => {
       try {
@@ -49,7 +49,7 @@ const EditUlasan = () => {
           ulasan: ulasan || '',
           foto: foto || '',
         });
-        setCurrentFoto(foto ? `https://api.pranugumproduction.com/${foto}` : 'no-image.jpeg'); // Set current photo URL
+        setCurrentFoto(foto ? `https://api.pranugumproduction.com/${foto}` : 'no-image.jpeg'); 
       } catch (error) {
         console.error('Error fetching data:', error);
         toast.error('Terjadi error saat mengambil data.');
@@ -57,7 +57,7 @@ const EditUlasan = () => {
     };
 
     fetchData();
-  }, [id, loading]); // Add loading to dependency array to refetch when loading changes
+  }, [id, loading]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -68,20 +68,21 @@ const EditUlasan = () => {
       ...formData,
       foto: e.target.files[0],
     });
-    setCurrentFoto(URL.createObjectURL(e.target.files[0])); // Preview image
+    setCurrentFoto(URL.createObjectURL(e.target.files[0])); 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = new FormData();
+      data.append('id', id);  
       data.append('nama', formData.nama);
       data.append('ulasan', formData.ulasan);
       if (formData.foto) {
         data.append('foto', formData.foto);
       }
 
-      await axios.put(`https://api.pranugumproduction.com/ulasan.php?id=${id}`, data, {
+      await axios.post(`https://api.pranugumproduction.com/editUlasan.php`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -91,6 +92,7 @@ const EditUlasan = () => {
         duration: 2000,
       });
 
+     
       setTimeout(() => {
         navigate('/admin/ulasan-list');
       }, 2000);
@@ -109,7 +111,7 @@ const EditUlasan = () => {
   };
 
   const handleConfirm = async () => {
-    // Add any confirmation logic here if needed
+
     setIsModalOpen(false);
   };
 
