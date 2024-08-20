@@ -153,8 +153,8 @@ const KeranjangBelanja = () => {
       setDaysDifference(0);
   
       const waLink = daysDifference > 1
-        ? `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} pesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, pada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, di alamat: ${updatedForm.alamat}, apakah barang ready?`
-        : `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} pesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, pada tanggal ${formattedSewa}, dengan alamat: ${updatedForm.alamat}, apakah barang ready?`;
+        ? `https://wa.me/62895702833432?text=Saya ${updatedForm.nama} pesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, pada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, di alamat: ${updatedForm.alamat}, apakah barang ready?`
+        : `https://wa.me/62895702833432?text=Saya ${updatedForm.nama} pesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, pada tanggal ${formattedSewa}, dengan alamat: ${updatedForm.alamat}, apakah barang ready?`;
   
       window.location = waLink;
   

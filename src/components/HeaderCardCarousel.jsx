@@ -77,7 +77,7 @@ const HeaderCardCarousel = () => {
           className='max-w-[330px] md:w-[300px] lg:w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
           {/* IMG */}
           <div className='w-[250px]  mx-auto'>
-            <img src="/kategori/Paket Produk.png" alt="Paket Produk" className=' mx-auto w-full' />
+            <img src="/kategori/Paket Produk.png" alt="Paket Produk" className=' mx-auto w-full rounded-md' />
           </div>
           {/* CONTENT */}
           <div className='flex justify-between items-center'>
@@ -110,7 +110,7 @@ const HeaderCardCarousel = () => {
           className='max-w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
           {/* IMG */}
           <div className='w-[250px] mx-auto'>
-            <img src="/kategori/Lighting.png" alt="Lighting" />
+            <img src="/kategori/Lighting.png" alt="Lighting" className='rounded-md' />
           </div>
           {/* CONTENT */}
           <div className='flex justify-between items-center'>
@@ -143,7 +143,7 @@ const HeaderCardCarousel = () => {
           className='max-w-[330px] h-[350px] border-2 border-primary rounded-[16px] p-4'>
           {/* IMG */}
           <div className='w-[250px] mx-auto'>
-            <img src="/kategori/Stage.png" alt="Stage" />
+            <img src="/kategori/Stage.png" alt="Stage" className='rounded-md'/>
           </div>
           {/* CONTENT */}
           <div className='flex justify-between items-center'>

@@ -122,7 +122,7 @@ const Produk = () => {
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
-              <img src="/kategori/Paket Produk.png" alt="" className=' w-auto mx-auto'/>
+              <img src="/kategori/Paket Produk.png" alt="" className='rounded-md'/>
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center mt-[-10px]">
@@ -149,7 +149,7 @@ const Produk = () => {
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
-              <img src="/kategori/Sound System.png" alt="" />
+              <img src="/kategori/Sound System.png" className='rounded-md' alt="" />
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center">
@@ -176,7 +176,7 @@ const Produk = () => {
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
-              <img src="/kategori/Stage.png" alt="" />
+              <img src="/kategori/Stage.png" alt="" className='rounded-md' />
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center">
@@ -203,7 +203,7 @@ const Produk = () => {
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
-              <img src="/kategori/LED Screen.png" alt="" />
+              <img src="/kategori/LED Screen.png" alt="" className='rounded-md'/>
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center">
@@ -230,7 +230,7 @@ const Produk = () => {
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px]  mx-auto">
-              <img src="/kategori/Lighting.png" alt="" />
+              <img src="/kategori/Lighting.png" alt="" className='rounded-md'/>
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center">
@@ -257,7 +257,7 @@ const Produk = () => {
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
-              <img src="/kategori/Genset.png" alt="" />
+              <img src="/kategori/Genset.png" alt="" className='rounded-md' />
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center">
@@ -284,7 +284,7 @@ const Produk = () => {
           <div className="w-[150px] md:w-[300px] lg:w-[270px] border-2 border-primary rounded-[16px] p-4 mt-5 mx-auto">
             {/* IMG */}
             <div className="w-[120px] md:w-[220px] mx-auto">
-              <img src="/kategori/Perlengkapan Acara.png" alt="" />
+              <img src="/kategori/Perlengkapan Acara.png" alt="" className='rounded-md'/>
             </div>
             {/* CONTENT */}
             <div className="flex justify-between items-center">
