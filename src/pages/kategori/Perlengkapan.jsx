@@ -15,7 +15,7 @@ const Perlengkapan = () => {
         const fetchAllPerlengkapan = async () => {
             try {
                 const res = await axios.get("https://api.pranugumproduction.com/perlengkapan.php");
-                setPerlengkapan(res.data.produkData);
+                setPerlengkapan(res.data.produkData || []);
             } catch (error) {
                 console.log(error);
             }
