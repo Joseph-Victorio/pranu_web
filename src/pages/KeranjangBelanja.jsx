@@ -153,8 +153,8 @@ const KeranjangBelanja = () => {
       setDaysDifference(0);
   
       const waLink = daysDifference > 1
-        ? `https://wa.me/62895702833432?text=Saya ${updatedForm.nama} pesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, pada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, di alamat: ${updatedForm.alamat}, apakah barang ready?`
-        : `https://wa.me/62895702833432?text=Saya ${updatedForm.nama} pesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, pada tanggal ${formattedSewa}, dengan alamat: ${updatedForm.alamat}, apakah barang ready?`;
+        ? `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} %0apesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, %0adi alamat: ${updatedForm.alamat}, %0aapakah barang ready?`
+        : `https://wa.me/6281295079288?text=Saya ${updatedForm.nama}%0apesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa}, %0adengan alamat: ${updatedForm.alamat}, %0aapakah barang ready?`;
   
       window.location = waLink;
   
@@ -342,7 +342,7 @@ const KeranjangBelanja = () => {
                 Waktu Sewa: <span className="text-red-500">{daysDifference} hari</span> 
               </p>
               <p className="text-primary text-[18px] md:text-[24px]">
-                Total Sementara: <span className="text-red-500">{formatCurrencyIDR(totalSum * daysDifference)}</span>
+                Total Harga: <span className="text-red-500">{formatCurrencyIDR(totalSum * daysDifference)}</span>
               </p>
             </div>
           </div>

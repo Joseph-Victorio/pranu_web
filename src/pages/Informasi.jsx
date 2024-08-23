@@ -59,7 +59,7 @@ const Informasi = () => {
     e.preventDefault();
     
     try {
-      await axios.post("http://localhost/api/kontak.php", KontakForm);
+      await axios.post("https://api.pranugumproduction.com/kontak.php", KontakForm);
       setKontakForm({
         nama_penanya: "",
         jenis_pesan : "Pertanyaan",
