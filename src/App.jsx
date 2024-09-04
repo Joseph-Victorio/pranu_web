@@ -38,6 +38,7 @@ import Register from "./pages/auth/Register";
 import Perduan from "./pages/admin/kelola/Perduan";
 import Penyewa from "./pages/admin/kelola/Penyewa";
 import Footer from "./components/Footer";
+import SuccessPayment from "./pages/payment/SuccessPayment";
 
 function App() {
  
@@ -95,6 +96,9 @@ function App() {
         {/* rute pengaduan & penyewa*/}
         <Route path="/admin/pertanyaan-pengaduan" element={<Perduan/>}/>
         <Route path="/admin/penyewa" element={<Penyewa/>}/>
+
+        {/* Rute Payment success */}
+        <Route path="/payment-success" element={<SuccessPayment/>}/>
       
     </Routes>
   </>

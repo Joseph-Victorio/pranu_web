@@ -12,11 +12,20 @@ import { CiLocationOn } from "react-icons/ci";
 
 import axios from "axios";
 import toast from "react-hot-toast";
+import { redirect } from "react-router-dom";
 
 const KeranjangBelanja = () => {
   const [barang, setBarang] = useState([]);
   const [totalSum, setTotalSum] = useState(0);
   const [daysDifference, setDaysDifference] = useState(0);
+  const [form, setForm] = useState({
+    nama: '',
+    telepon: '',
+    sewa: '',
+    balik: '',
+    alamat: '',
+    pesanan: '',
+  });
 
   useEffect(() => {
     const fetchItems = () => {
@@ -28,7 +37,11 @@ const KeranjangBelanja = () => {
           const parsedValue = JSON.parse(value);
           storageItems.push({
             key,
-            value: { ...parsedValue, jumlah: parsedValue.jumlah || 1 }
+            value: {
+              ...parsedValue,
+              jumlah: parsedValue.jumlah || 1,  // default to 1 if undefined
+              harga: parsedValue.harga || 0    // default to 0 if undefined
+            }
           });
         } catch (error) {
           console.error("Parsing error on", key, value);
@@ -37,20 +50,24 @@ const KeranjangBelanja = () => {
       }
       setBarang(storageItems);
     };
-
+  
     fetchItems();
   }, []);
+  
 
   useEffect(() => {
     const calculateTotalSum = () => {
       const sum = barang.reduce((acc, item) => {
-        return acc + item.value.jumlah * item.value.harga;
+        const jumlah = item.value.jumlah || 0;
+        const harga = item.value.harga || 0;
+        return acc + jumlah * harga;
       }, 0);
       setTotalSum(sum);
     };
-
+  
     calculateTotalSum();
   }, [barang]);
+  
 
   const keranjangKu = barang.map(bar => `${bar.value.jumlah} ${bar.value.nama_produk}`);
 
@@ -100,14 +117,7 @@ const KeranjangBelanja = () => {
     });
   };
 
-  const [form, setForm] = useState({
-    nama: '',
-    telepon: '',
-    sewa: '',
-    balik: '',
-    alamat: '',
-    pesanan: '',
-  });
+  
 
   const onChangeHandle = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -126,47 +136,155 @@ const KeranjangBelanja = () => {
     }
   };
 
+  useEffect(() => {
+    // Dynamically load Snap SDK
+    const script = document.createElement('script');
+    script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
+    script.setAttribute('data-client-key', 'SB-Mid-client-3Lex4aXaThiE0Ysp');
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      console.log('Midtrans Snap SDK loaded successfully');
+    };
+
+    script.onerror = () => {
+      console.error('Failed to load Midtrans Snap SDK');
+    };
+
+    // Cleanup script tag on component unmount
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  // const pesanHandelClick = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' };
+  //     const formattedSewa = new Date(form.sewa).toLocaleString('id-ID', options);
+  //     const formattedBalik = new Date(form.balik).toLocaleString('id-ID', options);
+      
+  //     const updatedForm = {
+  //       ...form,
+  //       sewa: formattedSewa,
+  //       balik: formattedBalik,
+  //       pesanan: keranjangKu.join(', '),
+  //     };
+  
+  //     await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
+  
+  //     setForm({
+  //       nama: '',
+  //       telepon: '',
+  //       sewa: '',
+  //       balik: '',
+  //       alamat: '',
+  //       pesanan: ''
+  //     });
+  //     setDaysDifference(0);
+  
+  //     const waLink = daysDifference > 1
+  //       ? `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} %0apesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, %0adi alamat: ${updatedForm.alamat}, %0aapakah barang ready?`
+  //       : `https://wa.me/6281295079288?text=Saya ${updatedForm.nama}%0apesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa}, %0adengan alamat: ${updatedForm.alamat}, %0aapakah barang ready?`;
+  
+  //     window.location = waLink;
+  
+  //     localStorage.clear();
+  
+  //   } catch (error) {
+  //     console.log('Error:', error.response ? error.response.data : error.message);
+  //   }
+  // };
+  const nama = form.nama
+     console.log("tes"+ form.alamat)
   const pesanHandelClick = async (e) => {
     e.preventDefault();
     try {
       const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' };
+      
+      // Format the dates as required
       const formattedSewa = new Date(form.sewa).toLocaleString('id-ID', options);
       const formattedBalik = new Date(form.balik).toLocaleString('id-ID', options);
-      
+  
+  
       const updatedForm = {
         ...form,
         sewa: formattedSewa,
         balik: formattedBalik,
         pesanan: keranjangKu.join(', '),
       };
-  
-      await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
-  
-      setForm({
-        nama: '',
-        telepon: '',
-        sewa: '',
-        balik: '',
-        alamat: '',
-        pesanan: ''
+      
+      const semua = totalSum * daysDifference
+      // console.log(`harga total = ${semua}`)
+     
+      const response = await axios.post('https://api.pranugumproduction.com/payment.php', {
+        totalAmount: semua, 
+        items: barang.map(item => ({
+          id: item.key,
+          price: item.value.harga * daysDifference, 
+          quantity: item.value.jumlah, 
+          name: item.value.nama_produk 
+        })),
+        customerDetails: {
+          first_name: nama,
+          phone: form.telepon,
+          shipping_address: {
+            address: form.alamat
+          }
+        },
+        orderDetails: {
+          startDate: formattedSewa,
+          endDate: formattedBalik,
+          firstName: nama,
+          phone: form.telepon,
+          address: form.alamat
+        }
       });
-      setDaysDifference(0);
+      
   
-      const waLink = daysDifference > 1
-        ? `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} %0apesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, %0adi alamat: ${updatedForm.alamat}, %0aapakah barang ready?`
-        : `https://wa.me/6281295079288?text=Saya ${updatedForm.nama}%0apesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa}, %0adengan alamat: ${updatedForm.alamat}, %0aapakah barang ready?`;
+      const { token } = response.data;
   
-      window.location = waLink;
+      // Use the Snap SDK to trigger the payment flow
+      window.snap.pay(token, {
+        onSuccess: function(result) {
+          console.log('success', result);
+          // toast.success('Payment successful!');
   
-      localStorage.clear();
+          // Clear the form and local storage after successful payment
+          setForm({
+            nama: '',
+            telepon: '',
+            sewa: '',
+            balik: '',
+            alamat: '',
+            pesanan: ''
+          });
+          setDaysDifference(0); // Reset daysDifference if you are using it in state
+          localStorage.clear();
+          window.location.href = "/payment-success"
+        },
+        onPending: function(result) {
+          console.log('pending', result);
+          toast('Payment is pending...');
+           window.location.href = "/keranjang"
+        },
+        onError: function(result) {
+          console.error('error', result);
+          toast.error('Payment failed!');
+          window.location.href = "/keranjang"
+        },
+        onClose: function() {
+          console.log('customer closed the popup without finishing the payment');
+        }
+      });
   
     } catch (error) {
       console.log('Error:', error.response ? error.response.data : error.message);
+      toast.error('Failed to initiate payment');
     }
   };
   
-  
-
   return (
     <div>
       <Navbar />
