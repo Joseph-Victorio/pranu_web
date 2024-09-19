@@ -12,19 +12,22 @@ import { CiLocationOn } from "react-icons/ci";
 
 import axios from "axios";
 import toast from "react-hot-toast";
-import { redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 
 const KeranjangBelanja = () => {
+
+  const { id } = useParams();
   const [barang, setBarang] = useState([]);
   const [totalSum, setTotalSum] = useState(0);
   const [daysDifference, setDaysDifference] = useState(0);
   const [form, setForm] = useState({
-    nama: '',
-    telepon: '',
-    sewa: '',
-    balik: '',
-    alamat: '',
-    pesanan: '',
+    nama: "",
+    telepon: "",
+    sewa: "",
+    balik: "",
+    alamat: "",
+    pesanan: "",
   });
 
   useEffect(() => {
@@ -39,9 +42,9 @@ const KeranjangBelanja = () => {
             key,
             value: {
               ...parsedValue,
-              jumlah: parsedValue.jumlah || 1,  // default to 1 if undefined
-              harga: parsedValue.harga || 0    // default to 0 if undefined
-            }
+              jumlah: parsedValue.jumlah || 1, // default to 1 if undefined
+              harga: parsedValue.harga || 0, // default to 0 if undefined
+            },
           });
         } catch (error) {
           console.error("Parsing error on", key, value);
@@ -50,10 +53,9 @@ const KeranjangBelanja = () => {
       }
       setBarang(storageItems);
     };
-  
+
     fetchItems();
   }, []);
-  
 
   useEffect(() => {
     const calculateTotalSum = () => {
@@ -64,25 +66,26 @@ const KeranjangBelanja = () => {
       }, 0);
       setTotalSum(sum);
     };
-  
+
     calculateTotalSum();
   }, [barang]);
-  
 
-  const keranjangKu = barang.map(bar => `${bar.value.jumlah} ${bar.value.nama_produk}`);
+  const keranjangKu = barang.map(
+    (bar) => `${bar.value.jumlah} ${bar.value.nama_produk}`
+  );
 
   const formatCurrencyIDR = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
-      minimumFractionDigits: 0
+      minimumFractionDigits: 0,
     }).format(number);
   };
 
   const handleDelete = (key) => {
     localStorage.removeItem(key);
     setBarang((prevBarang) => prevBarang.filter((item) => item.key !== key));
-    toast.success('Barang Berhasil di hapus!')
+    toast.success("Barang Berhasil di hapus!");
   };
 
   const handleTambah = (key) => {
@@ -117,12 +120,13 @@ const KeranjangBelanja = () => {
     });
   };
 
-  
-
   const onChangeHandle = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    if (e.target.name === 'sewa' || e.target.name === 'balik') {
-      calculateDaysDifference(e.target.name === 'sewa' ? e.target.value : form.sewa, e.target.name === 'balik' ? e.target.value : form.balik);
+    if (e.target.name === "sewa" || e.target.name === "balik") {
+      calculateDaysDifference(
+        e.target.name === "sewa" ? e.target.value : form.sewa,
+        e.target.name === "balik" ? e.target.value : form.balik
+      );
     }
   };
 
@@ -138,18 +142,18 @@ const KeranjangBelanja = () => {
 
   useEffect(() => {
     // Dynamically load Snap SDK
-    const script = document.createElement('script');
-    script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
-    script.setAttribute('data-client-key', 'SB-Mid-client-3Lex4aXaThiE0Ysp');
+    const script = document.createElement("script");
+    script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
+    script.setAttribute("data-client-key", "SB-Mid-client-PJbHmiaufyfB5CqT");
     script.async = true;
     document.body.appendChild(script);
 
     script.onload = () => {
-      console.log('Midtrans Snap SDK loaded successfully');
+      console.log("Midtrans Snap SDK loaded successfully");
     };
 
     script.onerror = () => {
-      console.error('Failed to load Midtrans Snap SDK');
+      console.error("Failed to load Midtrans Snap SDK");
     };
 
     // Cleanup script tag on component unmount
@@ -164,16 +168,16 @@ const KeranjangBelanja = () => {
   //     const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' };
   //     const formattedSewa = new Date(form.sewa).toLocaleString('id-ID', options);
   //     const formattedBalik = new Date(form.balik).toLocaleString('id-ID', options);
-      
+
   //     const updatedForm = {
   //       ...form,
   //       sewa: formattedSewa,
   //       balik: formattedBalik,
   //       pesanan: keranjangKu.join(', '),
   //     };
-  
+
   //     await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
-  
+
   //     setForm({
   //       nama: '',
   //       telepon: '',
@@ -183,108 +187,202 @@ const KeranjangBelanja = () => {
   //       pesanan: ''
   //     });
   //     setDaysDifference(0);
-  
+
   //     const waLink = daysDifference > 1
   //       ? `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} %0apesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, %0adi alamat: ${updatedForm.alamat}, %0aapakah barang ready?`
   //       : `https://wa.me/6281295079288?text=Saya ${updatedForm.nama}%0apesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa}, %0adengan alamat: ${updatedForm.alamat}, %0aapakah barang ready?`;
-  
+
   //     window.location = waLink;
-  
+
   //     localStorage.clear();
-  
+
   //   } catch (error) {
   //     console.log('Error:', error.response ? error.response.data : error.message);
   //   }
   // };
-  const nama = form.nama
-     console.log("tes"+ form.alamat)
+  const nama = form.nama;
+  console.log("tes" + form.alamat);
   const pesanHandelClick = async (e) => {
     e.preventDefault();
     try {
-      const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' };
-      
+      const options = {
+        timeZone: "Asia/Jakarta",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      };
+
       // Format the dates as required
-      const formattedSewa = new Date(form.sewa).toLocaleString('id-ID', options);
-      const formattedBalik = new Date(form.balik).toLocaleString('id-ID', options);
-  
-  
+      const formattedSewa = new Date(form.sewa).toLocaleString(
+        "id-ID",
+        options
+      );
+      const formattedBalik = new Date(form.balik).toLocaleString(
+        "id-ID",
+        options
+      );
+
       const updatedForm = {
         ...form,
         sewa: formattedSewa,
         balik: formattedBalik,
-        pesanan: keranjangKu.join(', '),
+        pesanan: keranjangKu.join(", "),
       };
-      
-      const semua = totalSum * daysDifference
-      // console.log(`harga total = ${semua}`)
-     
-      const response = await axios.post('https://api.pranugumproduction.com/payment.php', {
-        totalAmount: semua, 
-        items: barang.map(item => ({
-          id: item.key,
-          price: item.value.harga * daysDifference, 
-          quantity: item.value.jumlah, 
-          name: item.value.nama_produk 
-        })),
-        customerDetails: {
-          first_name: nama,
-          phone: form.telepon,
-          shipping_address: {
-            address: form.alamat
-          }
-        },
-        orderDetails: {
-          startDate: formattedSewa,
-          endDate: formattedBalik,
-          firstName: nama,
-          phone: form.telepon,
-          address: form.alamat
+
+      const semua = totalSum * daysDifference;
+
+      const formatDate = new Intl.DateTimeFormat("id-ID", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }).format;
+      const currentDate = formatDate(new Date());
+      const orderId = `PRANU-${currentDate.replace(/\//g, "-")}`;
+
+      console.log(orderId); // Create a unique invoice number
+
+      const response = await axios.post(
+        "https://api.pranugumproduction.com/payment.php",
+        {
+          totalAmount: semua,
+          order_id: orderId,
+          items: barang.map((item) => ({
+            id: item.key,
+            price: item.value.harga * daysDifference,
+            quantity: item.value.jumlah,
+            name: item.value.nama_produk,
+          })),
+          customerDetails: {
+            first_name: nama,
+            phone: form.telepon,
+            shipping_address: {
+              address: form.alamat,
+            },
+          },
+          orderDetails: {
+            startDate: formattedSewa,
+            endDate: formattedBalik,
+            firstName: nama,
+            phone: form.telepon,
+            address: form.alamat,
+          },
         }
-      });
-      
-  
-      const { token } = response.data;
-  
-      // Use the Snap SDK to trigger the payment flow
-      window.snap.pay(token, {
-        onSuccess: function(result) {
-          console.log('success', result);
-          // toast.success('Payment successful!');
-  
-          // Clear the form and local storage after successful payment
-          setForm({
-            nama: '',
-            telepon: '',
-            sewa: '',
-            balik: '',
-            alamat: '',
-            pesanan: ''
-          });
-          setDaysDifference(0); // Reset daysDifference if you are using it in state
-          localStorage.clear();
-          window.location.href = "/payment-success"
-        },
-        onPending: function(result) {
-          console.log('pending', result);
-          toast('Payment is pending...');
-           window.location.href = "/keranjang"
-        },
-        onError: function(result) {
-          console.error('error', result);
-          toast.error('Payment failed!');
-          window.location.href = "/keranjang"
-        },
-        onClose: function() {
-          console.log('customer closed the popup without finishing the payment');
+      );
+
+      const { token, order_id } = response.data;
+
+      const saveInvoiceData = async (no_invoice) => {
+        try {
+          const invoiceData = {
+            no_invoice: orderId,
+            nama: nama,
+            tanggal: new Date().toISOString(),
+            nama_barang: keranjangKu.join(", "),
+            harga: totalSum,
+            jumlah: localStorage.length,
+            total: totalSum * daysDifference,
+          };
+
+          // Send invoice data to your API endpoint
+          await axios.post("http://localhost/api/invoice.php", invoiceData);
+          console.log("Invoice data saved successfully");
+        } catch (error) {
+          console.error("Failed to save invoice data:", error);
         }
-      });
-  
+      };
+      saveInvoiceData();
+
+      const savePenyewaData = async (status = "Pending") => {
+        try {
+            const penyewaData = {
+                nama: nama,
+                telepon: form.telepon,
+                sewa: formattedSewa,
+                balik: formattedBalik,
+                alamat: form.alamat,
+                pesanan: keranjangKu.join(", "),
+                status: status, // Set status here (can be empty initially)
+            };
+    
+            await axios.post(
+                "https://api.pranugumproduction.com/penyewa.php",
+                penyewaData
+            );
+            console.log("Penyewa data saved successfully");
+        } catch (error) {
+            console.error("Failed to save penyewa data:", error);
+        }
+    };
+    
+    const deletePenyewaData = async () => {
+        try {
+            await axios.delete(
+                "https://api.pranugumproduction.com/penyewa.php",
+                {
+                    data: { status: "" } 
+                }
+            );
+            console.log("Deleted penyewa data with empty status successfully");
+        } catch (error) {
+            console.error("Failed to delete penyewa data:", error);
+        }
+    };
+    
+    // Call savePenyewaData initially with empty status
+    savePenyewaData();
+
+    
+    window.snap.pay(token, {
+        onSuccess: async function (result) {
+            console.log("success", result);
+    
+            await savePenyewaData("Berhasil");
+            await deletePenyewaData();
+    
+            // Clear the form and local storage after successful payment
+            setForm({
+                nama: "",
+                telepon: "",
+                sewa: "",
+                balik: "",
+                alamat: "",
+                pesanan: "",
+            });
+            setDaysDifference(0); // Reset daysDifference if you are using it in state
+            localStorage.clear();
+            window.location.href = "/payment-success";
+        },
+        onPending: async function (result) {
+            console.log("pending", result);
+            toast("Payment is pending...");
+            await deletePenyewaData()
+        },
+        onError: async function (result) {
+            console.error("error", result);
+            toast.error("Payment failed!");
+    
+            await savePenyewaData("Gagal");
+            await deletePenyewaData();
+    
+            window.location.href = "/keranjang";
+        },
+        onClose: async function () {
+            console.log("customer closed the popup without finishing the payment");
+    
+            // Send DELETE request to remove entries with empty status
+            await deletePenyewaData();
+        },
+    });
+    
     } catch (error) {
-      console.log('Error:', error.response ? error.response.data : error.message);
-      toast.error('Failed to initiate payment');
+      console.log(
+        "Error:",
+        error.response ? error.response.data : error.message
+      );
+      toast.error("Failed to initiate payment");
     }
   };
-  
+
   return (
     <div>
       <Navbar />
@@ -439,8 +537,7 @@ const KeranjangBelanja = () => {
               value={form.alamat}
             />
           </div>
-          <div className="mx-auto md:mx-0 mt-5 w-[250px] md:w-[1120px]">
-          </div>
+          <div className="mx-auto md:mx-0 mt-5 w-[250px] md:w-[1120px]"></div>
         </form>
 
         <br />
@@ -454,23 +551,31 @@ const KeranjangBelanja = () => {
           <div className="p-5">
             <div className="mt-5">
               <p className="text-primary text-[18px] md:text-[24px]">
-                Total Produk ({localStorage.length}): <span className="text-red-500">{formatCurrencyIDR(totalSum)}</span>
+                Total Produk ({localStorage.length}):{" "}
+                <span className="text-red-500">
+                  {formatCurrencyIDR(totalSum)}
+                </span>
               </p>
               <p className="text-primary text-[18px] md:text-[24px]">
-                Waktu Sewa: <span className="text-red-500">{daysDifference} hari</span> 
+                Waktu Sewa:{" "}
+                <span className="text-red-500">{daysDifference} hari</span>
               </p>
               <p className="text-primary text-[18px] md:text-[24px]">
-                Total Harga: <span className="text-red-500">{formatCurrencyIDR(totalSum * daysDifference)}</span>
+                Total Harga:{" "}
+                <span className="text-red-500">
+                  {formatCurrencyIDR(totalSum * daysDifference)}
+                </span>
               </p>
             </div>
           </div>
           {/* tombol pesan */}
           <div className="p-5">
-          <button 
-            className="w-full bg-primary text-secondary px-6 py-2 rounded-xl hover:text-primary hover:bg-secondary duration-300 ease-in-out transition"
-            onClick={pesanHandelClick}>
-                Pesan
-          </button>
+            <button
+              className="w-full bg-primary text-secondary px-6 py-2 rounded-xl hover:text-primary hover:bg-secondary duration-300 ease-in-out transition"
+              onClick={pesanHandelClick}
+            >
+              Pesan
+            </button>
           </div>
         </div>
       </div>

@@ -76,6 +76,11 @@ const SideNav = () => {
                                         className={({ isActive }) => (isActive ? "text-primary bg-secondary p-3 rounded-[10px]" : "p-3 text-secondary")}>
                                         <p>Penyewa</p>
                                     </NavLink>
+                                    <NavLink
+                                        to="https://dashboard.sandbox.midtrans.com/beta/transactions"
+                                        className={({ isActive }) => (isActive ? "text-primary bg-secondary p-3 rounded-[10px]" : "p-3 text-secondary")}>
+                                        <p>Riwayat Pembayaran</p>
+                                    </NavLink>
                                 </div>
                             )}
                         </div>
@@ -184,6 +189,11 @@ const SideNav = () => {
                                         to="/admin/penyewa"
                                         className={({ isActive }) => (isActive ? "text-primary bg-secondary p-3 rounded-[10px]" : "p-3 text-secondary")}>
                                         <p>Penyewa</p>
+                                    </NavLink>
+                                    <NavLink
+                                        to="https://dashboard.sandbox.midtrans.com/beta/transactions"
+                                        className={({ isActive }) => (isActive ? "text-primary bg-secondary p-3 rounded-[10px]" : "p-3 text-secondary")}>
+                                        <p>Riwayat Pembayaran</p>
                                     </NavLink>
                                 </div>
                             )}

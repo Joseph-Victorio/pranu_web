@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import SideNav from '../../../components/admin/SideNav';
-import axios from 'axios';
-import ReactPaginate from 'react-paginate';
+import React, { useState, useEffect } from "react";
+import SideNav from "../../../components/admin/SideNav";
+import axios from "axios";
+import ReactPaginate from "react-paginate";
 import toast from "react-hot-toast";
-import * as XLSX from 'xlsx';
-import { useNavigate } from 'react-router-dom';
+import * as XLSX from "xlsx";
+import { useNavigate } from "react-router-dom";
 import { VscSearch } from "react-icons/vsc";
 
 const Penyewa = () => {
@@ -20,11 +20,13 @@ const Penyewa = () => {
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const res = await axios.get('https://api.pranugumproduction.com/admin.php');
+        const res = await axios.get(
+          "https://api.pranugumproduction.com/admin.php"
+        );
         setPermission(res.data.userAdmin);
-        const cek = res.data.userAdmin.map(p => p.login);
+        const cek = res.data.userAdmin.map((p) => p.login);
         if (cek[0] === "FALSE") {
-          navigate('/');
+          navigate("/");
         } else {
           setLoading(false);
         }
@@ -40,7 +42,9 @@ const Penyewa = () => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const res = await axios.get('https://api.pranugumproduction.com/penyewa.php');
+        const res = await axios.get(
+          "https://api.pranugumproduction.com/penyewa.php"
+        );
         setData(res.data.penyewa || []);
         setFilteredData(res.data.penyewa || []);
       } catch (error) {
@@ -69,11 +73,12 @@ const Penyewa = () => {
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
     setSearchTerm(value);
-    const filtered = data.filter(item => 
-      item.nama.toLowerCase().includes(value) ||
-      item.telepon.toLowerCase().includes(value) ||
-      item.alamat.toLowerCase().includes(value) ||
-      item.pesanan.toLowerCase().includes(value)
+    const filtered = data.filter(
+      (item) =>
+        item.nama.toLowerCase().includes(value) ||
+        item.telepon.toLowerCase().includes(value) ||
+        item.alamat.toLowerCase().includes(value) ||
+        item.pesanan.toLowerCase().includes(value)
     );
     setFilteredData(filtered);
     setCurrentPage(0);
@@ -82,7 +87,11 @@ const Penyewa = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <img src="/logo/PRANUGUMBiruPutih.png" alt="Logo" className="w-full max-w-xs mx-auto my-auto" />
+        <img
+          src="/logo/PRANUGUMBiruPutih.png"
+          alt="Logo"
+          className="w-full max-w-xs mx-auto my-auto"
+        />
       </div>
     );
   }
@@ -94,51 +103,86 @@ const Penyewa = () => {
         <p className="text-3xl p-5">Data Penyewa</p>
         <hr className="border-primary border-b-2" />
         <div className="flex justify-between items-baseline px-5">
-          <button 
-            onClick={exportToExcel} 
-            className="bg-primary text-secondary p-2 rounded-md mt-4 hover:bg-secondary hover:text-primary duration-300 ease-in-out float-right text-[12px] md:text-[16px]">
+          <button
+            onClick={exportToExcel}
+            className="bg-primary text-secondary p-2 rounded-md mt-4 hover:bg-secondary hover:text-primary duration-300 ease-in-out float-right text-[12px] md:text-[16px]"
+          >
             Export to Excel
           </button>
-          <div className='flex relative mb-1'>
-            <input 
-              type="text" 
-              value={searchTerm} 
-              onChange={handleSearch} 
+          <div className="flex relative mb-1">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearch}
               className="border-b-2 outline-none border-primary bg-transparent text-primary p-2 w-full"
               placeholder="Cari..."
             />
-            <VscSearch className='text-secondary absolute right-2 top-1/2 transform -translate-y-1/2'/>
+            <VscSearch className="text-secondary absolute right-2 top-1/2 transform -translate-y-1/2" />
           </div>
         </div>
-        <div className='overflow-x-scroll w-full md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[1000px] lg:overflow-x-scroll p-3 px-5'>
-          <table className='rounded-md ring-2 ring-primary border-collapse mt-3 w-[950px] mx-auto '>
+        <div className="overflow-x-scroll w-full md:w-[500px] lg:w-[750px] xl:overflow-hidden xl:w-[1000px] lg:overflow-x-scroll p-3 px-5">
+          <table className="rounded-md ring-2 ring-primary border-collapse mt-3 w-[950px] mx-auto ">
             <thead>
-              <tr className='bg-secondary rounded-md ring-2 ring-primary'>
-                <th className='bg-secondary rounded-l-md p-2 w-[150px] md:text-[14px] border-r-2 border-primary'>Nama</th>
-                <th className='bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary'>No Telepon</th>
-                <th className='bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary'>Tanggal Sewa</th>
-                <th className='bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary'>Tanggal Selesai</th>
-                <th className='bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary'>Alamat</th>
-                <th className='bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary'>Pesanan</th>
-                <th className='bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] rounded-r-md'>Tanggal Pesan</th>
+              <tr className="bg-secondary rounded-md ring-2 ring-primary">
+                <th className="bg-secondary rounded-l-md p-2 w-[150px] md:text-[14px] border-r-2 border-primary">
+                  Nama
+                </th>
+                <th className="bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary">
+                  No Telepon
+                </th>
+                <th className="bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary">
+                  Tanggal Sewa
+                </th>
+                <th className="bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary">
+                  Tanggal Selesai
+                </th>
+                <th className="bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary">
+                  Alamat
+                </th>
+                <th className="bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary">
+                  Pesanan
+                </th>
+                <th className="bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] border-r-2 border-primary">
+                  Status
+                </th>
+
+                <th className="bg-secondary p-2 md:text-[14px] md:px-6 w-[150px] rounded-r-md">
+                  Tanggal Pesan
+                </th>
               </tr>
             </thead>
             <tbody>
-              {currentData.map(item => (
-                <tr className='text-center' key={item.id}>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.nama}</p></td>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.telepon}</p></td>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.sewa}</p></td>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{ item.balik}</p></td>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.alamat}</p></td>
-                  <td className='p-2 text-sm w-[150px] border-r-2 border-primary'><p>{item.pesanan}</p></td>
-                  <td className='p-2 text-sm w-[150px]'><p>{item.tgl_pesanan}</p></td>
+              {currentData.map((item) => (
+                <tr className="text-center" key={item.id}>
+                  <td className="p-2 text-sm w-[150px] border-r-2 border-primary">
+                    <p>{item.nama}</p>
+                  </td>
+                  <td className="p-2 text-sm w-[150px] border-r-2 border-primary">
+                    <p>{item.telepon}</p>
+                  </td>
+                  <td className="p-2 text-sm w-[150px] border-r-2 border-primary">
+                    <p>{item.sewa}</p>
+                  </td>
+                  <td className="p-2 text-sm w-[150px] border-r-2 border-primary">
+                    <p>{item.balik}</p>
+                  </td>
+                  <td className="p-2 text-sm w-[150px] border-r-2 border-primary">
+                    <p>{item.alamat}</p>
+                  </td>
+                  <td className="p-2 text-sm w-[150px] border-r-2 border-primary">
+                    <p>{item.pesanan}</p>
+                  </td>
+                  <td className="p-2 text-sm w-[150px] border-r-2 border-primary">
+                    <p>{item.status}</p>
+                  </td>
+                  <td className="p-2 text-sm w-[150px]">
+                    <p>{item.tgl_pesanan}</p>
+                  </td>
                 </tr>
-                
               ))}
             </tbody>
           </table>
-          <hr className='border-b-2 border-primary mt-5 '/>
+          <hr className="border-b-2 border-primary mt-5 " />
         </div>
         <ReactPaginate
           previousLabel={"Previous"}
@@ -148,12 +192,14 @@ const Penyewa = () => {
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={handlePageClick}
-          containerClassName={"pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 ml-5"}
+          containerClassName={
+            "pagination flex justify-between w-[300px] mt-5 text-secondary bg-primary rounded-md p-1 px-4 ml-5"
+          }
           activeClassName={"active"}
         />
       </div>
     </div>
   );
-}
+};
 
 export default Penyewa;

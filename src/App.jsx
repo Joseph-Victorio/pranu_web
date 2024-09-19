@@ -39,6 +39,7 @@ import Perduan from "./pages/admin/kelola/Perduan";
 import Penyewa from "./pages/admin/kelola/Penyewa";
 import Footer from "./components/Footer";
 import SuccessPayment from "./pages/payment/SuccessPayment";
+import Invoice from "./pages/payment/Invoice";
 
 function App() {
  
@@ -99,6 +100,7 @@ function App() {
 
         {/* Rute Payment success */}
         <Route path="/payment-success" element={<SuccessPayment/>}/>
+        <Route path="/invoice/:id" element={<Invoice/>}/>
       
     </Routes>
   </>

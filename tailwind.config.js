@@ -15,6 +15,7 @@ export default {
         tersier: '#5D5D5D',
         background: '#D9D9D9',
         hover: '#40438E',
+        lightGray : '#D4D4D4',
 
       }
     },
