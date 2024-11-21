@@ -140,248 +140,248 @@ const KeranjangBelanja = () => {
     }
   };
 
-  useEffect(() => {
-    // Dynamically load Snap SDK
-    const script = document.createElement("script");
-    script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
-    script.setAttribute("data-client-key", "SB-Mid-client-PJbHmiaufyfB5CqT");
-    script.async = true;
-    document.body.appendChild(script);
+  // useEffect(() => {
+  //   // Dynamically load Snap SDK
+  //   const script = document.createElement("script");
+  //   script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
+  //   script.setAttribute("data-client-key", "SB-Mid-client-PJbHmiaufyfB5CqT");
+  //   script.async = true;
+  //   document.body.appendChild(script);
 
-    script.onload = () => {
-      console.log("Midtrans Snap SDK loaded successfully");
-    };
+  //   script.onload = () => {
+  //     console.log("Midtrans Snap SDK loaded successfully");
+  //   };
 
-    script.onerror = () => {
-      console.error("Failed to load Midtrans Snap SDK");
-    };
+  //   script.onerror = () => {
+  //     console.error("Failed to load Midtrans Snap SDK");
+  //   };
 
-    // Cleanup script tag on component unmount
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   // Cleanup script tag on component unmount
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
-  // const pesanHandelClick = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' };
-  //     const formattedSewa = new Date(form.sewa).toLocaleString('id-ID', options);
-  //     const formattedBalik = new Date(form.balik).toLocaleString('id-ID', options);
-
-  //     const updatedForm = {
-  //       ...form,
-  //       sewa: formattedSewa,
-  //       balik: formattedBalik,
-  //       pesanan: keranjangKu.join(', '),
-  //     };
-
-  //     await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
-
-  //     setForm({
-  //       nama: '',
-  //       telepon: '',
-  //       sewa: '',
-  //       balik: '',
-  //       alamat: '',
-  //       pesanan: ''
-  //     });
-  //     setDaysDifference(0);
-
-  //     const waLink = daysDifference > 1
-  //       ? `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} %0apesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, %0adi alamat: ${updatedForm.alamat}, %0aapakah barang ready?`
-  //       : `https://wa.me/6281295079288?text=Saya ${updatedForm.nama}%0apesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa}, %0adengan alamat: ${updatedForm.alamat}, %0aapakah barang ready?`;
-
-  //     window.location = waLink;
-
-  //     localStorage.clear();
-
-  //   } catch (error) {
-  //     console.log('Error:', error.response ? error.response.data : error.message);
-  //   }
-  // };
-  const nama = form.nama;
-  console.log("tes" + form.alamat);
   const pesanHandelClick = async (e) => {
     e.preventDefault();
     try {
-      const options = {
-        timeZone: "Asia/Jakarta",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      };
-
-      // Format the dates as required
-      const formattedSewa = new Date(form.sewa).toLocaleString(
-        "id-ID",
-        options
-      );
-      const formattedBalik = new Date(form.balik).toLocaleString(
-        "id-ID",
-        options
-      );
+      const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' };
+      const formattedSewa = new Date(form.sewa).toLocaleString('id-ID', options);
+      const formattedBalik = new Date(form.balik).toLocaleString('id-ID', options);
 
       const updatedForm = {
         ...form,
         sewa: formattedSewa,
         balik: formattedBalik,
-        pesanan: keranjangKu.join(", "),
+        pesanan: keranjangKu.join(', '),
       };
 
-      const semua = totalSum * daysDifference;
+      await axios.post('https://api.pranugumproduction.com/penyewa.php', updatedForm);
 
-      const formatDate = new Intl.DateTimeFormat("id-ID", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      }).format;
-      const currentDate = formatDate(new Date());
-      const orderId = `PRANU-${currentDate.replace(/\//g, "-")}`;
+      setForm({
+        nama: '',
+        telepon: '',
+        sewa: '',
+        balik: '',
+        alamat: '',
+        pesanan: ''
+      });
+      setDaysDifference(0);
 
-      console.log(orderId); // Create a unique invoice number
+      const waLink = daysDifference > 1
+        ? `https://wa.me/6281295079288?text=Saya ${updatedForm.nama} %0apesan ${keranjangKu.join(', ')}, untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa} sampai tanggal ${formattedBalik}, %0adi alamat: ${updatedForm.alamat}, %0aapakah barang ready?`
+        : `https://wa.me/6281295079288?text=Saya ${updatedForm.nama}%0apesan ${keranjangKu.join(', ')} untuk ${daysDifference} hari, %0apada tanggal ${formattedSewa}, %0adengan alamat: ${updatedForm.alamat}, %0aapakah barang ready?`;
 
-      const response = await axios.post(
-        "https://api.pranugumproduction.com/payment.php",
-        {
-          totalAmount: semua,
-          order_id: orderId,
-          items: barang.map((item) => ({
-            id: item.key,
-            price: item.value.harga * daysDifference,
-            quantity: item.value.jumlah,
-            name: item.value.nama_produk,
-          })),
-          customerDetails: {
-            first_name: nama,
-            phone: form.telepon,
-            shipping_address: {
-              address: form.alamat,
-            },
-          },
-          orderDetails: {
-            startDate: formattedSewa,
-            endDate: formattedBalik,
-            firstName: nama,
-            phone: form.telepon,
-            address: form.alamat,
-          },
-        }
-      );
+      window.location = waLink;
 
-      const { token, order_id } = response.data;
+      localStorage.clear();
 
-      const saveInvoiceData = async (no_invoice) => {
-        try {
-          const invoiceData = {
-            no_invoice: orderId,
-            nama: nama,
-            tanggal: new Date().toISOString(),
-            nama_barang: keranjangKu.join(", "),
-            harga: totalSum,
-            jumlah: localStorage.length,
-            total: totalSum * daysDifference,
-          };
-
-          // Send invoice data to your API endpoint
-          await axios.post("http://localhost/api/invoice.php", invoiceData);
-          console.log("Invoice data saved successfully");
-        } catch (error) {
-          console.error("Failed to save invoice data:", error);
-        }
-      };
-      saveInvoiceData();
-
-      const savePenyewaData = async (status = "Pending") => {
-        try {
-            const penyewaData = {
-                nama: nama,
-                telepon: form.telepon,
-                sewa: formattedSewa,
-                balik: formattedBalik,
-                alamat: form.alamat,
-                pesanan: keranjangKu.join(", "),
-                status: status, // Set status here (can be empty initially)
-            };
-    
-            await axios.post(
-                "https://api.pranugumproduction.com/penyewa.php",
-                penyewaData
-            );
-            console.log("Penyewa data saved successfully");
-        } catch (error) {
-            console.error("Failed to save penyewa data:", error);
-        }
-    };
-    
-    const deletePenyewaData = async () => {
-        try {
-            await axios.delete(
-                "https://api.pranugumproduction.com/penyewa.php",
-                {
-                    data: { status: "" } 
-                }
-            );
-            console.log("Deleted penyewa data with empty status successfully");
-        } catch (error) {
-            console.error("Failed to delete penyewa data:", error);
-        }
-    };
-    
-    // Call savePenyewaData initially with empty status
-    savePenyewaData();
-
-    
-    window.snap.pay(token, {
-        onSuccess: async function (result) {
-            console.log("success", result);
-    
-            await savePenyewaData("Berhasil");
-            await deletePenyewaData();
-    
-            // Clear the form and local storage after successful payment
-            setForm({
-                nama: "",
-                telepon: "",
-                sewa: "",
-                balik: "",
-                alamat: "",
-                pesanan: "",
-            });
-            setDaysDifference(0); // Reset daysDifference if you are using it in state
-            localStorage.clear();
-            window.location.href = "/payment-success";
-        },
-        onPending: async function (result) {
-            console.log("pending", result);
-            toast("Payment is pending...");
-            await deletePenyewaData()
-        },
-        onError: async function (result) {
-            console.error("error", result);
-            toast.error("Payment failed!");
-    
-            await savePenyewaData("Gagal");
-            await deletePenyewaData();
-    
-            window.location.href = "/keranjang";
-        },
-        onClose: async function () {
-            console.log("customer closed the popup without finishing the payment");
-    
-            // Send DELETE request to remove entries with empty status
-            await deletePenyewaData();
-        },
-    });
-    
     } catch (error) {
-      console.log(
-        "Error:",
-        error.response ? error.response.data : error.message
-      );
-      toast.error("Failed to initiate payment");
+      console.log('Error:', error.response ? error.response.data : error.message);
     }
   };
+  const nama = form.nama;
+  console.log("tes" + form.alamat);
+  // const pesanHandelClick = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const options = {
+  //       timeZone: "Asia/Jakarta",
+  //       year: "numeric",
+  //       month: "2-digit",
+  //       day: "2-digit",
+  //     };
+
+  //     // Format the dates as required
+  //     const formattedSewa = new Date(form.sewa).toLocaleString(
+  //       "id-ID",
+  //       options
+  //     );
+  //     const formattedBalik = new Date(form.balik).toLocaleString(
+  //       "id-ID",
+  //       options
+  //     );
+
+  //     const updatedForm = {
+  //       ...form,
+  //       sewa: formattedSewa,
+  //       balik: formattedBalik,
+  //       pesanan: keranjangKu.join(", "),
+  //     };
+
+  //     const semua = totalSum * daysDifference;
+
+  //     const formatDate = new Intl.DateTimeFormat("id-ID", {
+  //       day: "2-digit",
+  //       month: "2-digit",
+  //       year: "numeric",
+  //     }).format;
+  //     const currentDate = formatDate(new Date());
+  //     const orderId = `PRANU-${currentDate.replace(/\//g, "-")}`;
+
+  //     console.log(orderId); // Create a unique invoice number
+
+  //     const response = await axios.post(
+  //       "https://api.pranugumproduction.com/payment.php",
+  //       {
+  //         totalAmount: semua,
+  //         order_id: orderId,
+  //         items: barang.map((item) => ({
+  //           id: item.key,
+  //           price: item.value.harga * daysDifference,
+  //           quantity: item.value.jumlah,
+  //           name: item.value.nama_produk,
+  //         })),
+  //         customerDetails: {
+  //           first_name: nama,
+  //           phone: form.telepon,
+  //           shipping_address: {
+  //             address: form.alamat,
+  //           },
+  //         },
+  //         orderDetails: {
+  //           startDate: formattedSewa,
+  //           endDate: formattedBalik,
+  //           firstName: nama,
+  //           phone: form.telepon,
+  //           address: form.alamat,
+  //         },
+  //       }
+  //     );
+
+  //     const { token, order_id } = response.data;
+
+  //     const saveInvoiceData = async (no_invoice) => {
+  //       try {
+  //         const invoiceData = {
+  //           no_invoice: orderId,
+  //           nama: nama,
+  //           tanggal: new Date().toISOString(),
+  //           nama_barang: keranjangKu.join(", "),
+  //           harga: totalSum,
+  //           jumlah: localStorage.length,
+  //           total: totalSum * daysDifference,
+  //         };
+
+  //         // Send invoice data to your API endpoint
+  //         await axios.post("http://localhost/api/invoice.php", invoiceData);
+  //         console.log("Invoice data saved successfully");
+  //       } catch (error) {
+  //         console.error("Failed to save invoice data:", error);
+  //       }
+  //     };
+  //     saveInvoiceData();
+
+  //     const savePenyewaData = async (status = "Pending") => {
+  //       try {
+  //           const penyewaData = {
+  //               nama: nama,
+  //               telepon: form.telepon,
+  //               sewa: formattedSewa,
+  //               balik: formattedBalik,
+  //               alamat: form.alamat,
+  //               pesanan: keranjangKu.join(", "),
+  //               status: status, // Set status here (can be empty initially)
+  //           };
+    
+  //           await axios.post(
+  //               "https://api.pranugumproduction.com/penyewa.php",
+  //               penyewaData
+  //           );
+  //           console.log("Penyewa data saved successfully");
+  //       } catch (error) {
+  //           console.error("Failed to save penyewa data:", error);
+  //       }
+  //   };
+    
+  //   const deletePenyewaData = async () => {
+  //       try {
+  //           await axios.delete(
+  //               "https://api.pranugumproduction.com/penyewa.php",
+  //               {
+  //                   data: { status: "" } 
+  //               }
+  //           );
+  //           console.log("Deleted penyewa data with empty status successfully");
+  //       } catch (error) {
+  //           console.error("Failed to delete penyewa data:", error);
+  //       }
+  //   };
+    
+  //   // Call savePenyewaData initially with empty status
+  //   savePenyewaData();
+
+    
+  //   window.snap.pay(token, {
+  //       onSuccess: async function (result) {
+  //           console.log("success", result);
+    
+  //           await savePenyewaData("Berhasil");
+  //           await deletePenyewaData();
+    
+  //           // Clear the form and local storage after successful payment
+  //           setForm({
+  //               nama: "",
+  //               telepon: "",
+  //               sewa: "",
+  //               balik: "",
+  //               alamat: "",
+  //               pesanan: "",
+  //           });
+  //           setDaysDifference(0); // Reset daysDifference if you are using it in state
+  //           localStorage.clear();
+  //           window.location.href = "/payment-success";
+  //       },
+  //       onPending: async function (result) {
+  //           console.log("pending", result);
+  //           toast("Payment is pending...");
+  //           await deletePenyewaData()
+  //       },
+  //       onError: async function (result) {
+  //           console.error("error", result);
+  //           toast.error("Payment failed!");
+    
+  //           await savePenyewaData("Gagal");
+  //           await deletePenyewaData();
+    
+  //           window.location.href = "/keranjang";
+  //       },
+  //       onClose: async function () {
+  //           console.log("customer closed the popup without finishing the payment");
+    
+  //           // Send DELETE request to remove entries with empty status
+  //           await deletePenyewaData();
+  //       },
+  //   });
+    
+  //   } catch (error) {
+  //     console.log(
+  //       "Error:",
+  //       error.response ? error.response.data : error.message
+  //     );
+  //     toast.error("Failed to initiate payment");
+  //   }
+  // };
 
   return (
     <div>

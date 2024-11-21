@@ -156,8 +156,6 @@ const ProdukDetail = () => {
               <div dangerouslySetInnerHTML={{ __html: detail.ketentuan }} />
             )}
           </div>
-          {detail.kategori === 'Paket Produk' && (
-            <>
               {/* tombol tambah */}
           <div className="flex gap-5 items-center mt-5">
             <div className="flex items-center border-primary border-2 rounded-3xl w-[120px] md:w-[170px] justify-between">
@@ -185,8 +183,7 @@ const ProdukDetail = () => {
               Tambahkan
             </button>
           </div>
-            </>
-          )}
+          
         </div>
       </div>
       {/* BAWAH */}

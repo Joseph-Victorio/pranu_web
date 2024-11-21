@@ -11,7 +11,6 @@ const ProdukCard = ({ foto, kategori,nama,harga,produk_id}) => {
   return (
     <div
       className="w-[152px] h-[230px]  md:w-[289px] md:h-[400px] xl:w-[250px] gap-5 rounded-[15px] md:rounded-[30px] border-2 border-primary p-5 bg-white mx-auto "
-      
     >
       {/* IMG */}
       <div className="">
@@ -33,8 +32,6 @@ const ProdukCard = ({ foto, kategori,nama,harga,produk_id}) => {
           {nama}
         </p>
         {/* HARGA SEWA */}
-        {kategori==='Paket Produk' ? (
-          <>
           <p className="text-secondary text-[10px] md:text-[18px] mt-1">
           {formatCurrencyIDR(harga)}
           <span className="text-tersier">/hari</span>
@@ -44,17 +41,9 @@ const ProdukCard = ({ foto, kategori,nama,harga,produk_id}) => {
             Tambahkan
           </button>
         </a>
-          </>
-        ):(
-          <>
-        <a href={`/produk/${produk_id}`} className="">
-          <button className="bg-primary hover:bg-secondary ease-in-out duration-300 rounded-full w-[133px] h-[18px] md:w-[200px] md:h-[38px] text-white text-[10px] md:mt-10 md:text-[14px] ml-[-12px] md:ml-5 xl:ml-0 ">
-            Lihat Detail Produk
-          </button>
-        </a>
-          </>
-        )}
-      </div>
+         
+       
+      </div> 
     </div>
   );
 };
